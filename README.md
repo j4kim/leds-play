@@ -25,6 +25,7 @@ Fun with LEDs, Raspberry &amp; Arduino
   - Câbles gainés. [Exemple](https://www.digitec.ch/fr/s1/product/rs-pro-cable-electrique-rs-pro-3g075-mm-gaine-caoutcho-25-m-cable-dalimentation-19221828?utm_campaign=organicshopping&utm_source=google&utm_medium=organic&utm_content=3013528&supplier=3013528) Il fait 0.78 cm de diamètre donc un peu gros.
   - [Celui-là](https://www.conrad.ch/fr/p/econ-connect-28awg4gr-cable-en-nappe-pas-1-27-mm-4-x-0-08-mm-gris-30-50-m-1656453.html) dit 4 conducteurs mais j'en compte 8, bizarre.
   - [Bon ça ça à l'air nickel non ?](https://www.distrelec.ch/fr/cable-en-nappe-pvc-3x-25mm-non-blinde-30m-rnd-rnd-475-00804/p/30139982?trackQuery=cat-DNAV_PL_091302&pos=11&origPos=1&origPageSize=50&track=true&filterapplied=filter_P%25C3%25B4les%3D3&sid=c5f79fc5168fd2bd72c0a0d504ea358c5187ecec&itemList=category)
+  - ou alors juste du [fil de cuivre émaillé](https://www.conrad.ch/fr/p/fil-de-cuivre-emaille-block-cul-100-0-15-o-exterieur-sans-vernis-isolant-0-15-mm-609-m-0-10-kg-605053.html) et du scotch non ?
 - Contrôleur Bluetooth
   - Un truc déjà tout fait ? Exemple [Zero 2](https://www.8bitdo.com/zero2/)
   - Un module prêt à l'emploi ? [Bluefruit EZ-Key](https://www.adafruit.com/product/1535)
