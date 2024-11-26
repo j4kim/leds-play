@@ -10,6 +10,14 @@ Fun with LEDs, Raspberry &amp; Arduino
 
 - Pouvoir déployer des programmes par FTP ou autre
 - Pouvoir contrôler le programme avec un contrôleur Bluetooth
+- Idées de programmes:
+  - Snake
+  - Tetris
+  - Message défilant
+  - Réaction à la musique (ASIO?)
+  - Aplat de couleur modifiable
+  - Crazy taxi
+  - Doodle jump
 
 ## Matériel
 
