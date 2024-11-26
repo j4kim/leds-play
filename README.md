@@ -4,7 +4,7 @@ Fun with LEDs, Raspberry &amp; Arduino
 
 ## Idée
 
-- Mettre des LEDs derrière les carreaux de cette paroi vitrée dans mon appart:
+- Mettre des LEDs derrière les carreaux de cette paroi vitrée dans mon appart pour en faire un écran de 6x7 px.
 
 <img src="https://github.com/user-attachments/assets/44430fdd-a368-4abf-a0f8-48c74fae11d4" width="400">
 
@@ -17,6 +17,7 @@ Fun with LEDs, Raspberry &amp; Arduino
 - LEDs addressables, exemples
   - [NeoPixel RGB 5050](https://www.adafruit.com/product/3094)
   - [LEDs WS2812B](https://www.amazon.fr/WS2812B-couleur-int%C3%A9gr%C3%A9-Symphonie-programmable/dp/B0B8D53RMS?dib=eyJ2IjoiMSJ9._Z_-WLQ1l7umCgRe701iq-5g3P8AZtPlisJOa6mQSpwttwznzy4S3GsKmTxgM7OO1sV5x3EcIHTLLdonusTmNcZSB-z2GTKiUT7QtVMEyI-bMUBcpZPLTWgdAYWCIw-LDe07_Znqr3cM1oj7H5VzLm__ijYwJsAjA-Yn9F_VD7wrX2P4Jtc3TOugckuUmhfAPRkhCZ1K5CGII-h8zZtBYskXbGZE4b9jjDaarGLrjwBemb1vAoMQWWHqlDyzlmtGbc3hTBt01adXf26K2X4v8RtdoBwkrSNtJzfDdcYRGbI.J7-X4YRyEk4x0iFxJdbn5Sf3T4De_t3I03NNI3HHdk0&dib_tag=se&keywords=led%2Bws2812b&qid=1732466870&sr=8-29&th=1)
+  - J'ai commandé [ça](https://letmeknow.fr/fr/leds/399-led-rgb-5050-neopixel-pack-de-10-0711099389388.html)
 - Fil
   - Le mieux serait d'avoir de la bande qui contient 3 fils pour connecter les 3 points sur les leds (signal, +, -) 
   - Flat Flexible Cable. [Ce genre de truc](https://fr.farnell.com/pro-power/pp001486/c-ble-cavalier-ffc-0-5mm-20-conduct/dp/2776611) mais il y a bcp trop de conducteurs.
