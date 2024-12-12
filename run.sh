@@ -1,1 +1,1 @@
-sudo venv/bin/python run.py
+sudo venv/bin/python main.py
