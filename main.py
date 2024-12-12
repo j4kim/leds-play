@@ -4,15 +4,16 @@ import programs
 
 try:
     while True:
-        program = inquirer.select(
-            message="Program",
+        choice = inquirer.select(
+            message="Program:",
             choices=[
-                Choice(value=programs.fill, name="Fill"),
-                Choice(value=programs.deinit, name="Deinit"),
-                Choice(value=programs.setPixelNumber, name="Set Pixel Number"),
-                Choice(value=programs.setBrightness, name="Set Brightness"),
+                Choice(value="fill", name="Fill"),
+                Choice(value="deinit", name="Deinit"),
+                Choice(value="setpixelnumber", name="Set Pixel Number"),
+                Choice(value="setbrightness", name="Set Brightness"),
             ],
         ).execute()
-        program()
+        p = getattr(programs, choice)
+        p.run()
 except KeyboardInterrupt:
     print("Bye")
