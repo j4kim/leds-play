@@ -30,3 +30,11 @@ Fun with LEDs & Raspberry
   - [Connecteur Barrel Jack](https://www.bastelgarage.ch/prise-dc-femelle-barrel-jack-5-5mm-2-1mm-avec-bornes-a-vis?search=420128)
   - [Condensateurs](https://www.bastelgarage.ch/condensateur-electrolytique-1000-f-25-v?search=420416)
 - Contrôleur Bluetooth: [Zero 2](https://www.8bitdo.com/zero2/)
+
+## Connexion SSH
+
+```sh
+ssh pi@192.168.1.116
+# mot de passe
+cd leds-play
+````
