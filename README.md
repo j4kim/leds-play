@@ -41,12 +41,28 @@ cd leds-play
 
 ## Développement
 
-```
+```sh
 python -m venv venv
 ```
 
+```sh
+source venv/bin/activate
 ```
+
+```sh
 pip install -r requirements.txt
+```
+
+Pour manipuler les LEDs, on doit être admin, donc lancer python en sudo. Mais on ne peut pas faire ça lorsqu'un est dans un venv. Donc on doit cibler l'exécutable de python dans le venv:
+
+```sh
+sudo venv/bin/python run.py
+```
+
+ou:
+
+```sh
+sh run.sh
 ```
 
 ## Dépendances
