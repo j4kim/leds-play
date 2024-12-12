@@ -1,12 +1,16 @@
 from InquirerPy import inquirer
+from InquirerPy.base.control import Choice
 import programs
 
 try:
     while True:
-        choice = inquirer.select(
+        program = inquirer.select(
             message="Program",
-            choices=['fill', 'deinit'],
+            choices=[
+                Choice(value=programs.fill, name="Fill"),
+                Choice(value=programs.deinit, name="Deinit"),
+            ],
         ).execute()
-        getattr(programs, choice)()
+        program()
 except KeyboardInterrupt:
     print("Bye")
