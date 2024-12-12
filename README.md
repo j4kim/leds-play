@@ -37,4 +37,18 @@ Fun with LEDs & Raspberry
 ssh pi@192.168.1.116
 # mot de passe
 cd leds-play
-````
+```
+
+## Développement
+
+```
+python -m venv venv
+```
+
+```
+pip install -r requirements.txt
+```
+
+## Dépendances
+
+- [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
