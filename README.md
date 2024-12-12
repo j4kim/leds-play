@@ -52,3 +52,4 @@ pip install -r requirements.txt
 ## Dépendances
 
 - [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
+- [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
