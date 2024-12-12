@@ -9,6 +9,8 @@ try:
             choices=[
                 Choice(value=programs.fill, name="Fill"),
                 Choice(value=programs.deinit, name="Deinit"),
+                Choice(value=programs.setPixelNumber, name="Set Pixel Number"),
+                Choice(value=programs.setBrightness, name="Set Brightness"),
             ],
         ).execute()
         program()
