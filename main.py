@@ -1,16 +1,12 @@
-import board
-import neopixel
 from InquirerPy import inquirer
+import programs
 
-pixels = neopixel.NeoPixel(board.D18, 2, brightness=0.1, auto_write=False)
-
-program = inquirer.select(
-    message="Program",
-    choices=["fill", "deinit"],
-).execute()
-
-if program == "fill":
-    pixels.fill((255, 255, 255))
-    pixels.show()
-elif program == "deinit":
-    pixels.deinit()
+try:
+    while True:
+        choice = inquirer.select(
+            message="Program",
+            choices=['fill', 'deinit'],
+        ).execute()
+        getattr(programs, choice)()
+except KeyboardInterrupt:
+    print("Bye")
