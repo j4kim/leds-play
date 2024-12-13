@@ -12,4 +12,5 @@ pixels = neopixel.NeoPixel(**config)
 
 def reset():
     global pixels
+    pixels.deinit()
     pixels = neopixel.NeoPixel(**config)
