@@ -5,7 +5,7 @@ try:
     while True:
         f = inquirer.select(
             message="Program:",
-            choices=programs.list()
+            choices=programs.list
         ).execute()
         f()
 except KeyboardInterrupt:
