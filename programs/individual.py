@@ -1,6 +1,5 @@
-import neopixel
 from InquirerPy import inquirer
-from config import config
+from pixels import config, pixels
 
 def run():
     index = inquirer.number(
@@ -10,11 +9,7 @@ def run():
         filter=lambda x: int(x)
     ).execute()
 
-    pixels = neopixel.NeoPixel(**config)
-
     pixels[index] = inquirer.text(
         message=f"hex value:",
         filter= lambda x: int(x, 16)
     ).execute()
-
-    pixels.show()

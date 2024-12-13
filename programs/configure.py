@@ -1,5 +1,5 @@
 from InquirerPy import inquirer
-from config import config
+from pixels import config, reset
 
 def run():
     config['n'] = int(inquirer.number(
@@ -14,3 +14,5 @@ def run():
         default=config['brightness'],
         min_allowed=0,
     ).execute())
+
+    reset()

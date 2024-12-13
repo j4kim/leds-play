@@ -1,7 +1,4 @@
-import neopixel
-from config import config
+from pixels import pixels
 
 def run():
-    pixels = neopixel.NeoPixel(**config)
     pixels.fill((255, 255, 255))
-    pixels.show()
