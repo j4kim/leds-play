@@ -1,8 +1,8 @@
-from . import configure, fill, deinit, individual
+from . import configure, fill, individual, reset
 
 list = [
     {'value': fill.run, 'name': 'Fill'},
     {'value': individual.run, 'name': 'Individual'},
-    {'value': deinit.run, 'name': 'Deinit'},
+    {'value': reset.run, 'name': 'Reset'},
     {'value': configure.run, 'name': 'Configure'},
 ]
