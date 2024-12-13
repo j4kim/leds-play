@@ -1,4 +1,4 @@
-from pixels import reset
+from pixels import pixels
 
 def run():
-    reset()
+    pixels.handler.fill(0)

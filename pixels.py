@@ -1,16 +1,16 @@
 import board
 import neopixel
 
-config = {
-    "pin": board.D18,
-    "n": 2,
-    "brightness": 0.1
-}
+class Pixels:
+    handler = None
+    pin = board.D18
+    n = 2
+    brightness = 0.1
 
-print("init pixels")
-pixels = neopixel.NeoPixel(**config)
+    def reset(self):
+        self.handler = neopixel.NeoPixel(self.pin, self.n, brightness=self.brightness)
 
-def reset():
-    global pixels
-    pixels.deinit()
-    pixels = neopixel.NeoPixel(**config)
+    def __init__(self):
+        self.reset()
+
+pixels = Pixels()
