@@ -4,7 +4,7 @@ import neopixel
 class Pixels:
     handler = None
     pin = board.D18
-    n = 50
+    n = 300
     brightness = 0.1
 
     def reset(self):
