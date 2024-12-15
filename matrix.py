@@ -14,3 +14,6 @@ matrix = (
 #    06   16   26   36   46   56
     (298, 202, 198, 101, 98,  2),
 )
+
+def get_index(x, y):
+    return matrix[y][x]
