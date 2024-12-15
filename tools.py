@@ -14,7 +14,7 @@ def get_color(color):
     if color in mapping:
         color = mapping[color]
 
-    return int(color, 16)
+    return int(str(color), 16)
 
 def prompt_color(message = "hex value or one of r,g,b,w,m,y,c:"):
     color = inquirer.text(message).execute()
