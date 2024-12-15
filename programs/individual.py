@@ -1,6 +1,6 @@
 from InquirerPy import inquirer
 from pixels import pixels
-from programs.tools import prompt_color
+from tools import prompt_color
 
 def run():
     index = inquirer.number(
