@@ -1,4 +1,4 @@
-from . import configure, fill, individual, reset, list
+from . import configure, fill, individual, reset, list, cursor
 
 list = [
     {'value': fill.run, 'name': 'Fill'},
@@ -6,4 +6,5 @@ list = [
     {'value': reset.run, 'name': 'Reset'},
     {'value': list.run, 'name': 'List'},
     {'value': configure.run, 'name': 'Configure'},
+    {'value': cursor.run, 'name': 'Cursor'},
 ]
