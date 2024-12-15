@@ -6,7 +6,7 @@ def run():
         if (i >= pixels.n):
             i = 0
         pixels.handler.fill(0)
-        pixels.handler[i] = 0xffffff
+        pixels.handler[i] = pixels.default_color
         inpt = input(i)
         i = i + 1
         if (inpt == 'q'):

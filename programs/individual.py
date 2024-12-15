@@ -1,5 +1,6 @@
 from InquirerPy import inquirer
 from pixels import pixels
+from programs.tools import prompt_color
 
 def run():
     index = inquirer.number(
@@ -9,21 +10,4 @@ def run():
         filter=lambda x: int(x)
     ).execute()
 
-    color = inquirer.text(
-        message="hex value or one of r,g,b,w,m,y,c:"
-    ).execute()
-
-    mapping = {
-        'r': 'ff0000',
-        'g': '00ff00',
-        'b': '0000ff',
-        'w': 'ffffff',
-        'm': 'ff00ff',
-        'y': 'ffff00',
-        'c': '00ffff',
-    }
-
-    if color in mapping:
-        color = mapping[color]
-
-    pixels.handler[index] = int(color, 16)
+    pixels.handler[index] = prompt_color()

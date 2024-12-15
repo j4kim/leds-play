@@ -1,5 +1,6 @@
 from InquirerPy import inquirer
 from pixels import pixels
+from programs.tools import prompt_color
 
 def run():
     pixels.n = int(inquirer.number(
@@ -14,5 +15,7 @@ def run():
         default=pixels.brightness,
         min_allowed=0,
     ).execute())
+
+    pixels.default_color = prompt_color("Default color:")
 
     pixels.reset()
