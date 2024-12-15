@@ -1,8 +1,6 @@
 from InquirerPy import inquirer
 
-def prompt_color(message = "hex value or one of r,g,b,w,m,y,c:"):
-    color = inquirer.text(message).execute()
-
+def get_color(color):
     mapping = {
         'r': 'ff0000',
         'g': '00ff00',
@@ -17,3 +15,7 @@ def prompt_color(message = "hex value or one of r,g,b,w,m,y,c:"):
         color = mapping[color]
 
     return int(color, 16)
+
+def prompt_color(message = "hex value or one of r,g,b,w,m,y,c:"):
+    color = inquirer.text(message).execute()
+    return get_color(color)
