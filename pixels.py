@@ -16,6 +16,12 @@ class Pixels:
     def __init__(self):
         self.reset()
 
+    def fill(self):
+        self.handler.fill(self.default_color)
+
+    def clear(self):
+        self.handler.fill(0)
+
     def set(self, x, y, v):
         i = get_index(x, y)
         color = get_color(v)

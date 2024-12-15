@@ -1,10 +1,11 @@
-from . import configure, fill, individual, reset, cursor, screen
+from . import configure, individual, cursor, screen
+from pixels import pixels
 
 list = [
-    {'value': fill.run, 'name': 'Fill'},
+    {'value': pixels.fill, 'name': 'Fill'},
+    {'value': pixels.clear, 'name': 'Clear'},
+    {'value': screen.run, 'name': 'Screen'},
     {'value': individual.run, 'name': 'Individual'},
-    {'value': reset.run, 'name': 'Reset'},
     {'value': configure.run, 'name': 'Configure'},
     {'value': cursor.run, 'name': 'Cursor'},
-    {'value': screen.run, 'name': 'Screen'},
 ]
