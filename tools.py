@@ -9,6 +9,7 @@ def get_color(color):
         'm': 'ff00ff',
         'y': 'ffff00',
         'c': '00ffff',
+        'o': 'ff5500',
     }
 
     if color in mapping:
