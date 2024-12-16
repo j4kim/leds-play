@@ -1,6 +1,6 @@
 import board
 import neopixel
-from matrix import get_index
+from matrix import matrix
 
 class Pixels:
     handler = None
@@ -29,7 +29,7 @@ class Pixels:
         self.handler.show()
 
     def set(self, x, y, color):
-        i = get_index(x, y)
+        i = matrix[y][x]
         self.handler[i] = color
 
 pixels = Pixels()

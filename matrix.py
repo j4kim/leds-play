@@ -14,6 +14,3 @@ matrix = (
 # 6
     (298, 202, 198, 101, 98,  2),
 )
-
-def get_index(x, y):
-    return matrix[y][x]
