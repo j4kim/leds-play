@@ -1,4 +1,4 @@
-from . import configure, individual, cursor, screen, fillscreen, randomscreen, animaterandom
+from . import configure, individual, cursor, screen, fillscreen, randomscreen, animaterandom, zigzag
 from pixels import pixels
 
 list = [
@@ -8,6 +8,7 @@ list = [
     {'value': fillscreen.run, 'name': 'Fill screen'},
     {'value': randomscreen.run, 'name': 'Random screen'},
     {'value': animaterandom.run, 'name': 'Animate random'},
+    {'value': zigzag.run, 'name': 'Zigzag'},
     {'value': individual.run, 'name': 'Individual'},
     {'value': configure.run, 'name': 'Configure'},
     {'value': cursor.run, 'name': 'Cursor'},
