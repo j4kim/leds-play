@@ -28,6 +28,9 @@ class Pixels:
         self.handler.fill(0)
         self.handler.show()
 
+    def show(self):
+        self.handler.show()
+
     def set(self, x, y, color):
         i = matrix[y][x]
         self.handler[i] = color
