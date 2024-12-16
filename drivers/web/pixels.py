@@ -8,6 +8,7 @@ class Pixels:
         [0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
     )
+    default_color = 0xffffff
 
     def fill(self):
         for y in range(7):
