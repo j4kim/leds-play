@@ -8,6 +8,7 @@ adafruit-circuitpython-typing==1.11.2
 Adafruit-PlatformDetect==3.75.0
 Adafruit-PureIO==1.1.11
 binho-host-adapter==0.1.6
+evdev==1.7.1
 inquirerpy==0.3.4
 pfzy==0.3.4
 prompt_toolkit==3.0.48
