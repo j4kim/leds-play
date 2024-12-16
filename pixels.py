@@ -22,9 +22,8 @@ class Pixels:
     def clear(self):
         self.handler.fill(0)
 
-    def set(self, x, y, v):
+    def set(self, x, y, color):
         i = get_index(x, y)
-        color = get_color(v)
         self.handler[i] = color
 
 pixels = Pixels()

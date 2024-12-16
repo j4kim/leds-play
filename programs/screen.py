@@ -1,4 +1,5 @@
 from pixels import pixels
+from tools import get_color
 
 def run():
     y = 0
@@ -9,4 +10,4 @@ def run():
                 v = values[x]
             except IndexError:
                 v = 0
-            pixels.set(x, y, v)
+            pixels.set(x, y, get_color(v))
