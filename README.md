@@ -49,10 +49,6 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-```sh
-pip install -r requirements.txt
-```
-
 Créer le fichier de config:
 
 ```sh
