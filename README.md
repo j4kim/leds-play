@@ -53,6 +53,30 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+Créer le fichier de config:
+
+```sh
+cp config.py.example config.py
+```
+
+Deux drivers sont configurables dans `config.py`: "web" et "led". 
+
+### Driver web
+
+À utiliser pour le prototypage
+
+```sh
+pip install -r drivers/web/requirements.txt
+```
+
+### Driver led
+
+Utilisable seulement sur le Raspberry.
+
+```sh
+pip install -r drivers/led/requirements.txt
+```
+
 Pour manipuler les LEDs, on doit être admin, donc lancer python en sudo. Mais on ne peut pas faire ça lorsqu'un est dans un venv. Donc on doit cibler l'exécutable de python dans le venv:
 
 ```sh
@@ -67,5 +91,5 @@ sh run.sh
 
 ## Dépendances
 
-- [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
 - [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
+- (driver led) [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
