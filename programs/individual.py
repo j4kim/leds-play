@@ -11,3 +11,4 @@ def run():
     ).execute()
 
     pixels.handler[index] = prompt_color()
+    pixels.handler.show()

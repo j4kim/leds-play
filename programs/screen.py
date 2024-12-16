@@ -11,3 +11,4 @@ def run():
             except IndexError:
                 v = 0
             pixels.set(x, y, get_color(v))
+        pixels.handler.show()
