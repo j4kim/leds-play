@@ -1,12 +1,26 @@
 class Pixels:
+    cells = (
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+    )
+
     def fill(self):
-        print("web driver fill")
+        for y in range(7):
+            for x in range(6):
+                self.cells[y][x] = 0xffffff
 
     def clear(self):
-        print("web driver clear")
-
-    def show(self):
-        print("web driver show")
+        for y in range(7):
+            for x in range(6):
+                self.cells[y][x] = 0
 
     def set(self, x, y, color):
-        print("web driver set", x, y, color)
+        self.cells[y][x] = color
+
+    def show(self):
+        print(self.cells)
