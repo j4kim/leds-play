@@ -1,4 +1,4 @@
-from . import configure, individual, cursor, screen, fillscreen, randomscreen
+from . import configure, individual, cursor, screen, fillscreen, randomscreen, animaterandom
 from pixels import pixels
 
 list = [
@@ -7,6 +7,7 @@ list = [
     {'value': screen.run, 'name': 'Screen'},
     {'value': fillscreen.run, 'name': 'Fill screen'},
     {'value': randomscreen.run, 'name': 'Random screen'},
+    {'value': animaterandom.run, 'name': 'Animate random'},
     {'value': individual.run, 'name': 'Individual'},
     {'value': configure.run, 'name': 'Configure'},
     {'value': cursor.run, 'name': 'Cursor'},
