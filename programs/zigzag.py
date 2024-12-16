@@ -13,3 +13,12 @@ def run():
             pixels.handler.show()
             time.sleep(0.02)
     pixels.clear()
+
+def horizontal():
+    i = 0
+    while i < pixels.n:
+        pixels.handler.fill(0)
+        pixels.handler[i] = pixels.default_color
+        pixels.handler.show()
+        i += 2
+    pixels.clear()

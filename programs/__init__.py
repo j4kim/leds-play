@@ -9,6 +9,7 @@ list = [
     {'value': screen.rand, 'name': 'Random screen'},
     {'value': screen.animate, 'name': 'Animate random'},
     {'value': zigzag.run, 'name': 'Zigzag'},
+    {'value': zigzag.horizontal, 'name': 'H Zigzag'},
     {'value': individual.run, 'name': 'Individual'},
     {'value': configure.run, 'name': 'Configure'},
     {'value': cursor.run, 'name': 'Cursor'},
