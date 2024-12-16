@@ -23,4 +23,7 @@ class Pixels:
         self.cells[y][x] = color
 
     def show(self):
-        print(self.cells)
+        for y in range(7):
+            for x in range(6):
+                print("#" if self.cells[y][x] else " ", end="|")
+            print()
