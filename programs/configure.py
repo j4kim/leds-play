@@ -16,6 +16,6 @@ def run():
         min_allowed=0,
     ).execute())
 
-    pixels.default_color = prompt_color("Default color:")
+    pixels.default_color = prompt_color("Default color:", pixels.default_color)
 
     pixels.reset()

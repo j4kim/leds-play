@@ -17,6 +17,6 @@ def get_color(color):
 
     return int(str(color), 16)
 
-def prompt_color(message = "hex value or one of r,g,b,w,m,y,c,o:"):
-    color = inquirer.text(message).execute()
+def prompt_color(message = "hex value or one of r,g,b,w,m,y,c,o:", default='w'):
+    color = inquirer.text(message, default=default).execute()
     return get_color(color)
