@@ -1,1 +1,1 @@
-driver = "web" # web or led
+driver = "pygame" # pygame or neopixel
