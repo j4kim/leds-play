@@ -8,9 +8,9 @@ def run():
         if y % 2 == 0:
             r = reversed(range(6))
         for x in r:
-            pixels.handler.fill(0)
+            pixels.clear()
             pixels.set(x, y, pixels.default_color)
-            pixels.handler.show()
+            pixels.show()
             time.sleep(0.02)
     pixels.clear()
 

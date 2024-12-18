@@ -49,8 +49,28 @@ python -m venv venv
 source venv/bin/activate
 ```
 
+Créer le fichier de config:
+
 ```sh
-pip install -r requirements.txt
+cp config.py.example config.py
+```
+
+Deux drivers sont configurables dans `config.py`: "pygame" et "neopixel". 
+
+### Driver pygame
+
+À utiliser pour le prototypage
+
+```sh
+pip install -r drivers/pygame/requirements.txt
+```
+
+### Driver neopixel
+
+Utilisable seulement sur le Raspberry.
+
+```sh
+pip install -r drivers/neopixel/requirements.txt
 ```
 
 Pour manipuler les LEDs, on doit être admin, donc lancer python en sudo. Mais on ne peut pas faire ça lorsqu'un est dans un venv. Donc on doit cibler l'exécutable de python dans le venv:
@@ -67,5 +87,5 @@ sh run.sh
 
 ## Dépendances
 
-- [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
 - [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
+- (driver neopixel) [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
