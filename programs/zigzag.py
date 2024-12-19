@@ -1,7 +1,7 @@
 from pixels import pixels
 import time
 
-def run():
+def horizontal():
     y = 0
     for y in range(7):
         r = range(6)
@@ -14,7 +14,7 @@ def run():
             time.sleep(0.02)
     pixels.clear()
 
-def horizontal():
+def vertical():
     i = 0
     while i < pixels.n:
         pixels.handler.fill(0)
