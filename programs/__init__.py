@@ -10,7 +10,8 @@ list = [
     {'value': screen.animate, 'name': 'Animate random'},
     {'value': zigzag.horizontal, 'name': 'H Zigzag'},
     {'value': zigzag.vertical, 'name': 'V Zigzag'},
+    {'value': configure.setBrighness, 'name': 'Set brightness'},
+    {'value': configure.setDefaultColor, 'name': 'Set default color'},
     {'value': individual.run, 'name': 'Individual'},
-    {'value': configure.run, 'name': 'Configure'},
     {'value': cursor.run, 'name': 'Cursor'},
 ]
