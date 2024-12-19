@@ -1,7 +1,7 @@
 from InquirerPy import inquirer
 import programs
 
-f = programs.choices[0]['value']
+f = None
 
 try:
     while True:
