@@ -89,3 +89,4 @@ sh run.sh
 
 - [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
 - (driver neopixel) [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
+- (driver pygame) [pygame](https://www.pygame.org/docs/)
