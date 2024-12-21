@@ -1,19 +1,12 @@
 import pygame
 
 class Pixels:
-    cells = (
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-    )
+    cells = ()
     default_color = 0xffffff
     screen = None
 
     def __init__(self):
+        self.clear()
         pygame.init()
         self.screen = pygame.display.set_mode((600, 700))
         pygame.event.get()
@@ -25,9 +18,15 @@ class Pixels:
         self.show()
 
     def clear(self):
-        for y in range(7):
-            for x in range(6):
-                self.cells[y][x] = 0
+        self.cells = (
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+        )
         self.show()
 
     def set(self, x, y, color):
