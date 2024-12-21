@@ -1,12 +1,12 @@
 from InquirerPy import inquirer
 import programs
 
-def run():
+async def run():
     f = None
     while True:
-        f = inquirer.select(
+        f = await inquirer.select(
             message="Program:",
             choices=programs.choices,
             default=lambda _ : f
-        ).execute()
+        ).execute_async()
         f()
