@@ -1,6 +1,6 @@
 import board
 import neopixel
-from drivers.led.matrix import matrix
+from .matrix import matrix
 
 class Pixels:
     handler = None

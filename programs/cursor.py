@@ -7,6 +7,7 @@ def run():
             i = 0
         pixels.handler.fill(0)
         pixels.handler[i] = pixels.default_color
+        pixels.handler.show()
         inpt = input(i)
         i = i + 1
         if (inpt == 'q'):

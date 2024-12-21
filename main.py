@@ -1,13 +1,13 @@
 from InquirerPy import inquirer
 import programs
 
-f = programs.list[0]['value']
+f = None
 
 try:
     while True:
         f = inquirer.select(
             message="Program:",
-            choices=programs.list,
+            choices=programs.choices,
             default=lambda _ : f
         ).execute()
         f()
