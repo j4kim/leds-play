@@ -1,15 +1,7 @@
-from InquirerPy import inquirer
-import programs
+import prompt
 
-f = None
-
-try:
-    while True:
-        f = inquirer.select(
-            message="Program:",
-            choices=programs.choices,
-            default=lambda _ : f
-        ).execute()
-        f()
-except KeyboardInterrupt:
-    print("Bye")
+if __name__ == '__main__':
+    try:
+        prompt.run()
+    except KeyboardInterrupt:
+        print("Bye")
