@@ -71,6 +71,8 @@ Utilisable seulement sur le Raspberry.
 pip install -r drivers/neopixel/requirements.txt
 ```
 
+<img src="https://github.com/user-attachments/assets/3d76d101-3ce0-4852-8f79-8da803eaa03b" width="400" title="Prgramme 'random' sur le driver neopixel"/>
+
 Pour manipuler les LEDs, on doit être admin, donc lancer python en sudo. Mais on ne peut pas faire ça lorsqu'un est dans un venv. Donc on doit cibler l'exécutable de python dans le venv:
 
 ```sh
