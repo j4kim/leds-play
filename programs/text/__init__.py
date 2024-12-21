@@ -2,9 +2,10 @@ from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 from pixels import pixels
 import time
+import os.path
 
-def generate_bitmap(text, font_path="PressStart2P-Regular.ttf", size=8):
-    font = ImageFont.truetype(font_path, size)
+def generate_bitmap(text, size=8):
+    font = ImageFont.truetype(os.path.join(os.path.dirname(__file__), "PressStart2P-Regular.ttf"), size)
     w = len(text) * size + 12
     image = Image.new("1", (w, size), 0)
     draw = ImageDraw.Draw(image)
