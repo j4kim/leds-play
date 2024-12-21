@@ -1,10 +1,11 @@
-from . import configure, individual, cursor, screen, zigzag
+from . import configure, individual, cursor, screen, zigzag, text
 from pixels import pixels
 from config import driver
 
 all = [
     {'value': pixels.fill, 'name': 'Fill', 'only-for': 'neopixel'},
     {'value': pixels.clear, 'name': 'Clear'},
+    {'value': text.run, 'name': 'Text'},
     {'value': screen.draw, 'name': 'Draw screen'},
     {'value': screen.fill, 'name': 'Fill screen'},
     {'value': screen.rand, 'name': 'Random screen'},
