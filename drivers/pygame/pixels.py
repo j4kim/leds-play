@@ -6,10 +6,10 @@ class Pixels:
     screen = None
 
     def __init__(self):
-        self.clear()
         pygame.init()
         self.screen = pygame.display.set_mode((600, 700))
         pygame.event.get()
+        self.clear()
 
     def fill(self):
         for y in range(7):
