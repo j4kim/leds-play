@@ -19,17 +19,16 @@ def frame(values, offset = 0):
             pixels.set(x, y, color)
     pixels.show()
 
-def scroll(values, offset = 0, fps = 10):
+def scroll(fps = 10):
+    values = generate_bitmap(input("Text: "))
+    offset = 0
     try:
-        frame(values, offset)
-        time.sleep(1/fps)
-        scroll(values, offset + 1, fps)
+        while True:
+            frame(values, offset)
+            time.sleep(1/fps)
+            offset += 1
     except IndexError:
         pass
-
-def text():
-    values = generate_bitmap(input("Text: "))
-    scroll(values)
 
 def char():
     values = generate_bitmap(input("Char: "), 0)
