@@ -61,7 +61,7 @@ Deux drivers à choix dans `config.py`: "pygame" et "neopixel".
 pip install -r drivers/pygame/requirements.txt
 ```
 
-[![Démo](drivers/pygame/demo.mov)](drivers/pygame/demo.mov)
+<video src="https://github.com/user-attachments/assets/5225aeb9-31cc-484a-9133-a43038fde24b"></video>
 
 ### Driver neopixel
 
