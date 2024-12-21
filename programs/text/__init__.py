@@ -24,5 +24,5 @@ def scroll(values, offset = 0, fps = 10):
         pass
 
 def run():
-    values = generate_bitmap("Hello!")
+    values = generate_bitmap(input("Text: "))
     scroll(values)
