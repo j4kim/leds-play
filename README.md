@@ -4,12 +4,10 @@ Fun with LEDs & Raspberry
 
 ## Idée
 
-- Mettre des LEDs derrière les carreaux de cette paroi vitrée dans mon appart pour en faire un écran de 6x7 px.
-
-<img src="https://github.com/user-attachments/assets/44430fdd-a368-4abf-a0f8-48c74fae11d4" width="400">
-
-- Pouvoir déployer des programmes par SSH, HTTP ou autre
-- Pouvoir contrôler le programme avec un contrôleur Bluetooth
+- Mettre des LEDs derrière les carreaux de cette paroi vitrée dans mon appart pour en faire un écran de 6x7 px.  
+  <img src="https://github.com/user-attachments/assets/44430fdd-a368-4abf-a0f8-48c74fae11d4" width="400">
+- Pouvoir déployer des programmes par SSH, HTTP ou autre.
+- Pouvoir contrôler le programme avec un contrôleur Bluetooth ou une app web sur téléphone.
 - Idées de programmes:
   - Snake
   - Tetris
@@ -55,7 +53,7 @@ Deux drivers à choix dans `config.py`: "pygame" et "neopixel".
 
 ### Driver pygame
 
-À utiliser pour le prototypage
+À utiliser pour le développement
 
 ```sh
 pip install -r drivers/pygame/requirements.txt
