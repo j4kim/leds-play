@@ -4,10 +4,11 @@ class Pixels:
     cells = ()
     default_color = 0xffffff
     screen = None
+    scale = 40
 
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((600, 700))
+        self.screen = pygame.display.set_mode((6*self.scale, 7*self.scale))
         pygame.event.get()
         self.clear()
 
@@ -35,5 +36,11 @@ class Pixels:
     def show(self):
         for y in range(7):
             for x in range(6):
-                pygame.draw.rect(self.screen, self.cells[y][x], pygame.Rect(10+x*100, 10+y*100, 80, 80))
+                margin = self.scale / 10
+                rx = margin + x * self.scale
+                ry = margin + y * self.scale
+                size = self.scale - 2 * margin
+                rect = pygame.Rect(rx, ry, size, size)
+                color = self.cells[y][x]
+                pygame.draw.rect(self.screen, color, rect)
         pygame.display.flip()
