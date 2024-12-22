@@ -27,21 +27,27 @@ def frame(bitmap, offset = 0):
             pixels.set(x, y, color)
     pixels.show()
 
-def padscroll(fps = 10):
-    bitmap, width = generate_bitmap(input("Text: "))
+def padscroll(text, fps = 10):
+    bitmap, width = generate_bitmap(text)
     offset = -6
     while offset < width:
         frame(bitmap, offset)
         time.sleep(1/fps)
         offset += 1
 
-def minscroll(fps = 5):
-    bitmap, width = generate_bitmap(input("Text: "))
+def padscroll_input():
+    padscroll(input("Text: "))
+
+def minscroll(text, fps = 5):
+    bitmap, width = generate_bitmap(text)
     offset = 0
     while offset == 0 or offset < width - 6:
         frame(bitmap, offset)
         time.sleep(1/fps)
         offset += 1
+
+def minscroll_input():
+    minscroll(input("Text: "))
 
 def char():
     bitmap, width = generate_bitmap(input("Char: "))
