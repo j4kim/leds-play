@@ -4,14 +4,14 @@ from pixels import pixels
 import time
 import os.path
 
-def generate_bitmap(text, size=8):
-    font = ImageFont.truetype(os.path.join(os.path.dirname(__file__), "PressStart2P-Regular.ttf"), size)
-    w = len(text) * size
-    image = Image.new("1", (w, size), 0)
+def generate_bitmap(text):
+    font = ImageFont.truetype(os.path.join(os.path.dirname(__file__), "Pixeled.ttf"), 5)
+    w = len(text) * 6
+    image = Image.new("1", (w, 7), 0)
     draw = ImageDraw.Draw(image)
-    draw.text((0, 0), text, font=font, fill=1)
+    draw.text((0, -4), text, font=font, fill=1)
     return (
-        np.array_split(list(image.getdata()), size),
+        np.array_split(list(image.getdata()), 7),
         draw.textlength(text, font)
     )
 
