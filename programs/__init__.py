@@ -5,7 +5,8 @@ from config import driver
 all = [
     {'value': pixels.fill, 'name': 'Fill', 'only-for': 'neopixel'},
     {'value': pixels.clear, 'name': 'Clear'},
-    {'value': text.scroll, 'name': 'Text scroll'},
+    {'value': text.padscroll, 'name': 'Text scroll'},
+    {'value': text.minscroll, 'name': 'Text min scroll'},
     {'value': text.char, 'name': 'Char'},
     {'value': screen.draw, 'name': 'Draw screen'},
     {'value': screen.fill, 'name': 'Fill screen'},

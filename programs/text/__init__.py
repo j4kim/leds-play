@@ -15,7 +15,6 @@ def generate_bitmap(text, size=8):
         draw.textlength(text, font)
     )
 
-
 def frame(bitmap, offset = 0):
     for y in range(7):
         row = bitmap[y]
@@ -28,10 +27,18 @@ def frame(bitmap, offset = 0):
             pixels.set(x, y, color)
     pixels.show()
 
-def scroll(fps = 10):
+def padscroll(fps = 10):
     bitmap, width = generate_bitmap(input("Text: "))
     offset = -6
     while offset < width:
+        frame(bitmap, offset)
+        time.sleep(1/fps)
+        offset += 1
+
+def minscroll(fps = 5):
+    bitmap, width = generate_bitmap(input("Text: "))
+    offset = 0
+    while offset == 0 or offset < width - 6:
         frame(bitmap, offset)
         time.sleep(1/fps)
         offset += 1
