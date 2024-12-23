@@ -10,4 +10,5 @@ def test_device(path = '/dev/input/event2'):
 
     for event in gamepad.read_loop():
         if event.type == evdev.ecodes.EV_KEY:
-            print(evdev.categorize(event))
+            if (event.value == 1):
+                print(event.code)
