@@ -1,15 +1,12 @@
-from InquirerPy import inquirer
-import programs
+import asyncio
+import prompt
+import pixels
 
-f = programs.list[0]['value']
+async def main():
+    await asyncio.gather(
+        prompt.run(),
+        pixels.pixels.run()
+    )
 
-try:
-    while True:
-        f = inquirer.select(
-            message="Program:",
-            choices=programs.list,
-            default=lambda _ : f
-        ).execute()
-        f()
-except KeyboardInterrupt:
-    print("Bye")
+if __name__ == '__main__':
+    asyncio.run(main())

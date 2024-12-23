@@ -1,39 +1,45 @@
 from pixels import pixels
 from tools import get_color, prompt_color
 import random
-import time
+import asyncio
+from InquirerPy import inquirer
 
-def draw():
+async def draw():
     y = 0
     for y in range(7):
-        values = input(f"{y}: ").split()
+        values = await inquirer.text(f"{y}:").execute_async()
         for x in range(6):
             try:
                 v = values[x]
             except IndexError:
                 v = 0
             pixels.set(x, y, get_color(v))
-        pixels.handler.show()
+        pixels.show()
 
 def fill():
-    color = prompt_color()
     y = 0
     for y in range(7):
         for x in range(6):
-            pixels.set(x, y, color)
-    pixels.handler.show()
+            pixels.set(x, y, pixels.default_color)
+    pixels.show()
 
 def rand():
     for y in range(7):
         for x in range(6):
             color = get_color(random.choice("rgbwmyco0"))
             pixels.set(x, y, color)
-    pixels.handler.show()
+    pixels.show()
 
-def animate():
-    try:
-        while True:
+async def animate():
+    stop_event = asyncio.Event()
+
+    async def go():
+        while not stop_event.is_set():
             rand()
-            time.sleep(0.1)
-    except KeyboardInterrupt:
-        pass
+            await asyncio.sleep(0.2)
+
+    async def stop():
+        await inquirer.text(message="Quitter:").execute_async()
+        stop_event.set()
+
+    await asyncio.gather(go(), stop())

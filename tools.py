@@ -10,6 +10,7 @@ def get_color(color):
         'y': 'ffff00',
         'c': '00ffff',
         'o': 'ff5500',
+        ' ': 0,
     }
 
     if color in mapping:
@@ -17,6 +18,6 @@ def get_color(color):
 
     return int(str(color), 16)
 
-def prompt_color(message = "hex value or one of r,g,b,w,m,y,c,o:"):
-    color = inquirer.text(message).execute()
+async def prompt_color(message = "hex value or one of r,g,b,w,m,y,c,o:"):
+    color = await inquirer.text(message).execute_async()
     return get_color(color)
