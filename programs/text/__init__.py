@@ -28,13 +28,18 @@ fonts = [
         "origin": (0, -1),
     },
     {
+        "file": "CWEBS.TTF",
+        "size": 13,
+        "origin": (0, -6),
+    },
+    {
         "file": "Rove's-SmolPixelz-4.ttf",
         "size": 4,
         "origin": (0, 7),
     },
 ]
 
-default_font_index = 3
+default_font_index = 1
 
 default_fps = 8
 
