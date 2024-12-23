@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 from pixels import pixels
-import time
+import asyncio
 import os.path
 import urllib.request
 import json
@@ -68,34 +68,34 @@ def frame(bitmap, offset = 0):
             pixels.set(x, y, color)
     pixels.show()
 
-def padscroll(text, fps = None, font_index = None):
+async def padscroll(text, fps = None, font_index = None):
     bitmap, width = generate_bitmap(text, font_index)
     offset = -6
     while offset < width:
         frame(bitmap, offset)
-        time.sleep(1/(fps or default_fps))
+        await asyncio.sleep(1/(fps or default_fps))
         offset += 1
 
-def padscroll_input():
-    padscroll(input("Text: "))
+async def padscroll_input():
+    await padscroll(input("Text: "))
 
-def minscroll(text, fps = None, font_index = None):
+async def minscroll(text, fps = None, font_index = None):
     bitmap, width = generate_bitmap(text, font_index)
     offset = 0
     while offset == 0 or offset < width - 6:
         frame(bitmap, offset)
-        time.sleep(1/(fps or default_fps))
+        await asyncio.sleep(1/(fps or default_fps))
         offset += 1
 
-def minscroll_input():
-    minscroll(input("Text: "))
+async def minscroll_input():
+    await minscroll(input("Text: "))
 
 def char():
     bitmap, width = generate_bitmap(input("Char: "))
     frame(bitmap)
 
-def random_word():
+async def random_word():
     data = urllib.request.urlopen("https://random-word-api.herokuapp.com/word?lang=fr&length=5").read().decode("utf-8")
     word = json.loads(data)[0]
-    padscroll(word)
+    await padscroll(word)
     print(word)

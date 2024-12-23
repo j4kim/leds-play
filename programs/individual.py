@@ -2,13 +2,13 @@ from InquirerPy import inquirer
 from pixels import pixels
 from tools import prompt_color
 
-def run():
-    index = inquirer.number(
+async def run():
+    index = await inquirer.number(
         message="Pixel index:",
         max_allowed=pixels.n - 1,
         min_allowed=0,
         filter=lambda x: int(x)
-    ).execute()
+    ).execute_async()
 
-    pixels.handler[index] = prompt_color()
+    pixels.handler[index] = await prompt_color()
     pixels.handler.show()

@@ -1,4 +1,5 @@
 import pygame
+import asyncio
 
 class Pixels:
     cells = ()
@@ -9,8 +10,15 @@ class Pixels:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((6*self.scale, 7*self.scale))
-        pygame.event.get()
         self.clear()
+
+    async def run(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return
+            pygame.display.flip()
+            await asyncio.sleep(1/60)
 
     def fill(self):
         for y in range(7):
@@ -43,4 +51,3 @@ class Pixels:
                 rect = pygame.Rect(rx, ry, size, size)
                 color = self.cells[y][x]
                 pygame.draw.rect(self.screen, color, rect)
-        pygame.display.flip()

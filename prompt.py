@@ -1,5 +1,6 @@
 from InquirerPy import inquirer
 import programs
+import asyncio
 
 async def run():
     f = None
@@ -9,4 +10,6 @@ async def run():
             choices=programs.choices,
             default=lambda _ : f
         ).execute_async()
-        f()
+        r = f()
+        if asyncio.iscoroutine(r):
+            await r
