@@ -21,6 +21,7 @@ all = [
     {'value': configure.setDefaultColor, 'name': 'Set default color'},
     {'value': individual.run, 'name': 'Individual', 'only-for': 'neopixel'},
     {'value': cursor.run, 'name': 'Cursor', 'only-for': 'neopixel'},
+    {'value': pixels.quit, 'name': 'Quit'},
 ]
 
 choices = [p for p in all if not 'only-for' in p or p['only-for'] == driver]

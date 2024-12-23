@@ -1,7 +1,7 @@
 from pixels import pixels
-import time
+import asyncio
 
-def horizontal():
+async def horizontal():
     y = 0
     for y in range(7):
         r = range(6)
@@ -11,10 +11,10 @@ def horizontal():
             pixels.clear()
             pixels.set(x, y, pixels.default_color)
             pixels.show()
-            time.sleep(0.02)
+            await asyncio.sleep(0.02)
     pixels.clear()
 
-def vertical():
+async def vertical():
     i = 0
     while i < pixels.n:
         pixels.handler.fill(0)
