@@ -4,15 +4,49 @@ from pixels import pixels
 import time
 import os.path
 
-def generate_bitmap(text, size=8):
-    font = ImageFont.truetype(os.path.join(os.path.dirname(__file__), "PressStart2P-Regular.ttf"), size)
-    w = len(text) * size
-    image = Image.new("1", (w, size), 0)
+fonts = [
+    {
+        "file": "PressStart2P-Regular.ttf",
+        "size": 8,
+        "origin": (0, 0),
+    },
+    {
+        "file": "A Goblin Appears!.otf",
+        "size": 7,
+        "origin": (0, 0),
+    },
+    {
+        "file": "Pixeled.ttf",
+        "size": 5,
+        "origin": (0, -4),
+    },
+    {
+        "file": "04B_03__.TTF",
+        "size": 8,
+        "origin": (0, -1),
+    },
+    {
+        "file": "Rove's-SmolPixelz-4.ttf",
+        "size": 4,
+        "origin": (0, 7),
+    },
+]
+
+selected_font_index = 3
+
+fps = 5
+
+def generate_bitmap(text):
+    font = fonts[selected_font_index]
+    path = os.path.join(os.path.dirname(__file__), font["file"])
+    image_font = ImageFont.truetype(path, font["size"])
+    w = len(text) * 8
+    image = Image.new("1", (w, 7), 0)
     draw = ImageDraw.Draw(image)
-    draw.text((0, 0), text, font=font, fill=1)
+    draw.text(font["origin"], text, font=image_font, fill=1)
     return (
-        np.array_split(list(image.getdata()), size),
-        draw.textlength(text, font)
+        np.array_split(list(image.getdata()), 7),
+        draw.textlength(text, image_font)
     )
 
 def frame(bitmap, offset = 0):
@@ -27,21 +61,27 @@ def frame(bitmap, offset = 0):
             pixels.set(x, y, color)
     pixels.show()
 
-def padscroll(fps = 10):
-    bitmap, width = generate_bitmap(input("Text: "))
+def padscroll(text):
+    bitmap, width = generate_bitmap(text)
     offset = -6
     while offset < width:
         frame(bitmap, offset)
         time.sleep(1/fps)
         offset += 1
 
-def minscroll(fps = 5):
-    bitmap, width = generate_bitmap(input("Text: "))
+def padscroll_input():
+    padscroll(input("Text: "))
+
+def minscroll(text):
+    bitmap, width = generate_bitmap(text)
     offset = 0
     while offset == 0 or offset < width - 6:
         frame(bitmap, offset)
         time.sleep(1/fps)
         offset += 1
+
+def minscroll_input():
+    minscroll(input("Text: "))
 
 def char():
     bitmap, width = generate_bitmap(input("Char: "))

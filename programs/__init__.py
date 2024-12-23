@@ -5,9 +5,11 @@ from config import driver
 all = [
     {'value': pixels.fill, 'name': 'Fill', 'only-for': 'neopixel'},
     {'value': pixels.clear, 'name': 'Clear'},
-    {'value': text.padscroll, 'name': 'Text scroll'},
-    {'value': text.minscroll, 'name': 'Text min scroll'},
+    {'value': text.padscroll_input, 'name': 'Text scroll'},
+    {'value': text.minscroll_input, 'name': 'Text min scroll'},
     {'value': text.char, 'name': 'Char'},
+    {'value': configure.setFont, 'name': 'Set font'},
+    {'value': configure.setTextFps, 'name': 'Set text fps'},
     {'value': screen.draw, 'name': 'Draw screen'},
     {'value': screen.fill, 'name': 'Fill screen'},
     {'value': screen.rand, 'name': 'Random screen'},
