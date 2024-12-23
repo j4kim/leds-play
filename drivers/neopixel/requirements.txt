@@ -9,7 +9,9 @@ Adafruit-PlatformDetect==3.75.0
 Adafruit-PureIO==1.1.11
 binho-host-adapter==0.1.6
 inquirerpy==0.3.4
+numpy==2.2.0
 pfzy==0.3.4
+pillow==11.0.0
 prompt_toolkit==3.0.48
 pyftdi==0.56.0
 pyserial==3.5

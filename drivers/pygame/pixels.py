@@ -1,24 +1,34 @@
+import pygame
+
 class Pixels:
-    cells = (
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-    )
+    cells = ()
     default_color = 0xffffff
+    screen = None
+    scale = 40
+
+    def __init__(self):
+        pygame.init()
+        self.screen = pygame.display.set_mode((6*self.scale, 7*self.scale))
+        pygame.event.get()
+        self.clear()
 
     def fill(self):
         for y in range(7):
             for x in range(6):
                 self.cells[y][x] = 0xffffff
+        self.show()
 
     def clear(self):
-        for y in range(7):
-            for x in range(6):
-                self.cells[y][x] = 0
+        self.cells = (
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+        )
+        self.show()
 
     def set(self, x, y, color):
         self.cells[y][x] = color
@@ -26,5 +36,11 @@ class Pixels:
     def show(self):
         for y in range(7):
             for x in range(6):
-                print("#" if self.cells[y][x] else " ", end="|")
-            print()
+                margin = self.scale / 10
+                rx = margin + x * self.scale
+                ry = margin + y * self.scale
+                size = self.scale - 2 * margin
+                rect = pygame.Rect(rx, ry, size, size)
+                color = self.cells[y][x]
+                pygame.draw.rect(self.screen, color, rect)
+        pygame.display.flip()

@@ -4,21 +4,19 @@ Fun with LEDs & Raspberry
 
 ## Idée
 
-- Mettre des LEDs derrière les carreaux de cette paroi vitrée dans mon appart pour en faire un écran de 6x7 px.
-
-<img src="https://github.com/user-attachments/assets/44430fdd-a368-4abf-a0f8-48c74fae11d4" width="400">
-
-- Pouvoir déployer des programmes par SSH, HTTP ou autre
-- Pouvoir contrôler le programme avec un contrôleur Bluetooth
+- Mettre des LEDs derrière les carreaux de cette paroi vitrée dans mon appart pour en faire un écran de 6x7 px.  
+  <img src="https://github.com/user-attachments/assets/44430fdd-a368-4abf-a0f8-48c74fae11d4" width="400">
+- Pouvoir déployer des programmes par SSH, HTTP ou autre.
+- Pouvoir contrôler le programme avec un contrôleur Bluetooth ou une app web sur téléphone.
 - Idées de programmes:
   - Snake
   - Tetris
   - Message défilant
   - Réaction à la musique (ASIO?)
   - Crazy Taxi
-  - Doodle Jump
   - Flappy Bird
   - Un détecteur de mouvement qui allume les LEDs
+  - Pong
 
 ## Matériel
 
@@ -29,21 +27,17 @@ Fun with LEDs & Raspberry
   - [Adaptateur secteur 5V 2A](https://www.bastelgarage.ch/adaptateur-secteur-ac-dc-5v-dc-2000ma-prise-5-5mm-2-1mm?search=422326)
   - [Connecteur Barrel Jack](https://www.bastelgarage.ch/prise-dc-femelle-barrel-jack-5-5mm-2-1mm-avec-bornes-a-vis?search=420128)
   - [Condensateurs](https://www.bastelgarage.ch/condensateur-electrolytique-1000-f-25-v?search=420416)
-- Contrôleur Bluetooth: [Zero 2](https://www.8bitdo.com/zero2/)
-
-## Connexion SSH
-
-```sh
-ssh pi@192.168.1.116
-# mot de passe
-cd leds-play
-```
+- Contrôleurs Bluetooth: 2 x [Zero 2](https://www.8bitdo.com/zero2/)
 
 ## Développement
+
+Créer un venv:
 
 ```sh
 python -m venv venv
 ```
+
+L'activer:
 
 ```sh
 source venv/bin/activate
@@ -55,15 +49,17 @@ Créer le fichier de config:
 cp config.py.example config.py
 ```
 
-Deux drivers sont configurables dans `config.py`: "pygame" et "neopixel". 
+Deux drivers à choix dans `config.py`: "pygame" et "neopixel". 
 
 ### Driver pygame
 
-À utiliser pour le prototypage
+À utiliser pour le développement
 
 ```sh
 pip install -r drivers/pygame/requirements.txt
 ```
+
+<video src="https://github.com/user-attachments/assets/5225aeb9-31cc-484a-9133-a43038fde24b"></video>
 
 ### Driver neopixel
 
@@ -73,19 +69,36 @@ Utilisable seulement sur le Raspberry.
 pip install -r drivers/neopixel/requirements.txt
 ```
 
+<img src="https://github.com/user-attachments/assets/3d76d101-3ce0-4852-8f79-8da803eaa03b" width="400" title="Prgramme 'random' sur le driver neopixel"/>
+
 Pour manipuler les LEDs, on doit être admin, donc lancer python en sudo. Mais on ne peut pas faire ça lorsqu'un est dans un venv. Donc on doit cibler l'exécutable de python dans le venv:
 
 ```sh
 sudo venv/bin/python main.py
 ```
 
-ou:
-
-```sh
-sh run.sh
-```
-
 ## Dépendances
 
 - [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
 - (driver neopixel) [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
+- (driver pygame) [pygame](https://www.pygame.org/docs/)
+
+## Montage
+
+Schéma de montage:
+
+![Schéma de montage](schema-leds-play.svg)
+
+Chaque colonne contient une bande de 50 LEDs. Donc il y a 300 LEDs en tout. Elles sont espacées de 3.333 cm. Une bande de 50 fait donc 166.666 cm. Les bandes sont câblées en série. J'utilise une alimentation externe de 2 Ampères / 5 Volts pour économiser la charge du Raspberry. Si on voulait allumer toutes les LEDs à pleine puissance, il faudrait ajouter une deuxième alim qui alimente les 3 dernières bandes.
+
+On n'utilise qu'une LED par carreau donc environ une sur huit. Le schéma est vu depuis l'arrière de la paroi donc l'axe horizontal est inversé : La LED pour le premier carreau (en haut à gauche) est la 252. 
+Le fichier [drivers/neopixel/matrix.py](drivers/neopixel/matrix.py) est utilisé pour faire le mapping coordonnées du carreau -> index de la LED.
+
+## Connexion SSH au Raspberry
+
+```sh
+ssh pi@192.168.1.116
+# mot de passe
+cd leds-play
+sh run.sh
+```
