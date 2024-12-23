@@ -8,6 +8,7 @@ all = [
     {'value': text.padscroll_input, 'name': 'Text scroll'},
     {'value': text.minscroll_input, 'name': 'Text min scroll'},
     {'value': text.char, 'name': 'Char'},
+    {'value': configure.setFont, 'name': 'Set font'},
     {'value': screen.draw, 'name': 'Draw screen'},
     {'value': screen.fill, 'name': 'Fill screen'},
     {'value': screen.rand, 'name': 'Random screen'},
