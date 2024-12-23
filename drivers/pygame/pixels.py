@@ -6,6 +6,7 @@ class Pixels:
     default_color = 0xffffff
     screen = None
     scale = 40
+    running = True
 
     def __init__(self):
         pygame.init()
@@ -13,12 +14,15 @@ class Pixels:
         self.clear()
 
     async def run(self):
-        while True:
+        while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
             pygame.display.flip()
             await asyncio.sleep(1/60)
+            
+    def quit(self):
+        self.running = False
 
     def fill(self):
         for y in range(7):

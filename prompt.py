@@ -1,10 +1,11 @@
 from InquirerPy import inquirer
 import programs
 import asyncio
+import pixels
 
 async def run():
     f = None
-    while True:
+    while pixels.pixels.running:
         f = await inquirer.select(
             message="Program:",
             choices=programs.choices,
