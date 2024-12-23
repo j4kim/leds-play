@@ -20,6 +20,16 @@ fonts = [
         "size": 5,
         "origin": (0, -4),
     },
+    {
+        "file": "04B_03__.TTF",
+        "size": 8,
+        "origin": (0, -1),
+    },
+    {
+        "file": "Rove's-SmolPixelz-4.ttf",
+        "size": 4,
+        "origin": (0, 7),
+    },
 ]
 
 selected_font_index = 0
