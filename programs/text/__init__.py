@@ -32,7 +32,9 @@ fonts = [
     },
 ]
 
-selected_font_index = 0
+selected_font_index = 3
+
+fps = 5
 
 def generate_bitmap(text):
     font = fonts[selected_font_index]
@@ -59,7 +61,7 @@ def frame(bitmap, offset = 0):
             pixels.set(x, y, color)
     pixels.show()
 
-def padscroll(text, fps = 10):
+def padscroll(text):
     bitmap, width = generate_bitmap(text)
     offset = -6
     while offset < width:
@@ -70,7 +72,7 @@ def padscroll(text, fps = 10):
 def padscroll_input():
     padscroll(input("Text: "))
 
-def minscroll(text, fps = 5):
+def minscroll(text):
     bitmap, width = generate_bitmap(text)
     offset = 0
     while offset == 0 or offset < width - 6:

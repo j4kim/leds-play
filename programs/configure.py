@@ -23,3 +23,12 @@ def setFont():
         filter=lambda x: int(x),
         default=programs.text.selected_font_index
     ).execute()
+
+def setTextFps():
+    programs.text.fps = inquirer.number(
+        message="FPS:",
+        min_allowed=1,
+        max_allowed=30,
+        filter=lambda x: int(x),
+        default=programs.text.fps
+    ).execute()
