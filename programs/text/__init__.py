@@ -4,15 +4,37 @@ from pixels import pixels
 import time
 import os.path
 
+fonts = [
+    {
+        "file": "PressStart2P-Regular.ttf",
+        "size": 8,
+        "origin": (0, 0),
+    },
+    {
+        "file": "A Goblin Appears!.otf",
+        "size": 7,
+        "origin": (0, 0),
+    },
+    {
+        "file": "Pixeled.ttf",
+        "size": 5,
+        "origin": (0, -4),
+    },
+]
+
+selected_font_index = 0
+
 def generate_bitmap(text):
-    font = ImageFont.truetype(os.path.join(os.path.dirname(__file__), "A Goblin Appears!.otf"), 7)
+    font = fonts[selected_font_index]
+    path = os.path.join(os.path.dirname(__file__), font["file"])
+    image_font = ImageFont.truetype(path, font["size"])
     w = len(text) * 8
     image = Image.new("1", (w, 7), 0)
     draw = ImageDraw.Draw(image)
-    draw.text((0, 0), text, font=font, fill=1)
+    draw.text(font["origin"], text, font=image_font, fill=1)
     return (
         np.array_split(list(image.getdata()), 7),
-        draw.textlength(text, font)
+        draw.textlength(text, image_font)
     )
 
 def frame(bitmap, offset = 0):
