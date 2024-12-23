@@ -3,6 +3,8 @@ import numpy as np
 from pixels import pixels
 import time
 import os.path
+import urllib.request
+import json
 
 fonts = [
     {
@@ -86,3 +88,9 @@ def minscroll_input():
 def char():
     bitmap, width = generate_bitmap(input("Char: "))
     frame(bitmap)
+
+def random_word():
+    data = urllib.request.urlopen("https://random-word-api.herokuapp.com/word?lang=fr&length=5").read().decode("utf-8")
+    word = json.loads(data)[0]
+    padscroll(word)
+    print(word)

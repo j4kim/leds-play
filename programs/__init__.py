@@ -8,6 +8,7 @@ all = [
     {'value': text.padscroll_input, 'name': 'Text scroll'},
     {'value': text.minscroll_input, 'name': 'Text min scroll'},
     {'value': text.char, 'name': 'Char'},
+    {'value': text.random_word, 'name': 'Random word'},
     {'value': configure.setFont, 'name': 'Set default font'},
     {'value': configure.setTextFps, 'name': 'Set default text fps'},
     {'value': screen.draw, 'name': 'Draw screen'},
