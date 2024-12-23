@@ -36,7 +36,7 @@ fonts = [
 
 default_font_index = 3
 
-default_fps = 5
+default_fps = 8
 
 def generate_bitmap(text, font_index = None):
     font = fonts[font_index or default_font_index]
