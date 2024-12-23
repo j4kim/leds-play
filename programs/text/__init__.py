@@ -32,12 +32,12 @@ fonts = [
     },
 ]
 
-selected_font_index = 3
+default_font_index = 3
 
-fps = 5
+default_fps = 5
 
-def generate_bitmap(text):
-    font = fonts[selected_font_index]
+def generate_bitmap(text, font_index = None):
+    font = fonts[font_index or default_font_index]
     path = os.path.join(os.path.dirname(__file__), font["file"])
     image_font = ImageFont.truetype(path, font["size"])
     w = len(text) * 8
@@ -61,23 +61,23 @@ def frame(bitmap, offset = 0):
             pixels.set(x, y, color)
     pixels.show()
 
-def padscroll(text):
-    bitmap, width = generate_bitmap(text)
+def padscroll(text, fps = None, font_index = None):
+    bitmap, width = generate_bitmap(text, font_index)
     offset = -6
     while offset < width:
         frame(bitmap, offset)
-        time.sleep(1/fps)
+        time.sleep(1/(fps or default_fps))
         offset += 1
 
 def padscroll_input():
     padscroll(input("Text: "))
 
-def minscroll(text):
-    bitmap, width = generate_bitmap(text)
+def minscroll(text, fps = None, font_index = None):
+    bitmap, width = generate_bitmap(text, font_index)
     offset = 0
     while offset == 0 or offset < width - 6:
         frame(bitmap, offset)
-        time.sleep(1/fps)
+        time.sleep(1/(fps or default_fps))
         offset += 1
 
 def minscroll_input():

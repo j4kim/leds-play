@@ -16,19 +16,19 @@ def setDefaultColor():
     pixels.default_color = prompt_color("Default color:")
 
 def setFont():
-    programs.text.selected_font_index = inquirer.number(
-        message="Font:",
+    programs.text.default_font_index = inquirer.number(
+        message="Default font:",
         min_allowed=0,
         max_allowed=len(programs.text.fonts) - 1,
         filter=lambda x: int(x),
-        default=programs.text.selected_font_index
+        default=programs.text.default_font_index
     ).execute()
 
 def setTextFps():
-    programs.text.fps = inquirer.number(
-        message="FPS:",
+    programs.text.default_fps = inquirer.number(
+        message="Defaut text fps:",
         min_allowed=1,
         max_allowed=30,
         filter=lambda x: int(x),
-        default=programs.text.fps
+        default=programs.text.default_fps
     ).execute()
