@@ -1,4 +1,5 @@
 import evdev
+import asyncio
 
 bindings = {
     '/dev/input/event2': {
@@ -29,3 +30,27 @@ def test_device(path = '/dev/input/event2'):
         if event.type == evdev.ecodes.EV_KEY:
             if (event.value == 1):
                 print(bindings[path][event.code])
+
+event_queue = asyncio.Queue()
+
+async def listen(path = '/dev/input/event2'):
+    gamepad = evdev.InputDevice(path)
+    async for event in gamepad.async_read_loop():
+        if event.type == evdev.ecodes.EV_KEY:
+            if (event.value == 1):
+                await event_queue.put(bindings[path][event.code])
+
+async def monitor():
+    while True:
+        event = await event_queue.get()
+        print(event)
+        event_queue.task_done()
+
+async def main():
+    await asyncio.gather(
+        monitor(),
+        listen(),
+    )
+
+if __name__ == '__main__':
+    asyncio.run(main())
