@@ -23,8 +23,6 @@ async def freeThePixel():
 
     def handle_event(event):
         nonlocal x, y
-        if event['value'] == 2 and event['binding'] == 'select':
-            quit.set()
 
         if event['value'] == 1:
             pixels.set(x, y, 0)
@@ -36,6 +34,8 @@ async def freeThePixel():
                 x -= 1
             elif event['binding'] == 'arrow_right':
                 x += 1
+            elif event['binding'] == 'select':
+                quit.set()
             x = max(0, min(5, x))
             y = max(0, min(6, y))
             pixels.set(x, y, pixels.default_color)
@@ -47,7 +47,7 @@ async def freeThePixel():
         print(e)
         return
 
-    print("Long press select to quit")
+    print("Press select to quit")
 
     await quit.wait()
     pixels.clear()
