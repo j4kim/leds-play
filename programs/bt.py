@@ -1,5 +1,5 @@
 from InquirerPy import inquirer
-from pixels import pixels
+from driver import driver
 import asyncio
 
 async def testControllers():
@@ -7,13 +7,13 @@ async def testControllers():
         print(event)
 
     try:
-        pixels.listen_controllers(handle_event)
+        driver.listen_controllers(handle_event)
     except Exception as e:
         print(e)
         return
 
     await inquirer.text(message="Press Enter to quit\n").execute_async()
-    pixels.stop_listening_controllers()
+    driver.stop_listening_controllers()
 
 async def freeThePixel():
     quit = asyncio.Event()
@@ -25,7 +25,7 @@ async def freeThePixel():
         nonlocal x, y
 
         if event['value'] == 1:
-            pixels.set(x, y, 0)
+            driver.set(x, y, 0)
             if event['key'] == 'arrow_up':
                 y -= 1
             elif event['key'] == 'arrow_down':
@@ -38,11 +38,11 @@ async def freeThePixel():
                 quit.set()
             x = max(0, min(5, x))
             y = max(0, min(6, y))
-            pixels.set(x, y, pixels.default_color)
-            pixels.show()
+            driver.set(x, y, driver.default_color)
+            driver.show()
 
     try:
-        pixels.listen_controllers(handle_event)
+        driver.listen_controllers(handle_event)
     except Exception as e:
         print(e)
         return
@@ -50,5 +50,5 @@ async def freeThePixel():
     print("Press select to quit")
 
     await quit.wait()
-    pixels.clear()
-    pixels.stop_listening_controllers()
+    driver.clear()
+    driver.stop_listening_controllers()

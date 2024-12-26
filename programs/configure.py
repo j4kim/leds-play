@@ -1,20 +1,20 @@
 from InquirerPy import inquirer
-from pixels import pixels
+from driver import driver
 from tools import prompt_color
 import programs.text
 
 async def setBrighness():
-    pixels.brightness = await inquirer.number(
+    driver.brightness = await inquirer.number(
         message="Enter Brightness:",
         float_allowed=True,
-        default=pixels.brightness,
+        default=driver.brightness,
         min_allowed=0,
         filter=lambda x: float(x),
     ).execute_async()
-    pixels.reset()
+    driver.reset()
 
 async def setDefaultColor():
-    pixels.default_color = await prompt_color("Default color:")
+    driver.default_color = await prompt_color("Default color:")
 
 async def setFont():
     programs.text.default_font_index = await inquirer.number(

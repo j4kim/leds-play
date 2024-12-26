@@ -1,13 +1,13 @@
-from pixels import pixels
+from driver import driver
 
 def run():
     i = 0
     while True:
-        if (i >= pixels.n):
+        if (i >= driver.n):
             i = 0
-        pixels.handler.fill(0)
-        pixels.handler[i] = pixels.default_color
-        pixels.handler.show()
+        driver.handler.fill(0)
+        driver.handler[i] = driver.default_color
+        driver.handler.show()
         inpt = input(i)
         i = i + 1
         if (inpt == 'q'):
