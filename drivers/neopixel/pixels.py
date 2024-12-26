@@ -2,7 +2,7 @@ import board
 import neopixel
 from .matrix import matrix
 import asyncio
-import bt
+from . import bt
 
 class Pixels:
     handler = None
