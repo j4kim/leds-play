@@ -19,7 +19,7 @@ bindings = {
 }
 
 def list_devices():
-    devices = [evdev.InputDevice(path) for path in evdev.list_devices()]
+    devices = [evdev.InputDevice(path) for path in evdev.list_devices() if path not in ['/dev/input/event0', '/dev/input/event1']]
     for device in devices:
         print(device.path, device.name, device.phys)
 
