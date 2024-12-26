@@ -6,7 +6,11 @@ async def testControllers():
     def handle_event(event):
         print(event)
 
-    pixels.listen_controllers(handle_event)
+    try:
+        pixels.listen_controllers(handle_event)
+    except Exception as e:
+        print(e)
+        return
 
     await inquirer.text(message="Press Enter to quit\n").execute_async()
     pixels.stop_listening_controllers()
@@ -37,7 +41,11 @@ async def freeThePixel():
             pixels.set(x, y, pixels.default_color)
             pixels.show()
 
-    pixels.listen_controllers(handle_event)
+    try:
+        pixels.listen_controllers(handle_event)
+    except Exception as e:
+        print(e)
+        return
 
     print("Long press select to quit")
 

@@ -57,8 +57,7 @@ class Pixels:
             if path not in ['/dev/input/event0', '/dev/input/event1'] # remove hdmi devices
         ]
         if (len(device_paths) == 0):
-            print("No devices found")
-            return
+            raise Exception("No devices found")
         for path in device_paths:
             task = asyncio.create_task(self.listen_controller(path, on_event))
             self.listening_tasks.append(task)
