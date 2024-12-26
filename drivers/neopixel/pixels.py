@@ -2,8 +2,22 @@ import board
 import neopixel
 from .matrix import matrix
 import asyncio
-from . import bt
 import evdev
+
+key_bindings = {
+    46: 'arrow_up',
+    33: 'arrow_right',
+    32: 'arrow_down',
+    18: 'arrow_left',
+    35: 'north',
+    34: 'east',
+    36: 'south',
+    23: 'west',
+    37: 'left',
+    50: 'right',
+    49: 'select',
+    24: 'start',
+}
 
 class Pixels:
     handler = None
@@ -34,7 +48,7 @@ class Pixels:
             while True:
                 event = await device.async_read_one()
                 if event.type == evdev.ecodes.EV_KEY:
-                    on_event({'event': event, 'device': path})
+                    on_event({'value': event.value, 'device': path, 'binding': key_bindings[event.code]})
         except asyncio.CancelledError:
             pass
         finally:
