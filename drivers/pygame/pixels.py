@@ -29,8 +29,6 @@ class Pixels:
     async def run(self):
         while self.running:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    return
                 if self.on_event and self.joysticks and event.type in [pygame.JOYBUTTONUP, pygame.JOYBUTTONDOWN, pygame.JOYAXISMOTION]:
                     self.on_event(self.transform_event(event))
             pygame.display.flip()
