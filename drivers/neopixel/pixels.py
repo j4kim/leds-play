@@ -12,7 +12,6 @@ class Pixels:
     brightness = 0.1
     default_color = 0xffffff
     running = True
-    controllers = []
     listening_tasks = []
 
     def reset(self):
@@ -29,28 +28,28 @@ class Pixels:
     async def run(self):
         pass
 
-    def list_devices(self):
-        return bt.list_devices()
-
-    def get_device_name(self, device: evdev.InputDevice):
-        return f"{device.name} - {device.path}"
-
-    def add_controller(self, device):
-        if device not in self.controllers:
-            self.controllers.append(device)
-        print("Controllers:", self.controllers)
-
-    async def listen_controller(self, device, on_event):
+    async def listen_controller(self, path, on_event):
         try:
+            device = evdev.InputDevice(path)
             while True:
                 event = await device.async_read_one()
-                on_event(event, device)
+                if event.type == evdev.ecodes.EV_KEY:
+                    on_event({'event': event, 'device': path})
         except asyncio.CancelledError:
             pass
+        finally:
+            device.close()
 
     def listen_controllers(self, on_event):
-        for device in self.controllers:
-            task = asyncio.create_task(self.listen_controller(device, on_event))
+        device_paths = [
+            path for path in evdev.list_devices()
+            if path not in ['/dev/input/event0', '/dev/input/event1'] # remove hdmi devices
+        ]
+        if (len(device_paths) == 0):
+            print("No devices found")
+            return
+        for path in device_paths:
+            task = asyncio.create_task(self.listen_controller(path, on_event))
             self.listening_tasks.append(task)
 
     def stop_listening_controllers(self):

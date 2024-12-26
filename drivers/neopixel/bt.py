@@ -14,10 +14,3 @@ bindings = {
     49: 'select',
     24: 'start',
 }
-
-def list_devices():
-    return [
-        evdev.InputDevice(path)
-        for path in evdev.list_devices()
-        if path not in ['/dev/input/event0', '/dev/input/event1'] # remove hdmi devices
-    ]

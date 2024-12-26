@@ -21,8 +21,7 @@ all = [
     {'value': configure.setDefaultColor, 'name': 'Set default color'},
     {'value': individual.run, 'name': 'Individual', 'only-for': 'neopixel'},
     {'value': cursor.run, 'name': 'Cursor', 'only-for': 'neopixel'},
-    {'value': bt.connectController, 'name': 'Connect controller'},
-    {'value': bt.testController, 'name': 'Test controller'},
+    {'value': bt.testControllers, 'name': 'Test controllers'},
     {'value': pixels.quit, 'name': 'Quit'},
 ]
 
