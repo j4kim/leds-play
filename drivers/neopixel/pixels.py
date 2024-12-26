@@ -12,7 +12,8 @@ class Pixels:
     brightness = 0.1
     default_color = 0xffffff
     running = True
-    controller_task = None
+    controllers = []
+    listening_tasks = []
 
     def reset(self):
         self.handler = neopixel.NeoPixel(
@@ -35,13 +36,31 @@ class Pixels:
         return f"{device.name} - {device.path}"
 
     def add_controller(self, device):
-        if self.controller_task is not None: self.controller_task.cancel()
-        self.controller_task = asyncio.create_task(bt.listen(device))
+        if device not in self.controllers:
+            self.controllers.append(device)
+        print("Controllers:", self.controllers)
+
+    async def listen_controller(self, device, on_event):
+        try:
+            while True:
+                event = await device.async_read_one()
+                on_event(event, device)
+        except asyncio.CancelledError:
+            pass
+
+    def listen_controllers(self, on_event):
+        for device in self.controllers:
+            task = asyncio.create_task(self.listen_controller(device, on_event))
+            self.listening_tasks.append(task)
+
+    def stop_listening_controllers(self):
+        for task in self.listening_tasks:
+            task.cancel()
+        self.listening_tasks = []
 
     def quit(self):
         self.clear()
         self.running = False
-        if self.controller_task is not None: self.controller_task.cancel()
 
     def fill(self):
         self.handler.fill(self.default_color)

@@ -22,16 +22,14 @@ async def connectController():
     pixels.add_controller(device)
 
 async def testController():
-    async def monitor():
-        try:
-            while True:
-                event = await queue.get()
-                print(event)
-                queue.task_done()
-        except asyncio.CancelledError:
-            pass
+    if len(pixels.controllers) == 0:
+        print("No controller connected")
+        return
 
-    monitor_task = asyncio.create_task(monitor())
+    def handle_event(event, device):
+        print(event, device)
+
+    pixels.listen_controllers(handle_event)
 
     await inquirer.text(message="Press Enter to quit\n").execute_async()
-    monitor_task.cancel()
+    pixels.stop_listening_controllers()
