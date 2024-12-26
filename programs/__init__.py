@@ -22,6 +22,7 @@ all = [
     {'value': individual.run, 'name': 'Individual', 'only-for': 'neopixel'},
     {'value': cursor.run, 'name': 'Cursor', 'only-for': 'neopixel'},
     {'value': bt.testControllers, 'name': 'Test controllers'},
+    {'value': bt.freeThePixel, 'name': 'Free the pixel'},
     {'value': pixels.quit, 'name': 'Quit'},
 ]
 
