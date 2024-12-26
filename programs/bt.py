@@ -26,15 +26,15 @@ async def freeThePixel():
 
         if event['value'] == 1:
             pixels.set(x, y, 0)
-            if event['binding'] == 'arrow_up':
+            if event['key'] == 'arrow_up':
                 y -= 1
-            elif event['binding'] == 'arrow_down':
+            elif event['key'] == 'arrow_down':
                 y += 1
-            elif event['binding'] == 'arrow_left':
+            elif event['key'] == 'arrow_left':
                 x -= 1
-            elif event['binding'] == 'arrow_right':
+            elif event['key'] == 'arrow_right':
                 x += 1
-            elif event['binding'] == 'select':
+            elif event['key'] == 'select':
                 quit.set()
             x = max(0, min(5, x))
             y = max(0, min(6, y))

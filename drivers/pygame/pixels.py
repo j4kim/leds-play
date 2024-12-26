@@ -37,25 +37,25 @@ class Pixels:
             await asyncio.sleep(1/60)
 
     def transform_event(self, event: pygame.event.Event):
-        binding = None
+        key = None
         if event.type == pygame.JOYAXISMOTION:
             v = round(event.value)
             if event.axis == 1 and v == -1:
-                binding = 'arrow_up'
+                key = 'arrow_up'
             elif event.axis == 1 and v == 1:
-                binding = 'arrow_down'
+                key = 'arrow_down'
             elif event.axis == 0 and v == -1:
-                binding = 'arrow_left'
+                key = 'arrow_left'
             elif event.axis == 0 and v == 1:
-                binding = 'arrow_right'
+                key = 'arrow_right'
             value = abs(v)
         else:
             value = 1 if event.type == pygame.JOYBUTTONDOWN else 0
-            binding = key_bindings[event.button]
+            key = key_bindings[event.button] if event.button in key_bindings else event.button
         return {
             'value': value,
             'device': event.joy,
-            'binding': binding,
+            'key': key,
         }
 
     def listen_controllers(self, on_event):

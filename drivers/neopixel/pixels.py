@@ -49,7 +49,11 @@ class Pixels:
         while True:
             event = await device.async_read_one()
             if event.type == evdev.ecodes.EV_KEY:
-                on_event({'value': event.value, 'device': path, 'binding': key_bindings[event.code]})
+                on_event({
+                    'value': event.value,
+                    'device': path,
+                    'key': key_bindings[event.code] if event.code in key_bindings else event.code
+                })
 
     def listen_controllers(self, on_event):
         device_paths = [
