@@ -81,9 +81,53 @@ sudo venv/bin/python main.py
 
 ## Dépendances
 
-- [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
-- (driver neopixel) [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
-- (driver pygame) [pygame](https://www.pygame.org/docs/)
+- Communes:
+  - [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
+- Driver pygame:
+  - [pygame](https://www.pygame.org/docs/)
+- Driver neopixel:
+  - [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
+  - [evdev](https://python-evdev.readthedocs.io/en/latest/)
+
+## Bluetooth
+
+### Sur Raspberry / driver neopixel
+
+Pour appairer un contrôleur:
+
+```sh
+bluetoothctl
+scan on
+# liste des appareils détectés
+Device E4:17:D8:88:14:47 8BitDo Zero 2 gamepad
+scan off
+# appairer et connecter
+pair E4:17:D8:88:14:47
+trust E4:17:D8:88:14:47
+connect E4:17:D8:88:14:47
+quit
+```
+
+Identification des devices:
+
+```sh
+cat /proc/bus/input/devices
+```
+
+On apprend qu le Zero 2 est géré par le device "event2".
+
+Tester les devices:
+
+```sh
+sudo apt install evtest
+sudo evtest
+```
+
+### Driver pygame
+
+Les contrôleurs sont gérés par [pygame.joystick](https://www.pygame.org/docs/ref/joystick.html). Pygame reconnaît automatiquement les manettes bluetooth (ou usb) connectées à l'ordinateur. Pour que les événements soient déclenchés, il faut que la fenêtre de Pygame soit active.
+
+En l'absence de manette, il est aussi possible d'utiliser le clavier (actuellement seulement sur la branche `keyboad-controller`) avec les touches W,A,S,D (touches directionnelles) ; I,J,K,L (boutons) ; Q,O (touches arrières) et espace, entrée (select, start).
 
 ## Montage
 

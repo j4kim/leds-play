@@ -1,4 +1,4 @@
-from pixels import pixels
+from driver import driver
 import asyncio
 
 async def horizontal():
@@ -8,17 +8,17 @@ async def horizontal():
         if y % 2 == 0:
             r = reversed(range(6))
         for x in r:
-            pixels.clear()
-            pixels.set(x, y, pixels.default_color)
-            pixels.show()
+            driver.clear()
+            driver.set(x, y, driver.default_color)
+            driver.show()
             await asyncio.sleep(0.02)
-    pixels.clear()
+    driver.clear()
 
 async def vertical():
     i = 0
-    while i < pixels.n:
-        pixels.handler.fill(0)
-        pixels.handler[i] = pixels.default_color
-        pixels.handler.show()
+    while i < driver.n:
+        driver.handler.fill(0)
+        driver.handler[i] = driver.default_color
+        driver.handler.show()
         i += 2
-    pixels.clear()
+    driver.clear()

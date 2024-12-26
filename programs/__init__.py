@@ -1,10 +1,10 @@
-from . import configure, individual, cursor, screen, zigzag, text
-from pixels import pixels
-from config import driver
+from . import configure, individual, cursor, screen, zigzag, text, bt
+from driver import driver
+import config
 
 all = [
-    {'value': pixels.fill, 'name': 'Fill', 'only-for': 'neopixel'},
-    {'value': pixels.clear, 'name': 'Clear'},
+    {'value': driver.fill, 'name': 'Fill', 'only-for': 'neopixel'},
+    {'value': driver.clear, 'name': 'Clear'},
     {'value': text.padscroll_input, 'name': 'Text scroll'},
     {'value': text.minscroll_input, 'name': 'Text min scroll'},
     {'value': text.char, 'name': 'Char'},
@@ -21,7 +21,9 @@ all = [
     {'value': configure.setDefaultColor, 'name': 'Set default color'},
     {'value': individual.run, 'name': 'Individual', 'only-for': 'neopixel'},
     {'value': cursor.run, 'name': 'Cursor', 'only-for': 'neopixel'},
-    {'value': pixels.quit, 'name': 'Quit'},
+    {'value': bt.testControllers, 'name': 'Test controllers'},
+    {'value': bt.freeThePixel, 'name': 'Free the pixel'},
+    {'value': driver.quit, 'name': 'Quit'},
 ]
 
-choices = [p for p in all if not 'only-for' in p or p['only-for'] == driver]
+choices = [p for p in all if not 'only-for' in p or p['only-for'] == config.driver]

@@ -1,5 +1,5 @@
-from pixels import pixels
-from tools import get_color, prompt_color
+from driver import driver
+from tools import get_color
 import random
 import asyncio
 from InquirerPy import inquirer
@@ -13,22 +13,22 @@ async def draw():
                 v = values[x]
             except IndexError:
                 v = 0
-            pixels.set(x, y, get_color(v))
-        pixels.show()
+            driver.set(x, y, get_color(v))
+        driver.show()
 
 def fill():
     y = 0
     for y in range(7):
         for x in range(6):
-            pixels.set(x, y, pixels.default_color)
-    pixels.show()
+            driver.set(x, y, driver.default_color)
+    driver.show()
 
 def rand():
     for y in range(7):
         for x in range(6):
             color = get_color(random.choice("rgbwmyco0"))
-            pixels.set(x, y, color)
-    pixels.show()
+            driver.set(x, y, color)
+    driver.show()
 
 async def animate():
     stop_event = asyncio.Event()
