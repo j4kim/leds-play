@@ -52,7 +52,7 @@ class Pixels:
                 on_event({
                     'value': event.value,
                     'device': path,
-                    'key': key_bindings[event.code] if event.code in key_bindings else event.code
+                    'key': key_bindings.get(event.code, event.code)
                 })
 
     def listen_controllers(self, on_event):
