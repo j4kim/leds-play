@@ -65,7 +65,7 @@ class Pixels:
         for i in range(count):
             joystick = pygame.joystick.Joystick(i)
             self.joysticks.append(joystick)
-            self.on_event = on_event
+        self.on_event = on_event
 
     def stop_listening_controllers(self):
         self.joysticks = []
