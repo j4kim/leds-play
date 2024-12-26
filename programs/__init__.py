@@ -1,4 +1,4 @@
-from . import configure, individual, cursor, screen, zigzag, text
+from . import configure, individual, cursor, screen, zigzag, text, bt
 from pixels import pixels
 from config import driver
 
@@ -21,6 +21,8 @@ all = [
     {'value': configure.setDefaultColor, 'name': 'Set default color'},
     {'value': individual.run, 'name': 'Individual', 'only-for': 'neopixel'},
     {'value': cursor.run, 'name': 'Cursor', 'only-for': 'neopixel'},
+    {'value': bt.connectController, 'name': 'Connect controller'},
+    {'value': bt.testController, 'name': 'Test controller'},
     {'value': pixels.quit, 'name': 'Quit'},
 ]
 
