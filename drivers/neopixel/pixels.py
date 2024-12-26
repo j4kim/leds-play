@@ -27,6 +27,7 @@ class Pixels:
     default_color = 0xffffff
     running = True
     listening_tasks = []
+    devices = []
 
     def reset(self):
         self.handler = neopixel.NeoPixel(
@@ -43,16 +44,12 @@ class Pixels:
         pass
 
     async def listen_controller(self, path, on_event):
-        try:
-            device = evdev.InputDevice(path)
-            while True:
-                event = await device.async_read_one()
-                if event.type == evdev.ecodes.EV_KEY:
-                    on_event({'value': event.value, 'device': path, 'binding': key_bindings[event.code]})
-        except asyncio.CancelledError:
-            pass
-        finally:
-            device.close()
+        device = evdev.InputDevice(path)
+        self.devices.append(device)
+        while True:
+            event = await device.async_read_one()
+            if event.type == evdev.ecodes.EV_KEY:
+                on_event({'value': event.value, 'device': path, 'binding': key_bindings[event.code]})
 
     def listen_controllers(self, on_event):
         device_paths = [
@@ -67,9 +64,14 @@ class Pixels:
             self.listening_tasks.append(task)
 
     def stop_listening_controllers(self):
+        for device in self.devices:
+            device.close()
+
         for task in self.listening_tasks:
             task.cancel()
+
         self.listening_tasks = []
+        self.devices = []
 
     def quit(self):
         self.clear()
