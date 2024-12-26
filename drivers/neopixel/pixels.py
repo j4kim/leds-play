@@ -2,6 +2,7 @@ import board
 import neopixel
 from .matrix import matrix
 import asyncio
+import bt
 
 class Pixels:
     handler = None
@@ -10,6 +11,7 @@ class Pixels:
     brightness = 0.1
     default_color = 0xffffff
     running = True
+    controller_task = None
 
     def reset(self):
         self.handler = neopixel.NeoPixel(
@@ -23,12 +25,13 @@ class Pixels:
         self.reset()
 
     async def run(self):
-        while self.running:
-            await asyncio.sleep(0.1)
+        self.controller_task = asyncio.create_task(bt.listen())
+        await self.controller_task
 
     def quit(self):
         self.clear()
         self.running = False
+        self.controller_task.cancel()
 
     def fill(self):
         self.handler.fill(self.default_color)
