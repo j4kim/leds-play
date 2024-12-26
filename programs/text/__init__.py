@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
-from pixels import pixels
+from driver import driver
 import asyncio
 import os.path
 import urllib.request
@@ -64,9 +64,9 @@ def frame(bitmap, offset = 0):
             if ox < 0 or ox >= len(row):
                 color = 0
             else:
-                color = pixels.default_color if row[ox] == 1 else 0
-            pixels.set(x, y, color)
-    pixels.show()
+                color = driver.default_color if row[ox] == 1 else 0
+            driver.set(x, y, color)
+    driver.show()
 
 async def padscroll(text, fps = None, font_index = None):
     bitmap, width = generate_bitmap(text, font_index)

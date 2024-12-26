@@ -1,11 +1,11 @@
 import asyncio
 import prompt
-import pixels
+from driver import driver
 
 async def main():
     await asyncio.gather(
         prompt.run(),
-        pixels.pixels.run()
+        driver.run()
     )
 
 if __name__ == '__main__':

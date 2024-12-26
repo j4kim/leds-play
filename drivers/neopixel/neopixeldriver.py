@@ -19,7 +19,7 @@ key_bindings = {
     24: 'start',
 }
 
-class Pixels:
+class NeopixelDriver:
     handler = None
     pin = board.D18
     n = 300

@@ -12,7 +12,7 @@ key_bindings = {
     6: 'start',
 }
 
-class Pixels:
+class PygameDriver:
     cells = ()
     default_color = 0xffffff
     screen = None
