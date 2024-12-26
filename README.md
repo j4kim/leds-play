@@ -9,14 +9,16 @@ Fun with LEDs & Raspberry
 - Pouvoir déployer des programmes par SSH, HTTP ou autre.
 - Pouvoir contrôler le programme avec un contrôleur Bluetooth ou une app web sur téléphone.
 - Idées de programmes:
-  - Snake
-  - Tetris
-  - Message défilant
-  - Réaction à la musique (ASIO?)
-  - Crazy Taxi
-  - Flappy Bird
-  - Un détecteur de mouvement qui allume les LEDs
-  - Pong
+  - [x] Message défilant
+  - [ ] Afficher une image
+  - [ ] Afficher une vidéo
+  - [ ] Snake
+  - [ ] Pong
+  - [ ] Tetris
+  - [ ] Crazy Taxi
+  - [ ] Flappy Bird
+  - [ ] Réaction à la musique
+  - [ ] Un détecteur de mouvement qui allume les LEDs
 
 ## Matériel
 
