@@ -91,10 +91,10 @@ Schéma de montage:
 
 ![Schéma de montage](schema-leds-play.svg)
 
-Chaque colonne contient une bande de 50 LEDs. Donc il y a 300 LEDs en tout. Elles sont espacées de 3.333 cm. Une bande de 50 fait donc 166.666 cm. Les bandes sont câblées en série. J'utilise une alimentation externe de 2 Ampères / 5 Volts pour économiser la charge du Raspberry. Si on voulait allumer toutes les LEDs à pleine puissance, il faudrait ajouter une deuxième alim qui alimente les 3 dernières bandes.
+Chaque colonne contient une bande de 50 LEDs. Donc il y a 300 LEDs en tout. Les LEDs sont espacées de 3.333 cm, une bande de 50 fait donc 166.666 cm. Les bandes sont câblées en série. J'utilise une alimentation externe de 2 Ampères / 5 Volts pour économiser la charge du Raspberry. Si on voulait allumer toutes les LEDs à pleine puissance, il faudrait ajouter une deuxième alim qui alimente les 3 dernières bandes.
 
-On n'utilise qu'une LED par carreau donc environ une sur huit. Le schéma est vu depuis l'arrière de la paroi donc l'axe horizontal est inversé : La LED pour le premier carreau (en haut à gauche) est la 252. 
-Le fichier [drivers/neopixel/matrix.py](drivers/neopixel/matrix.py) est utilisé pour faire le mapping coordonnées du carreau -> index de la LED.
+On n'utilise qu'une LED par carreau donc environ une sur huit. Le schéma est vu depuis l'arrière de la paroi donc l'axe horizontal est inversé: La LED pour le premier carreau (en haut à gauche) est la 252. 
+Le fichier [drivers/neopixel/matrix.py](drivers/neopixel/matrix.py) est utilisé pour faire la correspondance coordonnées du carreau -> index de la LED.
 
 ## Connexion SSH au Raspberry
 
