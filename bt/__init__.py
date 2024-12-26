@@ -35,10 +35,15 @@ event_queue = asyncio.Queue()
 
 async def listen(path = '/dev/input/event2'):
     gamepad = evdev.InputDevice(path)
-    async for event in gamepad.async_read_loop():
-        if event.type == evdev.ecodes.EV_KEY:
-            if (event.value == 1):
-                await event_queue.put(bindings[path][event.code])
+    try:
+        async for event in gamepad.async_read_loop():
+            if event.type == evdev.ecodes.EV_KEY:
+                if (event.value == 1):
+                    await event_queue.put(bindings[path][event.code])
+    except asyncio.exceptions.CancelledError:
+        pass
+    finally:
+        gamepad.close()
 
 async def monitor():
     while True:
