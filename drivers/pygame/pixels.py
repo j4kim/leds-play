@@ -49,7 +49,7 @@ class Pixels:
             value = abs(v)
         else:
             value = 1 if event.type == pygame.JOYBUTTONDOWN else 0
-            key = key_bindings[event.button] if event.button in key_bindings else event.button
+            key = key_bindings.get(event.button, event.button)
         return {
             'value': value,
             'device': event.joy,
