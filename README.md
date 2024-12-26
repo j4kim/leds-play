@@ -86,6 +86,8 @@ sudo venv/bin/python main.py
 
 ## Bluetooth
 
+### Sur Raspberry / driver neopixel
+
 Pour appairer un contrôleur:
 
 ```sh
@@ -115,6 +117,10 @@ Tester les devices:
 sudo apt install evtest
 sudo evtest
 ```
+
+### Driver pygame
+
+Les contrôleurs bluetooth sont gérés par [pygame.joystick](https://www.pygame.org/docs/ref/joystick.html). Pygame reconnaît automatiquement les manettes bluetooth connectés à l'ordinateur. Pour que les événements soient récupérés, il faut que la fenêtre de Pygame soit active.
 
 ## Montage
 
