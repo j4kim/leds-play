@@ -1,4 +1,4 @@
-from programs import text, screen, zigzag, configure, individual, cursor, bt
+from programs import text, screen, zigzag, configure, individual, cursor, bt, image
 from driver import driver
 from tools import prompt_menu
 
@@ -7,6 +7,7 @@ async def run():
         {'value': driver.fill, 'name': 'Fill', 'only-for': 'neopixel'},
         {'value': driver.clear, 'name': 'Clear'},
         {'value': text.menu, 'name': 'Text'},
+        {'value': image.duck, 'name': 'Duck'},
         {'value': screen.draw, 'name': 'Draw screen'},
         {'value': screen.fill, 'name': 'Fill screen'},
         {'value': screen.rand, 'name': 'Random screen'},
