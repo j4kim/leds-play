@@ -1,5 +1,6 @@
 from InquirerPy import inquirer
 import asyncio
+import config
 
 def get_color(color):
     mapping = {
@@ -24,6 +25,7 @@ async def prompt_color(message = "hex value or one of r,g,b,w,m,y,c,o:"):
     return get_color(color)
 
 async def prompt_menu(choices):
+    choices = [p for p in choices if p.get('only-for', config.driver) == config.driver]
     f = None
     while True:
         f = await inquirer.select(
