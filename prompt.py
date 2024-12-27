@@ -1,4 +1,4 @@
-from programs import text, screen, zigzag, configure, individual, cursor, bt, image
+from programs import text, screen, zigzag, configure, individual, cursor, bt, image, quack
 from driver import driver
 from tools import prompt_menu
 
@@ -9,6 +9,7 @@ async def run():
         {'value': text.menu, 'name': 'Text'},
         {'value': image.duck, 'name': 'Duck'},
         {'value': image.fireworks, 'name': 'Fireworks'},
+        {'value': quack.quack, 'name': 'Quack'},
         {'value': screen.draw, 'name': 'Draw screen'},
         {'value': screen.fill, 'name': 'Fill screen'},
         {'value': screen.rand, 'name': 'Random screen'},

@@ -13,8 +13,8 @@ def show_image(im):
             driver.set(x, y, bitmap[y][x][:3])
     driver.show()
 
-def open_image(path):
-    path = os.path.join(os.path.dirname(__file__), path)
+def open_image(path, dir = os.path.dirname(__file__)):
+    path = os.path.join(dir, path)
     return Image.open(path)
 
 def duck():
