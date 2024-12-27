@@ -13,18 +13,23 @@ def show_image(im):
             driver.set(x, y, bitmap[y][x][:3])
     driver.show()
 
+def open_image(path):
+    path = os.path.join(os.path.dirname(__file__), path)
+    return Image.open(path)
+
 def duck():
-    path = os.path.join(os.path.dirname(__file__), "duck.png")
-    with Image.open(path) as im:
-        show_image(im)
+    im = open_image("duck.png")
+    show_image(im)
+    im.close()
 
 async def fireworks():
-    path = os.path.join(os.path.dirname(__file__), "fireworks.gif")
-    with Image.open(path) as im:
-        try:
-            while True:
-                show_image(im)
-                im.seek(im.tell() + 1)
-                await asyncio.sleep(0.1)
-        except EOFError:
-            pass
+    im = open_image("fireworks.gif")
+    try:
+        while True:
+            show_image(im)
+            im.seek(im.tell() + 1)
+            await asyncio.sleep(0.1)
+    except EOFError:
+        pass
+    finally:
+        im.close()
