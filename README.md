@@ -10,8 +10,8 @@ Fun with LEDs & Raspberry
 - Pouvoir contrôler le programme avec un contrôleur Bluetooth ou une app web sur téléphone.
 - Idées de programmes:
   - [x] Message défilant
-  - [ ] Afficher une image
-  - [ ] Afficher une vidéo
+  - [x] Afficher une image
+  - [x] Afficher un gif
   - [ ] Snake
   - [ ] Pong
   - [ ] Tetris
