@@ -18,7 +18,6 @@ all = [
     {'value': cursor.run, 'name': 'Cursor', 'only-for': 'neopixel'},
     {'value': bt.testControllers, 'name': 'Test controllers'},
     {'value': bt.freeThePixel, 'name': 'Free the pixel'},
-    {'value': driver.quit, 'name': 'Quit'},
 ]
 
 choices = [p for p in all if not 'only-for' in p or p['only-for'] == config.driver]

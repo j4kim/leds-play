@@ -7,29 +7,17 @@ import urllib.request
 import json
 from InquirerPy import inquirer
 from . import config
+from tools import prompt_menu
 
 async def menu():
-    f = None
-    while True:
-        choices = [
-            {'value': padscroll_input, 'name': 'Text scroll'},
-            {'value': minscroll_input, 'name': 'Text min scroll'},
-            {'value': char, 'name': 'Char'},
-            {'value': random_word, 'name': 'Random word'},
-            {'value': setFont, 'name': 'Set default font'},
-            {'value': setTextFps, 'name': 'Set default text fps'},
-            {'value': 'exit', 'name': 'Exit'}
-        ]
-        f = await inquirer.select(
-            message="Program:",
-            choices=choices,
-            default=lambda _ : f,
-        ).execute_async()
-        if f == 'exit':
-            return
-        r = f()
-        if asyncio.iscoroutine(r):
-            await r
+    await prompt_menu([
+        {'value': padscroll_input, 'name': 'Text scroll'},
+        {'value': minscroll_input, 'name': 'Text min scroll'},
+        {'value': char, 'name': 'Char'},
+        {'value': random_word, 'name': 'Random word'},
+        {'value': setFont, 'name': 'Set default font'},
+        {'value': setTextFps, 'name': 'Set default text fps'},
+    ])
 
 def generate_bitmap(text, font_index = None):
     font = config.fonts[font_index or config.default_font_index]

@@ -1,16 +1,7 @@
-from InquirerPy import inquirer
 import programs
-import asyncio
 from driver import driver
+from tools import prompt_menu
 
 async def run():
-    f = None
-    while driver.running:
-        f = await inquirer.select(
-            message="Program:",
-            choices=programs.choices,
-            default=lambda _ : f
-        ).execute_async()
-        r = f()
-        if asyncio.iscoroutine(r):
-            await r
+    await prompt_menu(programs.choices)
+    driver.quit()
