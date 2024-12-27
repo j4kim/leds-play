@@ -8,6 +8,7 @@ async def run():
         {'value': driver.clear, 'name': 'Clear'},
         {'value': text.menu, 'name': 'Text'},
         {'value': image.duck, 'name': 'Duck'},
+        {'value': image.fireworks, 'name': 'Fireworks'},
         {'value': screen.draw, 'name': 'Draw screen'},
         {'value': screen.fill, 'name': 'Fill screen'},
         {'value': screen.rand, 'name': 'Random screen'},
