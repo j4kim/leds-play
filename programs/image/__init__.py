@@ -10,7 +10,7 @@ def show_image(path):
     bitmap = np.array_split(list(image.getdata()), 7)
     for y in range(7):
         for x in range(6):
-            driver.set(x, y, bitmap[y][x])
+            driver.set(x, y, bitmap[y][x][:3])
     driver.show()
 
 def duck():
