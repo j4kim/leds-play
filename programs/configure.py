@@ -1,7 +1,6 @@
 from InquirerPy import inquirer
 from driver import driver
 from tools import prompt_color
-import programs.text
 
 async def setBrighness():
     driver.brightness = await inquirer.number(
@@ -15,21 +14,3 @@ async def setBrighness():
 
 async def setDefaultColor():
     driver.default_color = await prompt_color("Default color:")
-
-async def setFont():
-    programs.text.default_font_index = await inquirer.number(
-        message="Default font:",
-        min_allowed=0,
-        max_allowed=len(programs.text.fonts) - 1,
-        filter=lambda x: int(x),
-        default=programs.text.default_font_index
-    ).execute_async()
-
-async def setTextFps():
-    programs.text.default_fps = await inquirer.number(
-        message="Defaut text fps:",
-        min_allowed=1,
-        max_allowed=30,
-        filter=lambda x: int(x),
-        default=programs.text.default_fps
-    ).execute_async()
