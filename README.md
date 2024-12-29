@@ -131,11 +131,11 @@ En l'absence de manette, il est aussi possible d'utiliser le clavier (actuelleme
 
 ### Interface web pour le son
 
-J'ai abandonnée l'idée de produire du son directement par le Raspberry. Rien ne marche: Le port jack crée des interférence avec les LEDs, une carte son produit un son pourri, connecter une enceinte bluetooth est un cauchemar... Bref j'ai abandonné.
+J'ai abandonnée l'idée de produire du son directement par le Raspberry. Rien ne marche: Le port jack crée des interférence avec les LEDs et fait tout crasher; une carte son produit un son pourri; connecter une enceinte bluetooth est un cauchemar... Bref j'ai abandonné.
 
 Après ces déconvenues voici la solution overkill:
-- Le script Python crée un serveur WebSockets.
-- Les noms de fichier des sons joués sont envoyés aux clients.
+- Le programme Python crée un serveur WebSockets.
+- Les noms de fichier des sons sont envoyés aux clients au moment où ils doivent être joués.
 - Une page web `web/index.html` est ouverte depuis un autre appareil, un ordinateur ou un téléphone.
 - La page permet de se connecter au serveur WebSocket.
 - Lorsque la page reçoit le nom d'un fichier, elle joue l'audio.
@@ -149,7 +149,7 @@ npm install --prefix web
 Et lancer l'app:
 
 ```
-npm run --prefix web dev
+npm run dev --prefix web
 ```
 
 Cette interface web pourrait être utilisée par la suite pour afficher l'état des LEDs et remplacerait le driver pygame.
