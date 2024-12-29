@@ -13,7 +13,7 @@
 <body>
     <main class="container" id="main">
         <h1>leds-play web remote</h1>
-        <form id="connectform">
+        <section>
             <fieldset class="grid">
                 <label>
                     Address
@@ -25,13 +25,16 @@
                 </label>
             </fieldset>
             <button type="submit" id="connectbtn">Connect to WebSocket server</button>
-        </form>
-        <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
+            <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
+        </section>
+        <section>
+            <audio controls src="/sounds/coin.wav" name="coin.wav"></audio>
+        </section>
     </main>
     <script>
         var websocket = null;
 
-        connectform.onsubmit = (e) => {
+        connectbtn.onclick = (e) => {
             e.preventDefault();
 
             const url = `ws://${addressinput.value}:${portinput.value}/`;
@@ -50,7 +53,11 @@
             };
 
             websocket.onmessage = ({ data }) => {
-                console.log("message", data);
+                const audio = document.querySelector(`audio[name="${data}"]`);
+                if (audio) {
+                    audio.currentTime = 0;
+                    audio.play();
+                }
             };
         }
 
