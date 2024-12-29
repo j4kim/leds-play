@@ -17,13 +17,12 @@ def open_image(path, dir = os.path.dirname(__file__)):
     path = os.path.join(dir, path)
     return Image.open(path)
 
-async def fireworks():
-    im = open_image("fireworks.gif")
+async def gif(im, fps = 10):
     try:
         while True:
             show_image(im)
             im.seek(im.tell() + 1)
-            await asyncio.sleep(0.1)
+            await asyncio.sleep(1/fps)
     except EOFError:
         pass
     finally:
