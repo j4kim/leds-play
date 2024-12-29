@@ -30,7 +30,9 @@ class PygameDriver:
         while self.running:
             for event in pygame.event.get():
                 if self.on_event and self.joysticks and event.type in [pygame.JOYBUTTONUP, pygame.JOYBUTTONDOWN, pygame.JOYAXISMOTION]:
-                    self.on_event(self.transform_event(event))
+                    x = self.on_event(self.transform_event(event))
+                    if asyncio.iscoroutine(x):
+                        asyncio.create_task(x)
             pygame.display.flip()
             await asyncio.sleep(1/60)
 
