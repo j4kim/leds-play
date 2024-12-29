@@ -129,7 +129,7 @@ Les contrôleurs sont gérés par [pygame.joystick](https://www.pygame.org/docs/
 
 En l'absence de manette, il est aussi possible d'utiliser le clavier (actuellement seulement sur la branche `keyboad-controller`) avec les touches W,A,S,D (touches directionnelles) ; I,J,K,L (boutons) ; Q,O (touches arrières) et espace, entrée (select, start).
 
-### Interface web pour le son
+## Interface web pour le son
 
 J'ai abandonnée l'idée de produire du son directement par le Raspberry. Rien ne marche: Le port jack crée des interférence avec les LEDs et fait tout crasher; une carte son produit un son pourri; connecter une enceinte bluetooth est un cauchemar... Bref j'ai abandonné.
 
