@@ -16,7 +16,6 @@ async def register(websocket):
 async def wait_for_messages():
     while True:
         message = await queue.get()
-        patched_print("websocket broadcasting", message)
         broadcast(CONNECTIONS, message)
 
 async def start():
