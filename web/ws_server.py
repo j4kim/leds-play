@@ -21,8 +21,8 @@ async def wait_for_messages():
 
 async def start():
     asyncio.create_task(wait_for_messages())
-    async with serve(register, "localhost", 8765) as server:
-        patched_print("websocket server started on ws://localhost:8765")
+    async with serve(register, "0.0.0.0", 8765) as server:
+        patched_print("websocket server started on ws://0.0.0.0:8765")
         await server.serve_forever()
 
 async def stop():
