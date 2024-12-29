@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
+    <title>leds-play web remote</title>
+</head>
+<body>
+    <main class="container" id="main">
+        <h1>leds-play web remote</h1>
+    </main>
+    <script>
+        const websocket = new WebSocket("ws://localhost:8765/");
+
+        websocket.onopen = () => {
+            console.log("connected");
+            websocket.send("Hello server!");
+        };
+
+        websocket.onclose = () => {
+            console.log("disconnected");
+        };
+
+        websocket.onmessage = ({ data }) => {
+            console.log("message", data);
+        };
+    </script>
+</body>
+</html>
