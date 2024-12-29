@@ -1,17 +1,15 @@
 import asyncio
 import os.path
 from ..image import open_image, show_image
-import pygame
+from web import ws_client
 
 async def quack():
     im = open_image("quack.gif", os.path.dirname(__file__))
-    pygame.mixer.init()
-    sound = pygame.mixer.Sound(os.path.join(os.path.dirname(__file__), "coin.wav"))
     show_image(im)
     await asyncio.sleep(0.5)
     im.seek(1)
     show_image(im)
-    sound.play()
+    ws_client.play_sound("coin.wav")
     await asyncio.sleep(0.3)
     im.seek(0)
     show_image(im)
