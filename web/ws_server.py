@@ -2,23 +2,27 @@ import asyncio
 from websockets.asyncio.server import serve, broadcast
 from InquirerPy.utils import patched_print
 
-serving = asyncio.Event()
+queue = asyncio.Queue()
 
 CONNECTIONS = set()
 
 async def register(websocket):
     CONNECTIONS.add(websocket)
-    async for message in websocket:
-        broadcast(CONNECTIONS, message)
     try:
         await websocket.wait_closed()
     finally:
         CONNECTIONS.remove(websocket)
 
+async def wait_for_messages():
+    while True:
+        message = await queue.get()
+        patched_print("websocket broadcasting", message)
+        broadcast(CONNECTIONS, message)
+
 async def start():
+    asyncio.create_task(wait_for_messages())
     async with serve(register, "localhost", 8765) as server:
         patched_print("websocket server started on ws://localhost:8765")
-        serving.set()
         await server.serve_forever()
 
 async def stop():
