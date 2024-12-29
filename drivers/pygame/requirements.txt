@@ -4,6 +4,5 @@ pfzy==0.3.4
 pillow==11.0.0
 prompt_toolkit==3.0.48
 pygame==2.6.1
-simpleaudio==1.0.4
 wcwidth==0.2.13
 websockets==14.1
