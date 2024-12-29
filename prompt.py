@@ -7,7 +7,6 @@ async def run():
         {'value': driver.fill, 'name': 'Fill', 'only-for': 'neopixel'},
         {'value': driver.clear, 'name': 'Clear'},
         {'value': text.menu, 'name': 'Text'},
-        {'value': image.duck, 'name': 'Duck'},
         {'value': image.fireworks, 'name': 'Fireworks'},
         {'value': quack.quack, 'name': 'Quack'},
         {'value': screen.draw, 'name': 'Draw screen'},

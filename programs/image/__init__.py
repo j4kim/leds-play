@@ -17,11 +17,6 @@ def open_image(path, dir = os.path.dirname(__file__)):
     path = os.path.join(dir, path)
     return Image.open(path)
 
-def duck():
-    im = open_image("duck.png")
-    show_image(im)
-    im.close()
-
 async def fireworks():
     im = open_image("fireworks.gif")
     try:
