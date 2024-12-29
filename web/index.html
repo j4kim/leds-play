@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
+    <title>leds-play web remote</title>
+</head>
+<body>
+    <main class="container" id="main">
+        <h1>leds-play web remote</h1>
+        <section>
+            <fieldset class="grid">
+                <label>
+                    Address
+                    <input id="addressinput" value="%VITE_WS_ADDRESS%" />
+                </label>
+                <label>
+                    Port
+                    <input id="portinput" value="%VITE_WS_PORT%" />
+                </label>
+            </fieldset>
+            <button type="submit" id="connectbtn">Connect to WebSocket server</button>
+            <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
+        </section>
+        <section>
+            <audio controls src="/sounds/coin.wav" name="coin.wav"></audio>
+        </section>
+    </main>
+    <script>
+        var websocket = null;
+
+        connectbtn.onclick = (e) => {
+            e.preventDefault();
+
+            const url = `ws://${addressinput.value}:${portinput.value}/`;
+            websocket = new WebSocket(url);
+
+            websocket.onopen = () => {
+                console.log("connected to ", url);
+                connectbtn.disabled = true;
+                disconnectbtn.disabled = false;
+            };
+
+            websocket.onclose = () => {
+                console.log("disconnected");
+                connectbtn.disabled = false;
+                disconnectbtn.disabled = true;
+            };
+
+            websocket.onmessage = ({ data }) => {
+                const audio = document.querySelector(`audio[name="${data}"]`);
+                if (audio) {
+                    audio.currentTime = 0;
+                    audio.play();
+                }
+            };
+        }
+
+        disconnectbtn.onclick = () => {
+            websocket?.close();
+        }
+    </script>
+</body>
+</html>
