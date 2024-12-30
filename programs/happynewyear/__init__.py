@@ -3,25 +3,54 @@ from .. import text
 from .. import fireworks
 from web import ws_server
 from .. import screen
+from InquirerPy import inquirer
+from driver import driver
 
-async def run():
+async def fireworks_1():
+    await fireworks.fire(0)
+    await fireworks.fire(1)
+
+async def fireworks_2():
+    await fireworks.fire(2)
+    await fireworks.fire(3)
+    await fireworks.fire(4)
+
+async def fireworks_3():
+    await fireworks.fire(3)
+    await fireworks.fire(5)
+    await fireworks.fire(1)
+
+async def fireworks_4():
+    await fireworks.fire(6)
+
+async def fireworks_5():
+    await fireworks.fire(7)
+    ws_server.playsound("halala")
+    await fireworks.fire(0)
+    await fireworks.fire(8)
+    await fireworks.fire(6)
+
+async def fireworks_6():
+    await fireworks.fire(5)
+    await fireworks.fire(4)
+    ws_server.playsound("wow c'est beau")
+    await fireworks.fire(0)
+    await fireworks.fire(3)
+    await fireworks.fire(9)
+
+async def countdown():
     ws_server.playsound("10-9-8")
-
     for i in range(10, 0, -1):
         asyncio.create_task(text.tools.minscroll(str(i)))
         await asyncio.sleep(1)
-
     ws_server.playsound("good times")
-
     for i in range(4):
         text.tools.char("0", colors=(0xeeaaff, 0x220000))
         await asyncio.sleep(0.2)
         text.tools.char("0", colors=(0xffeeaa, 0x110011))
         await asyncio.sleep(0.2)
 
-    await fireworks.fire(0)
-    await fireworks.fire(1)
-
+async def bonne_annee():
     ws_server.playsound("bonne année")
     await text.tools.funky(
         text.tools.padscroll,
@@ -30,10 +59,7 @@ async def run():
         multiplier=8
     )
 
-    await fireworks.fire(2)
-    await fireworks.fire(3)
-    await fireworks.fire(4)
-
+async def happy_new_year():
     ws_server.playsound("happy new year")
     await text.tools.funky(
         text.tools.minscroll,
@@ -42,10 +68,7 @@ async def run():
         font_index=5
     )
 
-    await fireworks.fire(3)
-    await fireworks.fire(5)
-    await fireworks.fire(1)
-
+async def deux_zero_deux_cinq():
     ws_server.playsound("2-0-2-5")
     text.tools.char("2", colors=(0xffff00, 0x000011))
     await asyncio.sleep(1)
@@ -56,22 +79,16 @@ async def run():
     text.tools.char("5", colors=(0xff9944, 0x000011))
     await asyncio.sleep(1)
 
-    await fireworks.fire(6)
-
+async def deux_mille_25():
     ws_server.playsound("2025")
     await text.tools.funky(
         text.tools.padscroll,
         "2025",
-        ((0xffffff, 0x090909), (0xe9e900, 0)),
+        ((0xffffff, 0x090909), (0xffff88, 0)),
         multiplier=8
     )
 
-    await fireworks.fire(7)
-    ws_server.playsound("halala")
-    await fireworks.fire(0)
-    await fireworks.fire(8)
-    await fireworks.fire(6)
-
+async def la_sante():
     ws_server.playsound("la santé")
     await text.tools.funky(
         text.tools.padscroll,
@@ -80,17 +97,12 @@ async def run():
         font_index=5
     )
 
-    for i in range(12):
+async def random():
+    for i in range(20):
         screen.rand()
         await asyncio.sleep(0.1)
 
-    await fireworks.fire(5)
-    await fireworks.fire(4)
-    ws_server.playsound("wow c'est beau")
-    await fireworks.fire(0)
-    await fireworks.fire(3)
-    await fireworks.fire(9)
-
+async def tchin_tchin():
     ws_server.playsound("tchin-tchin")
     await text.tools.funky(
         text.tools.padscroll,
@@ -100,7 +112,25 @@ async def run():
         multiplier=8
     )
 
-    await asyncio.sleep(2)
+async def start():
+    await countdown()
+    await fireworks_1()
+    await bonne_annee()
+    await fireworks_2()
+    await happy_new_year()
+    await fireworks_3()
+    await deux_zero_deux_cinq()
+    await fireworks_4()
+    await deux_mille_25()
+    await fireworks_5()
+    await la_sante()
+    await random()
+    await fireworks_6()
+    await tchin_tchin()
+
+async def run():
+    task = asyncio.create_task(start())
+    await inquirer.text(message="Press Enter to quit\n").execute_async()
+    task.cancel()
+    driver.clear()
     ws_server.stopsounds()
-
-
