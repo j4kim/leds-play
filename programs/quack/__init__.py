@@ -15,7 +15,7 @@ async def quack():
             if event['key'] == 'south':
                 im.seek(1)
                 show_image(im)
-                ws_server.queue.put_nowait("coin.wav")
+                ws_server.playsound("coin.wav")
                 await asyncio.sleep(0.3)
                 im.seek(0)
                 show_image(im)

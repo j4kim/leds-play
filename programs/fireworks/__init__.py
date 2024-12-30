@@ -7,7 +7,7 @@ from InquirerPy import inquirer
 images = [open_image(f"gifs/{i}.gif", os.path.dirname(__file__)) for i in range(10)]
 
 async def fire(index):
-    ws_server.queue.put_nowait(f"firework-{index}")
+    ws_server.playsound(f"firework-{index}")
     await gif(images[index], 3)
 
 async def individual():

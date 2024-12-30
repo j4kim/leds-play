@@ -44,6 +44,18 @@
     <script>
         var websocket = null;
 
+        const actions = {
+            play_sound: ({ sound }) => {
+                const audio = document.querySelector(`audio[name="${sound}"]`);
+                if (audio) {
+                    audio.currentTime = 0;
+                    audio.play();
+                } else {
+                    console.error(`audio "${sound}" not found`);
+                }
+            }
+        }
+
         connectbtn.onclick = (e) => {
             e.preventDefault();
 
@@ -63,12 +75,11 @@
             };
 
             websocket.onmessage = ({ data }) => {
-                const audio = document.querySelector(`audio[name="${data}"]`);
-                if (audio) {
-                    audio.currentTime = 0;
-                    audio.play();
-                } else {
-                    console.error(`audio "${data}" not found`);
+                try {
+                    data = JSON.parse(data);
+                    actions[data.action]?.(data);
+                } catch (e) {
+                    console.error("Invalid JSON", e);
                 }
             };
         }

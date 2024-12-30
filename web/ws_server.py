@@ -27,3 +27,6 @@ async def start():
 async def stop():
     for connection in set(CONNECTIONS):
         await connection.close()
+
+def playsound(name):
+    queue.put_nowait(f'{{"action": "play_sound", "sound": "{name}"}}')
