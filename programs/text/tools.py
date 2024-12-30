@@ -53,10 +53,10 @@ async def minscroll(text, fps = None, font_index = None, colors = None):
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
 
-def alternate(i, two_color_tuples):
+def alternate(i, two_color_tuples, multiplier):
     t1 = two_color_tuples[0]
     t2 = two_color_tuples[1]
-    return t1 if (i//4) % 2 == 0 else t2
+    return t1 if (i//multiplier) % 2 == 0 else t2
 
-async def funky(fun, text, two_color_tuples, alternator = alternate, bpm = 111, font_index = None):
-    await fun(text=text, fps=4*(bpm/60), font_index=font_index, colors=lambda i: alternator(i, two_color_tuples))
+async def funky(fun, text, two_color_tuples, alternator = alternate, bpm = 111, font_index = None, multiplier = 4):
+    await fun(text=text, fps=multiplier*(bpm/60), font_index=font_index, colors=lambda i: alternator(i, two_color_tuples, multiplier))
