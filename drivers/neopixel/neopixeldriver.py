@@ -37,11 +37,8 @@ class NeopixelDriver:
             auto_write=False
         )
 
-    def __init__(self):
-        self.reset()
-
     async def run(self):
-        pass
+        self.reset()
 
     async def listen_controller(self, path, on_event):
         device = evdev.InputDevice(path)
