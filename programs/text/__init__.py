@@ -10,7 +10,7 @@ async def menu():
         {'value': padscroll_input, 'name': 'Text scroll'},
         {'value': minscroll_input, 'name': 'Text min scroll'},
         {'value': lambda: funkyminscroll('Happy New Year!'), 'name': 'Funky min scroll'},
-        {'value': char, 'name': 'Char'},
+        {'value': char_input, 'name': 'Char'},
         {'value': random_word, 'name': 'Random word'},
         {'value': setFont, 'name': 'Set default font'},
         {'value': setTextFps, 'name': 'Set default text fps'},
@@ -18,7 +18,6 @@ async def menu():
 
 async def padscroll_input():
     await tools.padscroll(input("Text: "))
-
 
 async def funkyminscroll(text, bpm = 111):
     def getcolor(i):
@@ -28,9 +27,8 @@ async def funkyminscroll(text, bpm = 111):
 async def minscroll_input():
     await tools.minscroll(input("Text: "))
 
-def char(colors = (0xffffff, 0)):
-    bitmap, width = tools.generate_bitmap(input("Char: "))
-    tools.frame(bitmap, colors=colors)
+def char_input():
+    tools.char(input("Char: "))
 
 async def random_word():
     data = urllib.request.urlopen("https://random-word-api.herokuapp.com/word?lang=fr&length=5").read().decode("utf-8")

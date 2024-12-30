@@ -47,3 +47,7 @@ async def minscroll(text, fps = None, font_index = None, colors = (0xffffff, 0))
         frame(bitmap, offset, colors)
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
+
+def char(text, colors = (0xffffff, 0)):
+    bitmap, width = generate_bitmap(text)
+    frame(bitmap, colors=colors)
