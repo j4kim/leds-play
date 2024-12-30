@@ -72,6 +72,9 @@
             play_sound: ({ sound }) => {
                 const audio = document.querySelector(`audio[name="${sound}"]`);
                 if (audio) {
+                    if (audio.dataset.volume) {
+                        audio.volume = audio.dataset.volume;
+                    }
                     audio.currentTime = 0;
                     audio.play();
                 } else {
