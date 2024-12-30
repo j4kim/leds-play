@@ -62,7 +62,7 @@ async def run():
     await text.tools.funky(
         text.tools.padscroll,
         "2025",
-        ((0xffffff, 0x090909), (0xe0e0e0, 0)),
+        ((0xffffff, 0x090909), (0xe9e900, 0)),
         multiplier=8
     )
 
@@ -80,7 +80,7 @@ async def run():
         font_index=5
     )
 
-    for i in range(8):
+    for i in range(12):
         screen.rand()
         await asyncio.sleep(0.1)
 
