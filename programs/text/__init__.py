@@ -66,10 +66,10 @@ async def minscroll(text, fps = None, font_index = None, colors = (0xffffff, 0))
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
 
-async def funkyminscroll(text):
+async def funkyminscroll(text, bpm = 111):
     def getcolor(i):
-        return (0, 0x00ff99) if (i//8) % 2 == 0 else (0, 0x0099ff)
-    await minscroll(text, 10, 2, getcolor)
+        return (0, 0x00ff99) if (i//4) % 2 == 0 else (0, 0x0099ff)
+    await minscroll(text, 4*(bpm/60), 2, getcolor)
 
 async def minscroll_input():
     await minscroll(input("Text: "))
