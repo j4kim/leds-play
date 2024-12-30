@@ -40,10 +40,11 @@ async def fireworks_6():
 
 async def fireworks_final():
     driver.clear()
-    await asyncio.sleep(2)
+    await asyncio.sleep(4)
     ws_server.pausesound("good times")
     await asyncio.sleep(2)
     await fireworks.fire(10)
+    driver.clear()
     await asyncio.sleep(2)
     ws_server.resumesound("good times")
 
