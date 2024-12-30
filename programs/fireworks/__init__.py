@@ -4,7 +4,7 @@ import asyncio
 from web import ws_server
 from InquirerPy import inquirer
 
-images = [open_image(f"{i}.gif", os.path.dirname(__file__)) for i in range(10)]
+images = [open_image(f"gifs/{i}.gif", os.path.dirname(__file__)) for i in range(10)]
 
 async def individual():
     index = await inquirer.number(
