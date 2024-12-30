@@ -74,9 +74,9 @@ async def funkyminscroll(text, bpm = 111):
 async def minscroll_input():
     await minscroll(input("Text: "))
 
-def char():
+def char(colors = (0xffffff, 0)):
     bitmap, width = generate_bitmap(input("Char: "))
-    frame(bitmap)
+    frame(bitmap, colors=colors)
 
 async def random_word():
     data = urllib.request.urlopen("https://random-word-api.herokuapp.com/word?lang=fr&length=5").read().decode("utf-8")
