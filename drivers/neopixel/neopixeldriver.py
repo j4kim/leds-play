@@ -23,7 +23,7 @@ class NeopixelDriver:
     handler = None
     pin = board.D18
     n = 300
-    brightness = 0.1
+    brightness = 1
     default_color = 0xffffff
     running = True
     listening_tasks = []
