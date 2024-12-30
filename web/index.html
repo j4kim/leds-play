@@ -24,6 +24,12 @@
                     <input id="portinput" value="%VITE_WS_PORT%" />
                 </label>
             </fieldset>
+            <fieldset>
+                <label>
+                    Auto reconnect
+                    <input id="autoreconnect" type="checkbox" checked />
+                </label>
+            </fieldset>
             <button type="submit" id="connectbtn">Connect to WebSocket server</button>
             <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
         </section>
@@ -90,6 +96,12 @@
                 console.log("disconnected");
                 connectbtn.disabled = false;
                 disconnectbtn.disabled = true;
+                if (autoreconnect.checked) {
+                    setTimeout(() => {
+                        console.log("try reconnecting...");
+                        connectbtn.click();
+                    }, 2000);
+                }
             };
 
             websocket.onmessage = ({ data }) => {
