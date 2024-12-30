@@ -38,5 +38,8 @@ def pausesound(name):
 def resumesound(name):
     queue.put_nowait(f'{{"action": "resume_sound", "sound": "{name}"}}')
 
+def setvolume(name, volume):
+    queue.put_nowait(f'{{"action": "set_volume", "sound": "{name}", "volume": {volume}}}')
+
 def stopsounds():
     queue.put_nowait(f'{{"action": "stop_sounds"}}')

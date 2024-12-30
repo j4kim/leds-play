@@ -40,11 +40,18 @@ async def fireworks_6():
 
 async def fireworks_final():
     driver.clear()
-    await asyncio.sleep(4)
+    await asyncio.sleep(1)
+    ws_server.setvolume("good times", 0.3)
+    await asyncio.sleep(1)
+    ws_server.setvolume("good times", 0.2)
+    await asyncio.sleep(1)
+    ws_server.setvolume("good times", 0.1)
+    await asyncio.sleep(1)
     ws_server.pausesound("good times")
     await asyncio.sleep(2)
     await fireworks.fire(10)
     driver.clear()
+    ws_server.setvolume("good times", 0.5)
     await asyncio.sleep(2)
     ws_server.resumesound("good times")
 
@@ -53,6 +60,7 @@ async def countdown():
     for i in range(10, 0, -1):
         asyncio.create_task(text.tools.minscroll(str(i)))
         await asyncio.sleep(1)
+    ws_server.setvolume("good times", 0.4)
     ws_server.playsound("good times")
     for i in range(4):
         text.tools.char("0", colors=(0xeeaaff, 0x220000))

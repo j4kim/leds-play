@@ -53,7 +53,7 @@
         </section>
         <section>
             <audio controls src="/sounds/hny/10-9-8.mp3" name="10-9-8"></audio>
-            <audio controls src="/sounds/hny/09 - Good Times.mp3" name="good times" data-volume="0.5"></audio>
+            <audio controls src="/sounds/hny/09 - Good Times.mp3" name="good times"></audio>
             <audio controls src="/sounds/hny/bonne année.mp3" name="bonne année"></audio>
             <audio controls src="/sounds/hny/happy new year.mp3" name="happy new year"></audio>
             <audio controls src="/sounds/hny/happy new year 2.mp3" name="happy new year 2"></audio>
@@ -72,9 +72,6 @@
             play_sound: ({ sound }) => {
                 const audio = document.querySelector(`audio[name="${sound}"]`);
                 if (audio) {
-                    if (audio.dataset.volume) {
-                        audio.volume = audio.dataset.volume;
-                    }
                     audio.currentTime = 0;
                     audio.play();
                 } else {
@@ -85,10 +82,22 @@
                 document.querySelector(`audio[name="${sound}"]`)?.pause();
             },
             resume_sound: ({ sound }) => {
-                document.querySelector(`audio[name="${sound}"]`)?.play();
+                const audio = document.querySelector(`audio[name="${sound}"]`);
+                if (audio) {
+                    if (audio.dataset.volume) {
+                        audio.volume = audio.dataset.volume;
+                    }
+                    audio.play();
+                } 
             },
             stop_sounds: () => {
                 document.querySelectorAll("audio").forEach(a => a.pause())
+            },
+            set_volume: ({ sound, volume }) => {
+                const audio = document.querySelector(`audio[name="${sound}"]`);
+                if (audio) {
+                    audio.volume = volume;
+                }
             }
         }
 
