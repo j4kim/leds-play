@@ -68,7 +68,7 @@ async def minscroll(text, fps = None, font_index = None, colors = (0xffffff, 0))
 
 async def funkyminscroll(text, bpm = 111):
     def getcolor(i):
-        return (0, 0x00ff99) if (i//4) % 2 == 0 else (0, 0x0099ff)
+        return (0xffffff, 0x005522) if (i//4) % 2 == 0 else (0xffffff, 0x002255)
     await minscroll(text, 4*(bpm/60), 2, getcolor)
 
 async def minscroll_input():
