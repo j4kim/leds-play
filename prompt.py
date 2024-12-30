@@ -1,4 +1,4 @@
-from programs import text, screen, zigzag, configure, individual, cursor, bt, quack, fireworks
+from programs import text, screen, zigzag, configure, individual, cursor, bt, quack, fireworks, happynewyear
 from driver import driver
 from tools import prompt_menu
 
@@ -10,6 +10,7 @@ async def run():
         {'value': quack.quack, 'name': 'Quack'},
         {'value': fireworks.run, 'name': 'Fireworks'},
         {'value': fireworks.individual, 'name': 'Individual firework'},
+        {'value': happynewyear.run, 'name': 'Happy New Year'},
         {'value': screen.draw, 'name': 'Draw screen'},
         {'value': screen.fill, 'name': 'Fill screen'},
         {'value': screen.rand, 'name': 'Random screen'},
