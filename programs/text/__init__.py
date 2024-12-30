@@ -32,34 +32,34 @@ def generate_bitmap(text, font_index = None):
         draw.textlength(text, image_font)
     )
 
-def frame(bitmap, offset = 0):
+def frame(bitmap, offset = 0, colors = (None, 0)):
     for y in range(7):
         row = bitmap[y]
         for x in range(6):
             ox = x + offset
-            if ox < 0 or ox >= len(row):
-                color = 0
+            if ox < 0 or ox >= len(row) or row[ox] == 0:
+                color = colors[1]
             else:
-                color = driver.default_color if row[ox] == 1 else 0
+                color = (colors[0] or driver.default_color)
             driver.set(x, y, color)
     driver.show()
 
-async def padscroll(text, fps = None, font_index = None):
+async def padscroll(text, fps = None, font_index = None, colors = (None, 0)):
     bitmap, width = generate_bitmap(text, font_index)
     offset = -6
     while offset < width:
-        frame(bitmap, offset)
+        frame(bitmap, offset, colors)
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
 
 async def padscroll_input():
     await padscroll(input("Text: "))
 
-async def minscroll(text, fps = None, font_index = None):
+async def minscroll(text, fps = None, font_index = None, colors = (None, 0)):
     bitmap, width = generate_bitmap(text, font_index)
     offset = 0
     while offset == 0 or offset < width - 6:
-        frame(bitmap, offset)
+        frame(bitmap, offset, colors)
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
 
