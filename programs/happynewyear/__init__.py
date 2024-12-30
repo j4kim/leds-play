@@ -13,9 +13,9 @@ async def run():
     ws_server.playsound("good times")
 
     for i in range(4):
-        text.tools.char("0", colors=(0xffffff, 0x880000))
+        text.tools.char("0", colors=(0xeeaaff, 0x220000))
         await asyncio.sleep(0.2)
-        text.tools.char("0", colors=(0xffffff, 0x440044))
+        text.tools.char("0", colors=(0xffeeaa, 0x110011))
         await asyncio.sleep(0.2)
 
     await fireworks.fire(0)
@@ -25,7 +25,7 @@ async def run():
     await text.tools.funky(
         text.tools.padscroll,
         "Bonne année!",
-        ((0xffffff, 0x005522), (0xffffff, 0x002255)),
+        ((0xffffff, 0x000808), (0xffffff, 0x080800)),
         multiplier=8
     )
 
@@ -37,7 +37,7 @@ async def run():
     await text.tools.funky(
         text.tools.minscroll,
         "Happy New Year!",
-        ((0xbb00ff, 0x220011), (0xff00bb, 0x110022)),
+        ((0xcc00ff, 0x080100), (0xff00cc, 0x010008)),
         font_index=5
     )
 
