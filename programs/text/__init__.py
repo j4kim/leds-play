@@ -13,6 +13,7 @@ async def menu():
     await prompt_menu([
         {'value': padscroll_input, 'name': 'Text scroll'},
         {'value': minscroll_input, 'name': 'Text min scroll'},
+        {'value': lambda: funkyminscroll('Happy New Year!'), 'name': 'Funky min scroll'},
         {'value': char, 'name': 'Char'},
         {'value': random_word, 'name': 'Random word'},
         {'value': setFont, 'name': 'Set default font'},
@@ -32,7 +33,9 @@ def generate_bitmap(text, font_index = None):
         draw.textlength(text, image_font)
     )
 
-def frame(bitmap, offset = 0, colors = (None, 0)):
+def frame(bitmap, offset = 0, colors = (0xffffff, 0)):
+    if (callable(colors)):
+        colors = colors(offset)
     for y in range(7):
         row = bitmap[y]
         for x in range(6):
@@ -40,11 +43,11 @@ def frame(bitmap, offset = 0, colors = (None, 0)):
             if ox < 0 or ox >= len(row) or row[ox] == 0:
                 color = colors[1]
             else:
-                color = (colors[0] or driver.default_color)
+                color = colors[0]
             driver.set(x, y, color)
     driver.show()
 
-async def padscroll(text, fps = None, font_index = None, colors = (None, 0)):
+async def padscroll(text, fps = None, font_index = None, colors = (0xffffff, 0)):
     bitmap, width = generate_bitmap(text, font_index)
     offset = -6
     while offset < width:
@@ -55,13 +58,18 @@ async def padscroll(text, fps = None, font_index = None, colors = (None, 0)):
 async def padscroll_input():
     await padscroll(input("Text: "))
 
-async def minscroll(text, fps = None, font_index = None, colors = (None, 0)):
+async def minscroll(text, fps = None, font_index = None, colors = (0xffffff, 0)):
     bitmap, width = generate_bitmap(text, font_index)
     offset = 0
     while offset == 0 or offset < width - 6:
         frame(bitmap, offset, colors)
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
+
+async def funkyminscroll(text):
+    def getcolor(i):
+        return (0, 0x00ff99) if (i//8) % 2 == 0 else (0, 0x0099ff)
+    await minscroll(text, 10, 2, getcolor)
 
 async def minscroll_input():
     await minscroll(input("Text: "))
