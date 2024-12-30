@@ -14,24 +14,26 @@
     <main class="container" id="main">
         <h1>leds-play web remote</h1>
         <section>
-            <fieldset class="grid">
-                <label>
-                    Address
-                    <input id="addressinput" value="%VITE_WS_ADDRESS%" />
-                </label>
-                <label>
-                    Port
-                    <input id="portinput" value="%VITE_WS_PORT%" />
-                </label>
-            </fieldset>
-            <fieldset>
-                <label>
-                    Auto reconnect
-                    <input id="autoreconnect" type="checkbox" checked />
-                </label>
-            </fieldset>
-            <button type="submit" id="connectbtn">Connect to WebSocket server</button>
-            <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
+            <form>
+                <fieldset class="grid">
+                    <label>
+                        Address
+                        <input id="addressinput" value="%VITE_WS_ADDRESS%" />
+                    </label>
+                    <label>
+                        Port
+                        <input id="portinput" value="%VITE_WS_PORT%" />
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <label>
+                        Auto reconnect
+                        <input id="autoreconnect" type="checkbox" checked />
+                    </label>
+                </fieldset>
+                <button type="submit" id="connectbtn">Connect to WebSocket server</button>
+                <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
+            </form>
         </section>
         <section>
             <audio controls src="/sounds/coin.wav" name="coin.wav"></audio>
