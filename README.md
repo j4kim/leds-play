@@ -83,6 +83,7 @@ sudo venv/bin/python main.py
 
 - Communes:
   - [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
+  - [websockets](https://websockets.readthedocs.io/en/stable/index.html)
 - Driver pygame:
   - [pygame](https://www.pygame.org/docs/)
 - Driver neopixel:
