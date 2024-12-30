@@ -8,6 +8,7 @@ CONNECTIONS = set()
 
 async def register(websocket):
     CONNECTIONS.add(websocket)
+    patched_print("new webscoket connection, total:", len(CONNECTIONS))
     try:
         await websocket.wait_closed()
     finally:
