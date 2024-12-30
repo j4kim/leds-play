@@ -18,7 +18,8 @@ def generate_bitmap(text, font_index = None):
         draw.textlength(text, image_font)
     )
 
-def frame(bitmap, offset = 0, colors = (0xffffff, 0)):
+def frame(bitmap, offset = 0, colors = None):
+    colors = colors or (0xffffff, 0)
     if (callable(colors)):
         colors = colors(offset)
     for y in range(7):
@@ -32,7 +33,11 @@ def frame(bitmap, offset = 0, colors = (0xffffff, 0)):
             driver.set(x, y, color)
     driver.show()
 
-async def padscroll(text, fps = None, font_index = None, colors = (0xffffff, 0)):
+def char(text, font_index = None, colors = None):
+    bitmap, width = generate_bitmap(text, font_index)
+    frame(bitmap, colors=colors)
+
+async def padscroll(text, fps = None, font_index = None, colors = None):
     bitmap, width = generate_bitmap(text, font_index)
     offset = -6
     while offset < width:
@@ -40,7 +45,7 @@ async def padscroll(text, fps = None, font_index = None, colors = (0xffffff, 0))
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
 
-async def minscroll(text, fps = None, font_index = None, colors = (0xffffff, 0)):
+async def minscroll(text, fps = None, font_index = None, colors = None):
     bitmap, width = generate_bitmap(text, font_index)
     offset = 0
     while offset == 0 or offset < width - 6:
@@ -48,6 +53,10 @@ async def minscroll(text, fps = None, font_index = None, colors = (0xffffff, 0))
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
 
-def char(text, colors = (0xffffff, 0)):
-    bitmap, width = generate_bitmap(text)
-    frame(bitmap, colors=colors)
+def alternate(i, two_color_tuples):
+    t1 = two_color_tuples[0]
+    t2 = two_color_tuples[1]
+    return t1 if (i//4) % 2 == 0 else t2
+
+async def funky(fun, text, two_color_tuples, alternator = alternate, bpm = 111, font_index = None):
+    await fun(text=text, fps=4*(bpm/60), font_index=font_index, colors=lambda i: alternator(i, two_color_tuples))

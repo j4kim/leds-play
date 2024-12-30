@@ -8,8 +8,9 @@ from . import tools
 async def menu():
     await prompt_menu([
         {'value': padscroll_input, 'name': 'Text scroll'},
+        {'value': funkypadscroll, 'name': 'Funky scroll'},
         {'value': minscroll_input, 'name': 'Text min scroll'},
-        {'value': lambda: funkyminscroll('Happy New Year!'), 'name': 'Funky min scroll'},
+        {'value': funkyminscroll, 'name': 'Funky min scroll'},
         {'value': char_input, 'name': 'Char'},
         {'value': random_word, 'name': 'Random word'},
         {'value': setFont, 'name': 'Set default font'},
@@ -19,13 +20,14 @@ async def menu():
 async def padscroll_input():
     await tools.padscroll(input("Text: "))
 
-async def funkyminscroll(text, bpm = 111):
-    def getcolor(i):
-        return (0xffffff, 0x005522) if (i//4) % 2 == 0 else (0xffffff, 0x002255)
-    await tools.minscroll(text, 4*(bpm/60), 2, getcolor)
+async def funkypadscroll():
+    await tools.funky(tools.padscroll, input("Text: "), ((0, 0xff9900), (0, 0xff0099)), font_index=5)
 
 async def minscroll_input():
     await tools.minscroll(input("Text: "))
+
+async def funkyminscroll():
+    await tools.funky(tools.minscroll, input("Text: "), ((0xffffff, 0x005522), (0xffffff, 0x002255)))
 
 def char_input():
     tools.char(input("Char: "))
