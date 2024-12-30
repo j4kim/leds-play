@@ -2,10 +2,20 @@ import os.path
 from ..image import open_image, gif
 import asyncio
 from web import ws_server
+from InquirerPy import inquirer
+
+images = [open_image(f"{i}.gif", os.path.dirname(__file__)) for i in range(10)]
+
+async def individual():
+    index = await inquirer.number(
+        message="Index:",
+        max_allowed=len(images) - 1,
+        min_allowed=0,
+        filter=lambda x: int(x)
+    ).execute_async()
+    await gif(images[index], 3)
 
 async def run():
-    images = [open_image(f"{i}.gif", os.path.dirname(__file__)) for i in range(10)]
-
     wait = [1, 0.5, 0.5, 2, 1, 0.2, 0.2, 0.2, 2, 0]
 
     for i, image in enumerate(images):

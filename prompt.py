@@ -9,6 +9,7 @@ async def run():
         {'value': text.menu, 'name': 'Text'},
         {'value': quack.quack, 'name': 'Quack'},
         {'value': fireworks.run, 'name': 'Fireworks'},
+        {'value': fireworks.individual, 'name': 'Individual firework'},
         {'value': screen.draw, 'name': 'Draw screen'},
         {'value': screen.fill, 'name': 'Fill screen'},
         {'value': screen.rand, 'name': 'Random screen'},

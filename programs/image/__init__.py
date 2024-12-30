@@ -18,6 +18,7 @@ def open_image(path, dir = os.path.dirname(__file__)):
     return Image.open(path)
 
 async def gif(im, fps = 10):
+    im.seek(0)
     try:
         while True:
             show_image(im)
@@ -25,5 +26,3 @@ async def gif(im, fps = 10):
             await asyncio.sleep(1/fps)
     except EOFError:
         pass
-    finally:
-        im.close()
