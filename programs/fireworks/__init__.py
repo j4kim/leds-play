@@ -7,13 +7,18 @@ from InquirerPy import inquirer
 images = [open_image(f"gifs/{i}.gif", os.path.dirname(__file__)) for i in range(10)]
 
 async def individual():
-    index = await inquirer.number(
-        message="Index:",
-        max_allowed=len(images) - 1,
-        min_allowed=0,
-        filter=lambda x: int(x)
-    ).execute_async()
-    await gif(images[index], 3)
+    index = 0
+    while True:
+        index = await inquirer.number(
+            message="Index or -1 to quit:",
+            max_allowed=len(images) - 1,
+            min_allowed=-1,
+            filter=lambda x: int(x),
+            default=index
+        ).execute_async()
+        if index == -1:
+            return
+        await gif(images[index], 3)
 
 async def run():
     wait = [1, 0.5, 0.5, 2, 1, 0.2, 0.2, 0.2, 2, 0]
