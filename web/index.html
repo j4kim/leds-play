@@ -75,6 +75,12 @@
                     console.error(`audio "${sound}" not found`);
                 }
             },
+            pause_sound: ({ sound }) => {
+                document.querySelector(`audio[name="${sound}"]`)?.pause();
+            },
+            resume_sound: ({ sound }) => {
+                document.querySelector(`audio[name="${sound}"]`)?.play();
+            },
             stop_sounds: () => {
                 document.querySelectorAll("audio").forEach(a => a.pause())
             }
