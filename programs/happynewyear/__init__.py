@@ -38,6 +38,15 @@ async def fireworks_6():
     await fireworks.fire(3)
     await fireworks.fire(9)
 
+async def fireworks_final():
+    driver.clear()
+    await asyncio.sleep(2)
+    ws_server.pausesound("good times")
+    await asyncio.sleep(2)
+    await fireworks.fire(10)
+    await asyncio.sleep(2)
+    ws_server.resumesound("good times")
+
 async def countdown():
     ws_server.playsound("10-9-8")
     for i in range(10, 0, -1):
@@ -127,6 +136,8 @@ async def start():
     await random()
     await fireworks_6()
     await tchin_tchin()
+    await random()
+    await fireworks_final()
 
 async def run():
     task = asyncio.create_task(start())

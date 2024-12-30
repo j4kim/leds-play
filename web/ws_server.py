@@ -32,5 +32,11 @@ async def stop():
 def playsound(name):
     queue.put_nowait(f'{{"action": "play_sound", "sound": "{name}"}}')
 
+def pausesound(name):
+    queue.put_nowait(f'{{"action": "pause_sound", "sound": "{name}"}}')
+
+def resumesound(name):
+    queue.put_nowait(f'{{"action": "resume_sound", "sound": "{name}"}}')
+
 def stopsounds():
     queue.put_nowait(f'{{"action": "stop_sounds"}}')
