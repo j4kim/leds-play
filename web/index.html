@@ -68,6 +68,9 @@
                 } else {
                     console.error(`audio "${sound}" not found`);
                 }
+            },
+            stop_sounds: () => {
+                document.querySelectorAll("audio").forEach(a => a.pause())
             }
         }
 
