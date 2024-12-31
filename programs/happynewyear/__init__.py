@@ -40,24 +40,6 @@ async def fireworks_6():
     await fireworks.fire(3)
     await fireworks.fire(9)
 
-async def fireworks_final():
-    driver.clear()
-    ws_server.setvolume("good times", 0.3)
-    await asyncio.sleep(1)
-    ws_server.setvolume("good times", 0.2)
-    await asyncio.sleep(1)
-    ws_server.setvolume("good times", 0.1)
-    await asyncio.sleep(1)
-    ws_server.setvolume("good times", 0.05)
-    await asyncio.sleep(1)
-    ws_server.pausesound("good times")
-    await asyncio.sleep(2)
-    await fireworks.fire(10)
-    driver.clear()
-    ws_server.setvolume("good times", 0.6)
-    await asyncio.sleep(2)
-    ws_server.resumesound("good times")
-
 async def countdown():
     ws_server.playsound("10-9-8")
     for i in range(10, 0, -1):
@@ -132,6 +114,24 @@ async def tchin_tchin():
         font_index=5,
         multiplier=8
     )
+
+async def fireworks_final():
+    driver.clear()
+    ws_server.setvolume("good times", 0.3)
+    await asyncio.sleep(1)
+    ws_server.setvolume("good times", 0.2)
+    await asyncio.sleep(1)
+    ws_server.setvolume("good times", 0.1)
+    await asyncio.sleep(1)
+    ws_server.setvolume("good times", 0.05)
+    await asyncio.sleep(1)
+    ws_server.pausesound("good times")
+    await asyncio.sleep(2)
+    await fireworks.fire(10)
+    driver.clear()
+    ws_server.setvolume("good times", 0.6)
+    await asyncio.sleep(2)
+    ws_server.resumesound("good times")
 
 async def start():
     await countdown()
