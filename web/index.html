@@ -86,6 +86,9 @@
             },
             set_volume: ({ sound, volume }) => {
                 sounds[sound]?.volume(volume);
+            },
+            fade: ({ sound, from, to, duration }) => {
+                sounds[sound]?.fade(from, to, duration);
             }
         }
 

@@ -43,3 +43,6 @@ def setvolume(name, volume):
 
 def stopsounds():
     queue.put_nowait(f'{{"action": "stop_sounds"}}')
+
+def fade(name, f, t, d):
+    queue.put_nowait(f'{{"action": "fade", "sound": "{name}", "from": {f}, "to": {t}, "duration": {d}}}')

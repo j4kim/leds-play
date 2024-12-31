@@ -119,16 +119,9 @@ async def tchin_tchin():
 
 async def fireworks_final():
     driver.clear()
-    ws_server.setvolume("good times", 0.3)
-    await asyncio.sleep(1)
-    ws_server.setvolume("good times", 0.2)
-    await asyncio.sleep(1)
-    ws_server.setvolume("good times", 0.1)
-    await asyncio.sleep(1)
-    ws_server.setvolume("good times", 0.05)
-    await asyncio.sleep(1)
+    ws_server.fade("good times", 0.4, 0, 8000)
+    await asyncio.sleep(8)
     ws_server.pausesound("good times")
-    await asyncio.sleep(2)
     await fireworks.fire(10)
     driver.clear()
     await asyncio.sleep(2)
@@ -136,11 +129,11 @@ async def fireworks_final():
 async def fadeout():
     ws_server.setvolume("good times", 0.6)
     ws_server.resumesound("good times")
+    ws_server.fade("good times", 0.6, 0, 50000)
     x = 100
     while x >= 0:
         await random_disco()
         x -= 2
-        ws_server.setvolume("good times", x * 0.006)
         driver.brightness = x/100
         driver.reset()
     driver.brightness = 1
@@ -158,10 +151,10 @@ async def start():
     await deux_mille_25()
     await fireworks_5()
     await la_sante()
-    await random_disco(8)
+    await random_disco(12)
     await fireworks_6()
     await tchin_tchin()
-    await random_disco(16, multiplier=4)
+    await random_disco(32, multiplier=4)
     await fireworks_final()
     await fadeout()
 
