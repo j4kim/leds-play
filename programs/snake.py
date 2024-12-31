@@ -1,10 +1,12 @@
 from driver import driver
 import asyncio
+from InquirerPy.utils import patched_print
 
 class Snake:
     def __init__(self):
         self.dir = (0, -1)
         self.head = (0, 6)
+        self.body = [(0, 7), (0, 8), (0, 9)]
         self.quit = asyncio.Event()
         self.fps = 3
 
@@ -22,16 +24,25 @@ class Snake:
         elif event['key'] == 'select':
             self.quit.set()
 
+    def inscreen(self, x, y):
+        return 0 <= x <= 5 and 0 <= y <= 6
+
     def draw(self):
         driver.clear()
         x, y = self.head
         driver.set(x, y, 0x00ff00)
+        for x, y in self.body:
+            if self.inscreen(x, y):
+                driver.set(x, y, 0x00cc00)
 
     def move(self):
-        nx = self.head[0] + self.dir[0]
-        ny = self.head[1] + self.dir[1]
-        if 0 <= nx <= 5 and 0 <= ny <= 6:
+        hx, hy = self.head
+        nx = hx + self.dir[0]
+        ny = hy + self.dir[1]
+        if self.inscreen(nx, ny):
             self.head = (nx, ny)
+            self.body.insert(0, (hx, hy))
+            self.body.pop()
 
     async def run(self):
         while not self.quit.is_set():
@@ -49,7 +60,7 @@ async def run():
         print(e)
         return
 
-    print("Press select to quit")
+    patched_print("Press select to quit")
 
     await snake.run()
 
