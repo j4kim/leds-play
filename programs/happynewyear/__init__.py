@@ -119,8 +119,8 @@ async def tchin_tchin():
 
 async def fireworks_final():
     driver.clear()
-    ws_server.fade("good times", 0.4, 0, 5000)
-    await asyncio.sleep(5)
+    ws_server.fade("good times", 0.4, 0, 4000)
+    await asyncio.sleep(4)
     ws_server.pausesound("good times")
     await fireworks.fire(10)
     driver.clear()
