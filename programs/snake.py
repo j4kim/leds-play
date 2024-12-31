@@ -28,9 +28,10 @@ class Snake:
         driver.set(x, y, 0x00ff00)
 
     def move(self):
-        x = max(0, min(5, self.head[0] + self.dir[0]))
-        y = max(0, min(6, self.head[1] + self.dir[1]))
-        self.head = (x, y)
+        nx = self.head[0] + self.dir[0]
+        ny = self.head[1] + self.dir[1]
+        if 0 <= nx <= 5 and 0 <= ny <= 6:
+            self.head = (nx, ny)
 
     async def run(self):
         while not self.quit.is_set():
