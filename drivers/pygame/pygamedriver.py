@@ -78,13 +78,13 @@ class PygameDriver:
     def quit(self):
         self.running = False
 
-    def fill(self):
+    def fill(self, show = True):
         for y in range(7):
             for x in range(6):
                 self.cells[y][x] = 0xffffff
-        self.show()
+        if show: self.show()
 
-    def clear(self):
+    def clear(self, show = True):
         self.cells = (
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
@@ -94,7 +94,7 @@ class PygameDriver:
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
         )
-        self.show()
+        if show: self.show()
 
     def set(self, x, y, color):
         self.cells[y][x] = color

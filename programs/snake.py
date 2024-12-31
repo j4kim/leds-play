@@ -28,7 +28,7 @@ class Snake:
         return 0 <= x <= 5 and 0 <= y <= 6
 
     def draw(self):
-        driver.clear()
+        driver.clear(False)
         x, y = self.head
         driver.set(x, y, 0x00ff00)
         for x, y in self.body:
