@@ -175,11 +175,11 @@ async def start_at(dt):
     driver.clear()
     ws_server.stopsounds()
 
-async def schedule_for_next_hour():
+async def schedule_for_midnight():
     now = datetime.datetime.now()
-    next_hour = now + datetime.timedelta(hours=1)
-    next_hour = next_hour.replace(minute=0, second=0, microsecond=0)
-    ten_sec_before = next_hour - datetime.timedelta(seconds=10)
+    next_day = now + datetime.timedelta(days=1)
+    midnight = next_day.replace(hour=0, minute=0, second=0, microsecond=0)
+    ten_sec_before = midnight - datetime.timedelta(seconds=10)
     await start_at(ten_sec_before)
 
 async def run():
