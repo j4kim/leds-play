@@ -20,13 +20,14 @@ class PygameDriver:
     running = True
     joysticks = []
     on_event = None
+    brightness = 1
 
     def reset(self):
         pass
 
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((6*self.scale, 7*self.scale))
+        self.screen = pygame.display.set_mode((6*self.scale, 7*self.scale), pygame.DOUBLEBUF)
         self.clear()
 
     async def run(self):
@@ -99,12 +100,17 @@ class PygameDriver:
         self.cells[y][x] = color
 
     def show(self):
+        self.screen.fill((0,0,0,255))
         for y in range(7):
             for x in range(6):
                 margin = self.scale / 10
                 rx = margin + x * self.scale
                 ry = margin + y * self.scale
                 size = self.scale - 2 * margin
-                rect = pygame.Rect(rx, ry, size, size)
-                color = self.cells[y][x]
-                pygame.draw.rect(self.screen, color, rect)
+                rect = pygame.Surface((size, size), pygame.SRCALPHA)
+                colorval = self.cells[y][x]
+                colorhex = '#' + hex(colorval).replace('0x','').rjust(6, '0')
+                color = pygame.Color(colorhex)
+                color.a = int(255 * self.brightness)
+                rect.fill(color)
+                self.screen.blit(rect, (rx, ry))
