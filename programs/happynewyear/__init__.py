@@ -100,16 +100,12 @@ async def la_sante():
         font_index=5
     )
 
-async def random():
-    for i in range(20):
-        screen.rand()
-        await asyncio.sleep(0.1)
-
-async def random_disco(steps = 4, bpm = 111):
+async def random_disco(steps = 4, bpm = 111, multiplier = 2):
     bps = bpm/60
+    fps = bps * multiplier
     for i in range(steps):
         screen.rand()
-        await asyncio.sleep(1/(bps * 2))
+        await asyncio.sleep(1/fps)
 
 async def tchin_tchin():
     ws_server.playsound("tchin-tchin")
@@ -162,10 +158,10 @@ async def start():
     await deux_mille_25()
     await fireworks_5()
     await la_sante()
-    await random()
+    await random_disco(8)
     await fireworks_6()
     await tchin_tchin()
-    await random()
+    await random_disco(16, multiplier=4)
     await fireworks_final()
     await fadeout()
 
