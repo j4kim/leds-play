@@ -8,6 +8,7 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
     >
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
     <title>leds-play web remote</title>
 </head>
 <body>
@@ -35,70 +36,56 @@
                 <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
             </form>
         </section>
-        <section>
-            <audio controls src="/sounds/coin.wav" name="coin.wav"></audio>
-            <audio controls src="/sounds/ding.mp3" name="ding"></audio>
-        </section>
-        <section>
-            <audio controls src="/sounds/fireworks/firework-0.mp3" name="firework-0"></audio>
-            <audio controls src="/sounds/fireworks/firework-1.mp3" name="firework-1"></audio>
-            <audio controls src="/sounds/fireworks/firework-2.mp3" name="firework-2"></audio>
-            <audio controls src="/sounds/fireworks/firework-3.mp3" name="firework-3"></audio>
-            <audio controls src="/sounds/fireworks/firework-4.mp3" name="firework-4"></audio>
-            <audio controls src="/sounds/fireworks/firework-5.mp3" name="firework-5"></audio>
-            <audio controls src="/sounds/fireworks/firework-6.mp3" name="firework-6"></audio>
-            <audio controls src="/sounds/fireworks/firework-7.mp3" name="firework-7"></audio>
-            <audio controls src="/sounds/fireworks/firework-8.mp3" name="firework-8"></audio>
-            <audio controls src="/sounds/fireworks/firework-9.mp3" name="firework-9"></audio>
-            <audio controls src="/sounds/fireworks/firework-10.mp3" name="firework-10"></audio>
-        </section>
-        <section>
-            <audio controls src="/sounds/hny/10-9-8.mp3" name="10-9-8"></audio>
-            <audio controls src="/sounds/hny/09 - Good Times.mp3" name="good times"></audio>
-            <audio controls src="/sounds/hny/bonne année.mp3" name="bonne année"></audio>
-            <audio controls src="/sounds/hny/happy new year.mp3" name="happy new year"></audio>
-            <audio controls src="/sounds/hny/happy new year 2.mp3" name="happy new year 2"></audio>
-            <audio controls src="/sounds/hny/2-0-2-5.mp3" name="2-0-2-5"></audio>
-            <audio controls src="/sounds/hny/2025.mp3" name="2025"></audio>
-            <audio controls src="/sounds/hny/halala.mp3" name="halala"></audio>
-            <audio controls src="/sounds/hny/la santé.mp3" name="la santé"></audio>
-            <audio controls src="/sounds/hny/tchin-tchin.mp3" name="tchin-tchin"></audio>
-            <audio controls src="/sounds/hny/wow c'est beau.mp3" name="wow c'est beau"></audio>
-        </section>
     </main>
     <script>
         var websocket = null;
 
+        const sounds = {};
+        [
+            ["coin.wav", "/sounds/coin.wav"],
+            ["ding", "/sounds/ding.mp3"],
+            ["firework-0", "/sounds/fireworks/firework-0.mp3"],
+            ["firework-1", "/sounds/fireworks/firework-1.mp3"],
+            ["firework-2", "/sounds/fireworks/firework-2.mp3"],
+            ["firework-3", "/sounds/fireworks/firework-3.mp3"],
+            ["firework-4", "/sounds/fireworks/firework-4.mp3"],
+            ["firework-5", "/sounds/fireworks/firework-5.mp3"],
+            ["firework-6", "/sounds/fireworks/firework-6.mp3"],
+            ["firework-7", "/sounds/fireworks/firework-7.mp3"],
+            ["firework-8", "/sounds/fireworks/firework-8.mp3"],
+            ["firework-9", "/sounds/fireworks/firework-9.mp3"],
+            ["firework-10", "/sounds/fireworks/firework-10.mp3"],
+            ["10-9-8", "/sounds/hny/10-9-8.mp3"],
+            ["good times", "/sounds/hny/09 - Good Times.mp3"],
+            ["bonne année", "/sounds/hny/bonne année.mp3"],
+            ["happy new year", "/sounds/hny/happy new year.mp3"],
+            ["happy new year 2", "/sounds/hny/happy new year 2.mp3"],
+            ["2-0-2-5", "/sounds/hny/2-0-2-5.mp3"],
+            ["2025", "/sounds/hny/2025.mp3"],
+            ["halala", "/sounds/hny/halala.mp3"],
+            ["la santé", "/sounds/hny/la santé.mp3"],
+            ["tchin-tchin", "/sounds/hny/tchin-tchin.mp3"],
+            ["wow c'est beau", "/sounds/hny/wow c'est beau.mp3"],
+        ].forEach(([name, src]) => {
+            sounds[name] = new Howl({ src: [src] });
+        });
+
         const actions = {
             play_sound: ({ sound }) => {
-                const audio = document.querySelector(`audio[name="${sound}"]`);
-                if (audio) {
-                    audio.currentTime = 0;
-                    audio.play();
-                } else {
-                    console.error(`audio "${sound}" not found`);
-                }
+                sounds[sound]?.stop();
+                sounds[sound]?.play();
             },
             pause_sound: ({ sound }) => {
-                document.querySelector(`audio[name="${sound}"]`)?.pause();
+                sounds[sound]?.pause();
             },
             resume_sound: ({ sound }) => {
-                const audio = document.querySelector(`audio[name="${sound}"]`);
-                if (audio) {
-                    if (audio.dataset.volume) {
-                        audio.volume = audio.dataset.volume;
-                    }
-                    audio.play();
-                } 
+                sounds[sound]?.play();
             },
             stop_sounds: () => {
-                document.querySelectorAll("audio").forEach(a => a.pause())
+                Howler.stop();
             },
             set_volume: ({ sound, volume }) => {
-                const audio = document.querySelector(`audio[name="${sound}"]`);
-                if (audio) {
-                    audio.volume = volume;
-                }
+                sounds[sound]?.volume(volume);
             }
         }
 
