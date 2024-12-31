@@ -5,6 +5,8 @@ from web import ws_server
 from .. import screen
 from InquirerPy import inquirer
 from driver import driver
+import datetime
+from InquirerPy.utils import patched_print
 
 async def fireworks_1():
     await fireworks.fire(0)
@@ -149,9 +151,36 @@ async def start():
     await random()
     await fireworks_final()
 
-async def run():
-    task = asyncio.create_task(start())
-    await inquirer.text(message="Press Enter to quit\n").execute_async()
+async def scheduled_start(dt):
+    patched_print("schedule start at", dt)
+    while True:
+        now = datetime.datetime.now()
+        delta = dt - now
+        delay = delta.total_seconds()
+        if delay < 60:
+            ws_server.playsound("ding")
+            patched_print(now, "starting in", delay, "seconds")
+            await asyncio.sleep(delay)
+            await start()
+            return
+        if 90 < delay < 120:
+            ws_server.playsound("ding")
+        patched_print(now, "start in", delta)
+        await asyncio.sleep(30)
+
+async def start_at(dt):
+    task = asyncio.create_task(scheduled_start(dt))
+    await inquirer.text(message="Task scheduled, Enter to cancel").execute_async()
     task.cancel()
     driver.clear()
     ws_server.stopsounds()
+
+async def schedule_for_next_hour():
+    now = datetime.datetime.now()
+    next_hour = now + datetime.timedelta(hours=1)
+    next_hour = next_hour.replace(minute=0, second=0, microsecond=0)
+    ten_sec_before = next_hour - datetime.timedelta(seconds=10)
+    await start_at(ten_sec_before)
+
+async def run():
+    await start_at(datetime.datetime.now())

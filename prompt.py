@@ -5,6 +5,7 @@ from tools import prompt_menu
 async def run():
     await prompt_menu([
         {'value': happynewyear.run, 'name': 'Happy New Year'},
+        {'value': happynewyear.schedule_for_next_hour, 'name': 'Happy New Year (scheduled for next hour)'},
         {'value': driver.fill, 'name': 'Fill', 'only-for': 'neopixel'},
         {'value': driver.clear, 'name': 'Clear'},
         {'value': text.menu, 'name': 'Text'},
