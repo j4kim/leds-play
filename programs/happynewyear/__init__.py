@@ -105,6 +105,12 @@ async def random():
         screen.rand()
         await asyncio.sleep(0.1)
 
+async def random_disco(steps = 4, bpm = 111):
+    bps = bpm/60
+    for i in range(steps):
+        screen.rand()
+        await asyncio.sleep(1/(bps * 2))
+
 async def tchin_tchin():
     ws_server.playsound("tchin-tchin")
     await text.tools.funky(
@@ -129,9 +135,20 @@ async def fireworks_final():
     await asyncio.sleep(2)
     await fireworks.fire(10)
     driver.clear()
-    ws_server.setvolume("good times", 0.6)
     await asyncio.sleep(2)
+
+async def fadeout():
+    ws_server.setvolume("good times", 0.6)
     ws_server.resumesound("good times")
+    x = 100
+    while x >= 0:
+        await random_disco()
+        x -= 2
+        ws_server.setvolume("good times", x * 0.006)
+        driver.brightness = x/100
+        driver.reset()
+    driver.brightness = 1
+    driver.reset()
 
 async def start():
     await countdown()
@@ -150,6 +167,7 @@ async def start():
     await tchin_tchin()
     await random()
     await fireworks_final()
+    await fadeout()
 
 async def scheduled_start(dt):
     patched_print("schedule start at", dt)
