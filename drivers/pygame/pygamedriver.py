@@ -21,6 +21,9 @@ class PygameDriver:
     joysticks = []
     on_event = None
 
+    def reset(self):
+        pass
+
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((6*self.scale, 7*self.scale))
