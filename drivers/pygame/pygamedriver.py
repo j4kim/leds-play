@@ -109,8 +109,9 @@ class PygameDriver:
                 size = self.scale - 2 * margin
                 rect = pygame.Surface((size, size), pygame.SRCALPHA)
                 colorval = self.cells[y][x]
-                colorhex = '#' + hex(colorval).replace('0x','').rjust(6, '0')
-                color = pygame.Color(colorhex)
+                if type(colorval) is int:
+                    colorval = '#' + hex(colorval).replace('0x','').rjust(6, '0')
+                color = pygame.Color(colorval)
                 color.a = int(255 * self.brightness)
                 rect.fill(color)
                 self.screen.blit(rect, (rx, ry))
