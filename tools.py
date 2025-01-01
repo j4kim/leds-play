@@ -1,4 +1,6 @@
 from InquirerPy import inquirer
+import asyncio
+import config
 
 def get_color(color):
     mapping = {
@@ -21,3 +23,18 @@ def get_color(color):
 async def prompt_color(message = "hex value or one of r,g,b,w,m,y,c,o:"):
     color = await inquirer.text(message).execute_async()
     return get_color(color)
+
+async def prompt_menu(choices):
+    choices = [p for p in choices if p.get('only-for', config.driver) == config.driver]
+    f = None
+    while True:
+        f = await inquirer.select(
+            message="Program:",
+            choices=[*choices, {'value': 'exit', 'name': 'Exit'}],
+            default=lambda _ : f,
+        ).execute_async()
+        if f == 'exit':
+            return
+        r = f()
+        if asyncio.iscoroutine(r):
+            await r

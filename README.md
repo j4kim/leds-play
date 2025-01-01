@@ -9,14 +9,16 @@ Fun with LEDs & Raspberry
 - Pouvoir déployer des programmes par SSH, HTTP ou autre.
 - Pouvoir contrôler le programme avec un contrôleur Bluetooth ou une app web sur téléphone.
 - Idées de programmes:
-  - Snake
-  - Tetris
-  - Message défilant
-  - Réaction à la musique (ASIO?)
-  - Crazy Taxi
-  - Flappy Bird
-  - Un détecteur de mouvement qui allume les LEDs
-  - Pong
+  - [x] Message défilant
+  - [x] Afficher une image
+  - [x] Afficher un gif
+  - [ ] Snake
+  - [ ] Pong
+  - [ ] Tetris
+  - [ ] Crazy Taxi
+  - [ ] Flappy Bird
+  - [ ] Réaction à la musique
+  - [ ] Un détecteur de mouvement qui allume les LEDs
 
 ## Matériel
 
@@ -79,10 +81,14 @@ sudo venv/bin/python main.py
 
 ## Dépendances
 
-- [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
-- (driver neopixel) [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
-- (driver pygame) [pygame](https://www.pygame.org/docs/)
-- [evdev](https://python-evdev.readthedocs.io/en/latest/)
+- Communes:
+  - [InquirerPy](https://inquirerpy.readthedocs.io/en/latest/index.html)
+  - [websockets](https://websockets.readthedocs.io/en/stable/index.html)
+- Driver pygame:
+  - [pygame](https://www.pygame.org/docs/)
+- Driver neopixel:
+  - [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
+  - [evdev](https://python-evdev.readthedocs.io/en/latest/)
 
 ## Bluetooth
 
@@ -120,7 +126,34 @@ sudo evtest
 
 ### Driver pygame
 
-Les contrôleurs bluetooth sont gérés par [pygame.joystick](https://www.pygame.org/docs/ref/joystick.html). Pygame reconnaît automatiquement les manettes bluetooth connectés à l'ordinateur. Pour que les événements soient récupérés, il faut que la fenêtre de Pygame soit active.
+Les contrôleurs sont gérés par [pygame.joystick](https://www.pygame.org/docs/ref/joystick.html). Pygame reconnaît automatiquement les manettes bluetooth (ou usb) connectées à l'ordinateur. Pour que les événements soient déclenchés, il faut que la fenêtre de Pygame soit active.
+
+En l'absence de manette, il est aussi possible d'utiliser le clavier (actuellement seulement sur la branche `keyboad-controller`) avec les touches W,A,S,D (touches directionnelles) ; I,J,K,L (boutons) ; Q,O (touches arrières) et espace, entrée (select, start).
+
+## Interface web pour le son
+
+J'ai abandonnée l'idée de produire du son directement par le Raspberry. Rien ne marche: Le port jack crée des interférence avec les LEDs et fait tout crasher; une carte son produit un son pourri; connecter une enceinte bluetooth est un cauchemar... Bref j'ai abandonné.
+
+Après ces déconvenues voici la solution overkill:
+- Le programme Python crée un serveur WebSockets.
+- Les noms de fichier des sons sont envoyés aux clients au moment où ils doivent être joués.
+- Une page web `web/index.html` est ouverte depuis un autre appareil, un ordinateur ou un téléphone.
+- La page permet de se connecter au serveur WebSocket.
+- Lorsque la page reçoit le nom d'un fichier, elle joue l'audio.
+
+Installer les dépendances web:
+
+```
+npm install --prefix web
+```
+
+Et lancer l'app:
+
+```
+npm run dev --prefix web
+```
+
+Cette interface web pourrait être utilisée par la suite pour afficher l'état des LEDs et remplacerait le driver pygame.
 
 ## Montage
 
@@ -128,10 +161,10 @@ Schéma de montage:
 
 ![Schéma de montage](schema-leds-play.svg)
 
-Chaque colonne contient une bande de 50 LEDs. Donc il y a 300 LEDs en tout. Elles sont espacées de 3.333 cm. Une bande de 50 fait donc 166.666 cm. Les bandes sont câblées en série. J'utilise une alimentation externe de 2 Ampères / 5 Volts pour économiser la charge du Raspberry. Si on voulait allumer toutes les LEDs à pleine puissance, il faudrait ajouter une deuxième alim qui alimente les 3 dernières bandes.
+Chaque colonne contient une bande de 50 LEDs. Donc il y a 300 LEDs en tout. Les LEDs sont espacées de 3.333 cm, une bande de 50 fait donc 166.666 cm. Les bandes sont câblées en série. J'utilise une alimentation externe de 2 Ampères / 5 Volts pour économiser la charge du Raspberry. Si on voulait allumer toutes les LEDs à pleine puissance, il faudrait ajouter une deuxième alim qui alimente les 3 dernières bandes.
 
-On n'utilise qu'une LED par carreau donc environ une sur huit. Le schéma est vu depuis l'arrière de la paroi donc l'axe horizontal est inversé : La LED pour le premier carreau (en haut à gauche) est la 252. 
-Le fichier [drivers/neopixel/matrix.py](drivers/neopixel/matrix.py) est utilisé pour faire le mapping coordonnées du carreau -> index de la LED.
+On n'utilise qu'une LED par carreau donc environ une sur huit. Le schéma est vu depuis l'arrière de la paroi donc l'axe horizontal est inversé: La LED pour le premier carreau (en haut à gauche) est la 252. 
+Le fichier [drivers/neopixel/matrix.py](drivers/neopixel/matrix.py) est utilisé pour faire la correspondance coordonnées du carreau -> index de la LED.
 
 ## Connexion SSH au Raspberry
 

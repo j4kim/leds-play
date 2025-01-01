@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
+    <title>leds-play web remote</title>
+</head>
+<body>
+    <main class="container" id="main">
+        <h1>leds-play web remote</h1>
+        <section>
+            <form>
+                <fieldset class="grid">
+                    <label>
+                        Address
+                        <input id="addressinput" value="%VITE_WS_ADDRESS%" />
+                    </label>
+                    <label>
+                        Port
+                        <input id="portinput" value="%VITE_WS_PORT%" />
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <label>
+                        Auto reconnect
+                        <input id="autoreconnect" type="checkbox" checked />
+                    </label>
+                </fieldset>
+                <button type="submit" id="connectbtn">Connect to WebSocket server</button>
+                <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        var websocket = null;
+
+        const sounds = {};
+        [
+            ["coin.wav", "/sounds/coin.wav"],
+            ["ding", "/sounds/ding.mp3"],
+            ["firework-0", "/sounds/fireworks/firework-0.mp3"],
+            ["firework-1", "/sounds/fireworks/firework-1.mp3"],
+            ["firework-2", "/sounds/fireworks/firework-2.mp3"],
+            ["firework-3", "/sounds/fireworks/firework-3.mp3"],
+            ["firework-4", "/sounds/fireworks/firework-4.mp3"],
+            ["firework-5", "/sounds/fireworks/firework-5.mp3"],
+            ["firework-6", "/sounds/fireworks/firework-6.mp3"],
+            ["firework-7", "/sounds/fireworks/firework-7.mp3"],
+            ["firework-8", "/sounds/fireworks/firework-8.mp3"],
+            ["firework-9", "/sounds/fireworks/firework-9.mp3"],
+            ["firework-10", "/sounds/fireworks/firework-10.mp3"],
+            ["10-9-8", "/sounds/hny/10-9-8.mp3"],
+            ["good times", "/sounds/hny/09 - Good Times.mp3"],
+            ["bonne année", "/sounds/hny/bonne année.mp3"],
+            ["happy new year", "/sounds/hny/happy new year.mp3"],
+            ["happy new year 2", "/sounds/hny/happy new year 2.mp3"],
+            ["2-0-2-5", "/sounds/hny/2-0-2-5.mp3"],
+            ["2025", "/sounds/hny/2025.mp3"],
+            ["halala", "/sounds/hny/halala.mp3"],
+            ["la santé", "/sounds/hny/la santé.mp3"],
+            ["tchin-tchin", "/sounds/hny/tchin-tchin.mp3"],
+            ["wow c'est beau", "/sounds/hny/wow c'est beau.mp3"],
+        ].forEach(([name, src]) => {
+            sounds[name] = new Howl({ src: [src] });
+        });
+
+        const actions = {
+            play_sound: ({ sound }) => {
+                sounds[sound]?.stop();
+                sounds[sound]?.play();
+            },
+            pause_sound: ({ sound }) => {
+                sounds[sound]?.pause();
+            },
+            resume_sound: ({ sound }) => {
+                sounds[sound]?.play();
+            },
+            stop_sounds: () => {
+                Howler.stop();
+            },
+            set_volume: ({ sound, volume }) => {
+                sounds[sound]?.volume(volume);
+            },
+            fade: ({ sound, from, to, duration }) => {
+                sounds[sound]?.fade(from, to, duration);
+            }
+        }
+
+        connectbtn.onclick = (e) => {
+            e.preventDefault();
+
+            const url = `ws://${addressinput.value}:${portinput.value}/`;
+            websocket = new WebSocket(url);
+
+            websocket.onopen = () => {
+                console.log("connected to ", url);
+                connectbtn.disabled = true;
+                disconnectbtn.disabled = false;
+            };
+
+            websocket.onclose = () => {
+                console.log("disconnected");
+                connectbtn.disabled = false;
+                disconnectbtn.disabled = true;
+                if (autoreconnect.checked) {
+                    setTimeout(() => {
+                        console.log("try reconnecting...");
+                        connectbtn.click();
+                    }, 2000);
+                }
+            };
+
+            websocket.onmessage = ({ data }) => {
+                try {
+                    data = JSON.parse(data);
+                    actions[data.action]?.(data);
+                } catch (e) {
+                    console.error("Invalid JSON", e);
+                }
+            };
+        }
+
+        disconnectbtn.onclick = () => {
+            websocket?.close();
+        }
+    </script>
+</body>
+</html>

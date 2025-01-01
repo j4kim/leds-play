@@ -23,7 +23,7 @@ class NeopixelDriver:
     handler = None
     pin = board.D18
     n = 300
-    brightness = 0.1
+    brightness = 1
     default_color = 0xffffff
     running = True
     listening_tasks = []
@@ -37,11 +37,8 @@ class NeopixelDriver:
             auto_write=False
         )
 
-    def __init__(self):
-        self.reset()
-
     async def run(self):
-        pass
+        self.reset()
 
     async def listen_controller(self, path, on_event):
         device = evdev.InputDevice(path)
@@ -49,11 +46,13 @@ class NeopixelDriver:
         while True:
             event = await device.async_read_one()
             if event.type == evdev.ecodes.EV_KEY:
-                on_event({
+                x = on_event({
                     'value': event.value,
                     'device': path,
                     'key': key_bindings.get(event.code, event.code)
                 })
+                if asyncio.iscoroutine(x):
+                    asyncio.create_task(x)
 
     def listen_controllers(self, on_event):
         device_paths = [
@@ -80,13 +79,13 @@ class NeopixelDriver:
         self.clear()
         self.running = False
 
-    def fill(self):
+    def fill(self, show = True):
         self.handler.fill(self.default_color)
-        self.handler.show()
+        if show: self.handler.show()
 
-    def clear(self):
+    def clear(self, show = True):
         self.handler.fill(0)
-        self.handler.show()
+        if show: self.handler.show()
 
     def show(self):
         self.handler.show()

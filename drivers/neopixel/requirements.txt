@@ -22,3 +22,4 @@ RPi.GPIO==0.7.1
 sysv-ipc==1.1.0
 typing_extensions==4.12.2
 wcwidth==0.2.13
+websockets==14.1
