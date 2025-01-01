@@ -1,5 +1,4 @@
 import pygame
-import asyncio
 from .pygamedriver import PygameDriver
 
 key_bindings = {
