@@ -1,1 +1,5 @@
-driver = "pygame" # pygame or neopixel
+# either "pygame" or "neopixel"
+driver = "pygame"
+
+# for pygame driver only, controller is either "keyboard" or "gamepad"
+controller = "keyboard"
