@@ -5,10 +5,10 @@ from InquirerPy.utils import patched_print
 class Snake:
     def __init__(self):
         self.dir = (0, -1)
-        self.head = (0, 6)
-        self.body = [(0, 7), (0, 8), (0, 9)]
+        self.head = (0, 7)
+        self.body = [(0, 8), (0, 9), (0, 10)]
         self.quit = asyncio.Event()
-        self.fps = 3
+        self.fps = 4
 
     def handle_event(self, event):
         if event['value'] != 1:
@@ -46,8 +46,8 @@ class Snake:
 
     async def run(self):
         while not self.quit.is_set():
-            self.draw()
             self.move()
+            self.draw()
             driver.show()
             await asyncio.sleep(1/self.fps)
 
