@@ -1,22 +1,8 @@
 import pygame
 import asyncio
+from abc import ABC, abstractmethod
 
-key_bindings = {
-    'w': 'arrow_up',
-    'd': 'arrow_right',
-    's': 'arrow_down',
-    'a': 'arrow_left',
-    'i': 'north',
-    'l': 'east',
-    'k': 'south',
-    'j': 'west',
-    'q': 'left',
-    'o': 'right',
-    ' ': 'select',
-    '\r': 'start',
-}
-
-class PygameDriver:
+class PygameDriver(ABC):
     cells = ()
     default_color = 0xffffff
     screen = None
@@ -36,21 +22,21 @@ class PygameDriver:
     async def run(self):
         while self.running:
             for event in pygame.event.get():
-                if self.on_event and event.type in [pygame.KEYUP, pygame.KEYDOWN]:
-                    x = self.on_event({
-                        'value': 1 if event.type == pygame.KEYDOWN else 0,
-                        'key': key_bindings.get(event.unicode, event.unicode),
-                    })
-                    if asyncio.iscoroutine(x):
-                        asyncio.create_task(x)
+                self.handle_event(event)
             pygame.display.flip()
             await asyncio.sleep(1/60)
 
-    def listen_controllers(self, on_event):
-        self.on_event = on_event
+    @abstractmethod
+    def handle_event(self, event: pygame.event.Event):
+        pass
 
+    @abstractmethod
+    def listen_controllers(self, on_event):
+        pass
+
+    @abstractmethod
     def stop_listening_controllers(self):
-        self.on_event = None
+        pass
 
     def quit(self):
         self.running = False
