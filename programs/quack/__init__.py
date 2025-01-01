@@ -10,15 +10,25 @@ async def quack():
     im = open_image("quack.gif", os.path.dirname(__file__))
     show_image(im)
 
-    async def handle_event(event):
+    quack_task = None
+
+    async def quack():
+        im.seek(1)
+        show_image(im)
+        ws_server.resumesound("coin.wav")
+        await asyncio.sleep(0.3)
+        im.seek(0)
+        show_image(im)
+
+    def handle_event(event):
+        nonlocal quack_task
         if event['value'] == 1:
             if event['key'] == 'south':
-                im.seek(1)
-                show_image(im)
-                ws_server.playsound("coin.wav")
-                await asyncio.sleep(0.3)
-                im.seek(0)
-                show_image(im)
+                if quack_task:
+                    im.seek(0)
+                    show_image(im)
+                    quack_task.cancel()
+                quack_task = asyncio.create_task(quack())
             elif event['key'] == 'select':
                 quit.set()
 
