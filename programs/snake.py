@@ -13,13 +13,13 @@ class Snake:
     def handle_event(self, event):
         if event['value'] != 1:
             return
-        if event['key'] == 'arrow_up':
+        if event['key'] == 'arrow_up' and self.dir[0] != 0:
             self.dir = (0, -1)
-        elif event['key'] == 'arrow_down':
+        elif event['key'] == 'arrow_down' and self.dir[0] != 0:
             self.dir = (0, 1)
-        elif event['key'] == 'arrow_left':
+        elif event['key'] == 'arrow_left' and self.dir[1] != 0:
             self.dir = (-1, 0)
-        elif event['key'] == 'arrow_right':
+        elif event['key'] == 'arrow_right' and self.dir[1] != 0:
             self.dir = (1, 0)
         elif event['key'] == 'select':
             self.quit.set()
