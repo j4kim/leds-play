@@ -5,22 +5,23 @@ from InquirerPy.utils import patched_print
 class Snake:
     def __init__(self):
         self.dir = (0, -1)
+        self.nextdir = (0, -1)
         self.head = (0, 7)
         self.body = [(0, 7)] * 10
         self.quit = asyncio.Event()
-        self.fps = 4
+        self.fps = 3
 
     def handle_event(self, event):
         if event['value'] != 1:
             return
         if event['key'] == 'arrow_up' and self.dir[0] != 0:
-            self.dir = (0, -1)
+            self.nextdir = (0, -1)
         elif event['key'] == 'arrow_down' and self.dir[0] != 0:
-            self.dir = (0, 1)
+            self.nextdir = (0, 1)
         elif event['key'] == 'arrow_left' and self.dir[1] != 0:
-            self.dir = (-1, 0)
+            self.nextdir = (-1, 0)
         elif event['key'] == 'arrow_right' and self.dir[1] != 0:
-            self.dir = (1, 0)
+            self.nextdir = (1, 0)
         elif event['key'] == 'select':
             self.quit.set()
 
@@ -36,6 +37,7 @@ class Snake:
                 driver.set(x, y, 0x00cc00)
 
     def move(self):
+        self.dir = self.nextdir
         hx, hy = self.head
         nx = hx + self.dir[0]
         ny = hy + self.dir[1]
