@@ -6,7 +6,7 @@ class Snake:
     def __init__(self):
         self.dir = (0, -1)
         self.head = (0, 7)
-        self.body = [(0, 8), (0, 9), (0, 10)]
+        self.body = [(0, 7)] * 10
         self.quit = asyncio.Event()
         self.fps = 4
 
