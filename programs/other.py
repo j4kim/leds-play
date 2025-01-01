@@ -1,4 +1,4 @@
-from programs import screen, zigzag, configure, individual, cursor, bt
+from programs import screen, zigzag, configure, individual, cursor, bt, happynewyear
 from driver import driver
 from tools import prompt_menu
 
@@ -16,4 +16,6 @@ async def menu():
         {'value': cursor.run, 'name': 'Cursor', 'only-for': 'neopixel'},
         {'value': bt.testControllers, 'name': 'Test controllers'},
         {'value': bt.freeThePixel, 'name': 'Free the pixel'},
+        {'value': happynewyear.run, 'name': 'Happy New Year'},
+        {'value': happynewyear.schedule_for_midnight, 'name': 'Happy New Year (scheduled for midnight)'},
     ])
