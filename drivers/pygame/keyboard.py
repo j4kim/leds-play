@@ -21,12 +21,10 @@ class PygameKeyboardDriver(PygameDriver):
 
     def handle_event(self, event: pygame.event.Event):
         if self.on_event and event.type in [pygame.KEYUP, pygame.KEYDOWN]:
-            x = self.on_event({
+            self.on_event({
                 'value': 1 if event.type == pygame.KEYDOWN else 0,
                 'key': key_bindings.get(event.unicode, event.unicode),
             })
-            if asyncio.iscoroutine(x):
-                asyncio.create_task(x)
 
     def listen_controllers(self, on_event):
         self.on_event = on_event

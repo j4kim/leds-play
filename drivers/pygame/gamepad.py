@@ -18,9 +18,7 @@ class PygameGamepadDriver(PygameDriver):
 
     def handle_event(self, event: pygame.event.Event):
         if self.on_event and self.joysticks and event.type in [pygame.JOYBUTTONUP, pygame.JOYBUTTONDOWN, pygame.JOYAXISMOTION]:
-            x = self.on_event(self.transform_event(event))
-            if asyncio.iscoroutine(x):
-                asyncio.create_task(x)
+            self.on_event(self.transform_event(event))
 
     def transform_event(self, event: pygame.event.Event):
         key = None
