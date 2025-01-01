@@ -141,14 +141,15 @@ Pygame reconnaît automatiquement les manettes bluetooth (ou usb) connectées à
 
 #### Mode clavier
 
-Lorsque `config.controller` est `"keyboard"`
+Lorsque `config.controller` est `"keyboard"`.
 
-En l'absence de manette, il est aussi possible d'utiliser le clavier avec ces correspondances:
-- W,A,S,D: croix directionnelle
-- I,J,K,L: boutons d'actions
-- Q,O: gachettes
-- espace: select
-- entrée: start
+On utilise le clavier comme contrôleur, avec ces correspondances:
+
+- Touches fléchées: croix directionnelle
+- W,A,S,D: boutons d'actions
+- Q,E: gachettes
+- espace, backspace: select
+- space, enter: start
 
 Ce mode ne permet pas de gérer plusieurs contrôleurs.
 

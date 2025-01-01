@@ -1,20 +1,21 @@
 import pygame
-import asyncio
 from .pygamedriver import PygameDriver
 
 key_bindings = {
-    'w': 'arrow_up',
-    'd': 'arrow_right',
-    's': 'arrow_down',
-    'a': 'arrow_left',
-    'i': 'north',
-    'l': 'east',
-    'k': 'south',
-    'j': 'west',
-    'q': 'left',
-    'o': 'right',
-    ' ': 'select',
-    '\r': 'start',
+    pygame.K_UP: 'arrow_up',
+    pygame.K_RIGHT: 'arrow_right',
+    pygame.K_DOWN: 'arrow_down',
+    pygame.K_LEFT: 'arrow_left',
+    pygame.K_w: 'north',
+    pygame.K_a: 'east',
+    pygame.K_s: 'south',
+    pygame.K_d: 'west',
+    pygame.K_q: 'left',
+    pygame.K_e: 'right',
+    pygame.K_SPACE: 'start',
+    pygame.K_RETURN: 'start',
+    pygame.K_BACKSPACE: 'select',
+    pygame.K_ESCAPE: 'select',
 }
 
 class PygameKeyboardDriver(PygameDriver):
@@ -23,7 +24,7 @@ class PygameKeyboardDriver(PygameDriver):
         if self.on_event and event.type in [pygame.KEYUP, pygame.KEYDOWN]:
             self.on_event({
                 'value': 1 if event.type == pygame.KEYDOWN else 0,
-                'key': key_bindings.get(event.unicode, event.unicode),
+                'key': key_bindings.get(event.key, event.unicode),
             })
 
     def listen_controllers(self, on_event):
