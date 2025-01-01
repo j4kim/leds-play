@@ -6,7 +6,6 @@ Fun with LEDs & Raspberry
 
 - Mettre des LEDs derrière les carreaux de cette paroi vitrée dans mon appart pour en faire un écran de 6x7 px.  
   <img src="https://github.com/user-attachments/assets/44430fdd-a368-4abf-a0f8-48c74fae11d4" width="400">
-- Pouvoir déployer des programmes par SSH, HTTP ou autre.
 - Pouvoir contrôler le programme avec un contrôleur Bluetooth ou une app web sur téléphone.
 - Idées de programmes:
   - [x] Message défilant
@@ -90,9 +89,13 @@ sudo venv/bin/python main.py
   - [Adafruit CircuitPython NeoPixel](https://docs.circuitpython.org/projects/neopixel/en/latest/)
   - [evdev](https://python-evdev.readthedocs.io/en/latest/)
 
-## Bluetooth
+## Contrôleurs
+
+La gestion des inputs est différente en fonction du driver.
 
 ### Sur Raspberry / driver neopixel
+
+Sur le Raspberry on utilise evdev (Linux seulement) pour se connecter aux contrôleurs Bluetooth.
 
 Pour appairer un contrôleur:
 
@@ -126,9 +129,28 @@ sudo evtest
 
 ### Driver pygame
 
-Les contrôleurs sont gérés par [pygame.joystick](https://www.pygame.org/docs/ref/joystick.html). Pygame reconnaît automatiquement les manettes bluetooth (ou usb) connectées à l'ordinateur. Pour que les événements soient déclenchés, il faut que la fenêtre de Pygame soit active.
+Les contrôleurs sont gérés par [pygame.joystick](https://www.pygame.org/docs/ref/joystick.html) ou [pygame.key](https://www.pygame.org/docs/ref/key.html) en fonction de ce qui est configuré dans `config.py`.
 
-En l'absence de manette, il est aussi possible d'utiliser le clavier (actuellement seulement sur la branche `keyboad-controller`) avec les touches W,A,S,D (touches directionnelles) ; I,J,K,L (boutons) ; Q,O (touches arrières) et espace, entrée (select, start).
+Pour que les événements soient déclenchés, il faut que la fenêtre de Pygame soit active.
+
+#### Mode manette
+
+Lorsque `config.controller` est `"gamepad"`.
+
+Pygame reconnaît automatiquement les manettes bluetooth (ou usb) connectées à l'ordinateur.
+
+#### Mode clavier
+
+Lorsque `config.controller` est `"keyboard"`
+
+En l'absence de manette, il est aussi possible d'utiliser le clavier avec ces correspondances:
+- W,A,S,D: croix directionnelle
+- I,J,K,L: boutons d'actions
+- Q,O: gachettes
+- espace: select
+- entrée: start
+
+Ce mode ne permet pas de gérer plusieurs contrôleurs.
 
 ## Interface web pour le son
 
