@@ -1,7 +1,7 @@
 from driver import driver
 import asyncio
 from InquirerPy.utils import patched_print
-from abc import ABC, abstractmethod
+from abc import ABC
 
 class BaseGame(ABC):
     def __init__(self):
@@ -26,7 +26,6 @@ class BaseGame(ABC):
             self.frame()
             await asyncio.sleep(1/self.fps)
 
-    @abstractmethod
     def frame(self):
         pass
 

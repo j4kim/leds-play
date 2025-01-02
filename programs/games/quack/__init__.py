@@ -15,9 +15,6 @@ class Quack(BaseGame):
         self.im.seek(index)
         show_image(self.im)
 
-    def frame(self):
-        pass
-
     async def quack(self):
         self.show_frame(1)
         ws_server.resumesound("coin.wav")
