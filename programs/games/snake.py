@@ -2,6 +2,7 @@ from driver import driver
 from .base import BaseGame
 import asyncio
 import random
+from ..text.tools import padscroll
 
 class Snake(BaseGame):
     def __init__(self):
@@ -26,6 +27,12 @@ class Snake(BaseGame):
         driver.fill(color = 0xff0000)
         await asyncio.sleep(1/self.fps)
         self.draw()
+        await asyncio.sleep(1/self.fps)
+        driver.fill(color = 0xff0000)
+        await asyncio.sleep(1/self.fps)
+        score = str(len(self.body) - 1)
+        await padscroll(score)
+        self.quit.set()
 
     def move(self):
         self.dir = self.nextdir
