@@ -2,10 +2,13 @@ from driver import driver
 from .base import BaseGame
 
 class Snake(BaseGame):
-    dir = (0, -1)
-    nextdir = (0, -1)
-    head = (0, 7)
-    body = [(0, 7)] * 10
+    def __init__(self):
+        super().__init__()
+        self.dir = (0, -1)
+        self.nextdir = (0, -1)
+        self.head = (0, 7)
+        self.body = [(0, 7)] * 10
+        self.fps = 3
 
     def frame(self):
         self.move()

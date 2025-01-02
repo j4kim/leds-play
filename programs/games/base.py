@@ -4,8 +4,9 @@ from InquirerPy.utils import patched_print
 from abc import ABC, abstractmethod
 
 class BaseGame(ABC):
-    quit = asyncio.Event()
-    fps = 3
+    def __init__(self):
+        self.quit = asyncio.Event()
+        self.fps = 10
 
     @classmethod
     async def run(cls):
