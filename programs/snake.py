@@ -3,13 +3,31 @@ import asyncio
 from InquirerPy.utils import patched_print
 
 class Snake:
-    def __init__(self):
-        self.dir = (0, -1)
-        self.nextdir = (0, -1)
-        self.head = (0, 7)
-        self.body = [(0, 7)] * 10
-        self.quit = asyncio.Event()
-        self.fps = 3
+    dir = (0, -1)
+    nextdir = (0, -1)
+    head = (0, 7)
+    body = [(0, 7)] * 10
+    quit = asyncio.Event()
+    fps = 3
+
+    @classmethod
+    async def run(cls):
+        snake = cls()
+        try:
+            driver.listen_controllers(snake.handle_event)
+        except Exception as e:
+            print(e)
+            return
+        patched_print("Press select to quit")
+        await snake.loop()
+        driver.clear()
+        driver.stop_listening_controllers()
+
+    async def loop(self):
+        while not self.quit.is_set():
+            self.move()
+            self.draw()
+            await asyncio.sleep(1/self.fps)
 
     def handle_event(self, event):
         if event['value'] != 1:
@@ -46,25 +64,3 @@ class Snake:
             self.head = (nx, ny)
             self.body.insert(0, (hx, hy))
             self.body.pop()
-
-    async def run(self):
-        while not self.quit.is_set():
-            self.move()
-            self.draw()
-            await asyncio.sleep(1/self.fps)
-
-async def run():
-    snake = Snake()
-
-    try:
-        driver.listen_controllers(snake.handle_event)
-    except Exception as e:
-        print(e)
-        return
-
-    patched_print("Press select to quit")
-
-    await snake.run()
-
-    driver.clear()
-    driver.stop_listening_controllers()

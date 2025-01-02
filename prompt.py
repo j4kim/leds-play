@@ -4,7 +4,7 @@ from tools import prompt_menu
 
 async def run():
     await prompt_menu([
-        {'value': snake.run, 'name': 'Snake'},
+        {'value': snake.Snake.run, 'name': 'Snake'},
         {'value': quack.quack, 'name': 'Quack'},
         {'value': driver.clear, 'name': 'Clear'},
         {'value': text.menu, 'name': 'Text'},
