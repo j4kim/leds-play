@@ -1,6 +1,7 @@
 from driver import driver
 from .base import BaseGame
 import asyncio
+import random
 
 class Snake(BaseGame):
     def __init__(self):
@@ -8,9 +9,11 @@ class Snake(BaseGame):
         self.dir = (0, -1)
         self.nextdir = (0, -1)
         self.head = (0, 7)
-        self.body = [(0, 7)] * 10
+        self.body = [(0, 7)]
         self.fps = 3
         self.game_is_over = False
+        self.food = None
+        self.pop_food()
 
     def frame(self):
         if not self.game_is_over:
@@ -33,7 +36,10 @@ class Snake(BaseGame):
         else:
             self.head = (nx, ny)
             self.body.insert(0, (hx, hy))
-            self.body.pop()
+            if self.head == self.food:
+                self.pop_food()
+            else:
+                self.body.pop()
 
     def draw(self):
         driver.clear(False)
@@ -42,7 +48,17 @@ class Snake(BaseGame):
         for x, y in self.body:
             if self.inscreen(x, y):
                 driver.set(x, y, 0x00cc00)
+        fx, fy = self.food
+        driver.set(fx, fy, 0xff0000)
         driver.show()
+
+    def pop_food(self):
+        while True:
+            x = random.randint(0, 5)
+            y = random.randint(0, 6)
+            if (x, y) not in self.body:
+                self.food = (x, y)
+                break
 
     def change_dir(self, x, y):
         if self.dir[0] != x and self.dir[1] != y:
