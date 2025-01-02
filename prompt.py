@@ -1,4 +1,5 @@
-from programs import text, screen, quack, fireworks, other, snake
+from programs import text, screen, quack, fireworks, other
+from programs.games import snake
 from driver import driver
 from tools import prompt_menu
 
