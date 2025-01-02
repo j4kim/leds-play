@@ -21,7 +21,9 @@ class Snake(BaseGame):
         hx, hy = self.head
         nx = hx + self.dir[0]
         ny = hy + self.dir[1]
-        if self.inscreen(nx, ny):
+        if not self.inscreen(nx, ny):
+            self.gameover = True
+        else:
             self.head = (nx, ny)
             self.body.insert(0, (hx, hy))
             self.body.pop()
