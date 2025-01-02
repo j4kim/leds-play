@@ -11,7 +11,7 @@ Fun with LEDs & Raspberry
   - [x] Message défilant
   - [x] Afficher une image
   - [x] Afficher un gif
-  - [ ] Snake
+  - [x] Snake
   - [ ] Pong
   - [ ] Tetris
   - [ ] Crazy Taxi
