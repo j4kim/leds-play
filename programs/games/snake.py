@@ -1,5 +1,6 @@
 from driver import driver
 from .base import BaseGame
+import asyncio
 
 class Snake(BaseGame):
     def __init__(self):
@@ -9,12 +10,18 @@ class Snake(BaseGame):
         self.head = (0, 7)
         self.body = [(0, 7)] * 10
         self.fps = 3
-        self.gameover = False
+        self.game_is_over = False
 
     def frame(self):
-        if not self.gameover:
+        if not self.game_is_over:
             self.move()
             self.draw()
+
+    async def game_over(self):
+        self.game_is_over = True
+        driver.fill(color = 0xff0000)
+        await asyncio.sleep(1/self.fps)
+        self.draw()
 
     def move(self):
         self.dir = self.nextdir
@@ -22,7 +29,7 @@ class Snake(BaseGame):
         nx = hx + self.dir[0]
         ny = hy + self.dir[1]
         if not self.inscreen(nx, ny):
-            self.gameover = True
+            asyncio.create_task(self.game_over())
         else:
             self.head = (nx, ny)
             self.body.insert(0, (hx, hy))
