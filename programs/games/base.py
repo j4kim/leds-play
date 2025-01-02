@@ -33,9 +33,10 @@ class BaseGame(ABC):
     def handle_event(self, event):
         if event['value'] != 1:
             return
-        if event['key'] == 'select':
-            self.quit.set()
         key = event['key']
+        if key == 'select':
+            self.quit.set()
+            return
         methodname = f'on_{key}'
         method = getattr(self, methodname, None)
         if method:
