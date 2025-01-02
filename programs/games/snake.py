@@ -13,6 +13,7 @@ class Snake(BaseGame):
         self.fps = 3
         self.game_is_over = False
         self.food = None
+        self.all_pixels = set([(x, y) for x in range(6) for y in range(7)])
         self.pop_food()
 
     def frame(self):
@@ -53,12 +54,8 @@ class Snake(BaseGame):
         driver.show()
 
     def pop_food(self):
-        while True:
-            x = random.randint(0, 5)
-            y = random.randint(0, 6)
-            if (x, y) not in self.body:
-                self.food = (x, y)
-                break
+        available_pixels = self.all_pixels - set(self.body) - set([self.head])
+        self.food = random.choice(list(available_pixels))
 
     def change_dir(self, x, y):
         if self.dir[0] != x and self.dir[1] != y:
