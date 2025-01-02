@@ -46,9 +46,9 @@ class Snake(BaseGame):
         driver.clear(False)
         x, y = self.head
         driver.set(x, y, 0x00ff00)
-        for x, y in self.body:
+        for i, (x, y) in enumerate(self.body):
             if self.inscreen(x, y):
-                driver.set(x, y, 0x00cc00)
+                driver.set(x, y, self.get_body_color(i))
         fx, fy = self.food
         driver.set(fx, fy, 0xff0000)
         driver.show()
@@ -68,3 +68,11 @@ class Snake(BaseGame):
 
     def inscreen(self, x, y):
         return 0 <= x <= 5 and 0 <= y <= 6
+
+    def get_body_color(self, i):
+        i = i % 20
+        if i > 10:
+            i = 20 - i
+        b = i * (255/10)
+        g = 255 - b
+        return (0, g, b)
