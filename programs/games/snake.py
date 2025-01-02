@@ -14,21 +14,21 @@ class Snake(BaseGame):
         self.move()
         self.draw()
 
+    def change_dir(self, x, y):
+        if self.dir[0] != x and self.dir[1] != y:
+            self.nextdir = (x, y)
+
     def on_arrow_up(self):
-        if self.dir[0] != 0:
-            self.nextdir = (0, -1)
+        self.change_dir(0, -1)
 
     def on_arrow_down(self):
-        if self.dir[0] != 0:
-            self.nextdir = (0, 1)
+        self.change_dir(0, 1)
 
     def on_arrow_left(self):
-        if self.dir[1] != 0:
-            self.nextdir = (-1, 0)
+        self.change_dir(-1, 0)
 
     def on_arrow_right(self):
-        if self.dir[1] != 0:
-            self.nextdir = (1, 0)
+        self.change_dir(1, 0)
 
     def inscreen(self, x, y):
         return 0 <= x <= 5 and 0 <= y <= 6
