@@ -28,7 +28,7 @@ class Snake(BaseGame):
         hx, hy = self.head
         nx = hx + self.dir[0]
         ny = hy + self.dir[1]
-        if not self.inscreen(nx, ny):
+        if not self.inscreen(nx, ny) or (nx, ny) in self.body:
             asyncio.create_task(self.game_over())
         else:
             self.head = (nx, ny)
