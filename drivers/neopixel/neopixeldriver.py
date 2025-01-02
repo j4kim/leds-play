@@ -46,13 +46,11 @@ class NeopixelDriver:
         while True:
             event = await device.async_read_one()
             if event.type == evdev.ecodes.EV_KEY:
-                x = on_event({
+                on_event({
                     'value': event.value,
                     'device': path,
                     'key': key_bindings.get(event.code, event.code)
                 })
-                if asyncio.iscoroutine(x):
-                    asyncio.create_task(x)
 
     def listen_controllers(self, on_event):
         device_paths = [
