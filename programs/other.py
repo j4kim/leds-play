@@ -5,8 +5,8 @@ from tools import prompt_menu
 async def menu():
     await prompt_menu([
         {'value': driver.fill, 'name': 'Fill', 'only-for': 'neopixel'},
+        {'value': driver.fillscreen, 'name': 'Fill screen'},
         {'value': screen.draw, 'name': 'Draw screen'},
-        {'value': screen.fill, 'name': 'Fill screen'},
         {'value': screen.animate, 'name': 'Animate random'},
         {'value': zigzag.horizontal, 'name': 'H Zigzag'},
         {'value': zigzag.vertical, 'name': 'V Zigzag', 'only-for': 'neopixel'},

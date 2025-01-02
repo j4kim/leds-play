@@ -16,13 +16,6 @@ async def draw():
             driver.set(x, y, get_color(v))
         driver.show()
 
-def fill():
-    y = 0
-    for y in range(7):
-        for x in range(6):
-            driver.set(x, y, driver.default_color)
-    driver.show()
-
 def rand():
     for y in range(7):
         for x in range(6):

@@ -81,6 +81,12 @@ class NeopixelDriver:
         self.handler.fill(color or self.default_color)
         if show: self.handler.show()
 
+    def fillscreen(self, show = True, color = None):
+        for y in range(7):
+            for x in range(6):
+                self.set(x, y, color or self.default_color)
+        if show: self.handler.show()
+
     def clear(self, show = True):
         self.handler.fill(0)
         if show: self.handler.show()

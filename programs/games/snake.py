@@ -24,13 +24,12 @@ class Snake(BaseGame):
 
     async def game_over(self):
         self.game_is_over = True
-        driver.fill(color = 0xff0000)
+        driver.fillscreen(color = 0xff0000)
         await asyncio.sleep(1/self.fps)
         self.draw()
         await asyncio.sleep(1/self.fps)
-        driver.fill(color = 0xff0000)
+        driver.fillscreen(color = 0xff0000)
         await asyncio.sleep(1/self.fps)
-        driver.clear(False)
         score = str(len(self.body) - 1)
         await padscroll(score)
         self.quit.set()
