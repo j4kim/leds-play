@@ -35,6 +35,7 @@ class Snake:
         for x, y in self.body:
             if self.inscreen(x, y):
                 driver.set(x, y, 0x00cc00)
+        driver.show()
 
     def move(self):
         self.dir = self.nextdir
@@ -50,7 +51,6 @@ class Snake:
         while not self.quit.is_set():
             self.move()
             self.draw()
-            driver.show()
             await asyncio.sleep(1/self.fps)
 
 async def run():
