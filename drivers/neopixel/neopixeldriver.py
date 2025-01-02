@@ -77,8 +77,8 @@ class NeopixelDriver:
         self.clear()
         self.running = False
 
-    def fill(self, show = True):
-        self.handler.fill(self.default_color)
+    def fill(self, show = True, color = None):
+        self.handler.fill(color or self.default_color)
         if show: self.handler.show()
 
     def clear(self, show = True):

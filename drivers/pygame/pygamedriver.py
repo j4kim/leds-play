@@ -41,10 +41,10 @@ class PygameDriver(ABC):
     def quit(self):
         self.running = False
 
-    def fill(self, show = True):
+    def fill(self, show = True, color = None):
         for y in range(7):
             for x in range(6):
-                self.cells[y][x] = 0xffffff
+                self.cells[y][x] = color or self.default_color
         if show: self.show()
 
     def clear(self, show = True):
