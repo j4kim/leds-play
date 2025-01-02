@@ -10,7 +10,7 @@ class Snake(BaseGame):
         self.nextdir = (0, -1)
         self.head = (0, 7)
         self.body = [(0, 7)]
-        self.fps = 3
+        self.fps = 2.5
         self.game_is_over = False
         self.food = None
         self.all_pixels = set([(x, y) for x in range(6) for y in range(7)])
@@ -39,6 +39,7 @@ class Snake(BaseGame):
             self.body.insert(0, (hx, hy))
             if self.head == self.food:
                 self.pop_food()
+                self.fps += 0.2
             else:
                 self.body.pop()
 
