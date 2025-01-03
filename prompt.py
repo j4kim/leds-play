@@ -1,10 +1,11 @@
 from programs import text, screen, fireworks, other
-from programs.games import snake, quack
+from programs.games import snake, quack, menu
 from driver import driver
 from tools import prompt_menu
 
 async def run():
     await prompt_menu([
+        {'value': menu.Menu.run, 'name': 'Game menu'},
         {'value': snake.Snake.run, 'name': 'Snake'},
         {'value': quack.Quack.run, 'name': 'Quack'},
         {'value': driver.clear, 'name': 'Clear'},

@@ -6,6 +6,7 @@ from abc import ABC
 class BaseGame(ABC):
     def __init__(self):
         self.quit = asyncio.Event()
+        self.done = asyncio.Event()
         self.fps = 10
 
     @classmethod
@@ -16,10 +17,11 @@ class BaseGame(ABC):
         except Exception as e:
             print(e)
             return
-        patched_print("Press select to quit")
+        patched_print(f"{cls.__name__} started. Press select to quit")
         await game.loop()
         driver.clear()
         driver.stop_listening_controllers()
+        game.done.set()
 
     async def loop(self):
         while not self.quit.is_set():
