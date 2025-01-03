@@ -97,6 +97,7 @@
 
         connectbtn.onclick = (e) => {
             e.preventDefault();
+            requestWakeLock();
 
             const url = `ws://${addressinput.value}:${portinput.value}/`;
             websocket = new WebSocket(url);
@@ -136,6 +137,14 @@
 
         disconnectbtn.onclick = () => {
             websocket?.close();
+        }
+
+        var wakeLock = null;
+
+        async function requestWakeLock() {
+            console.log("requestWakeLock");
+            if (wakeLock && !wakeLock.released) return;
+            wakeLock = await navigator.wakeLock.request("screen");
         }
     </script>
 </body>
