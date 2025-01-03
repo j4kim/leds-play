@@ -164,19 +164,37 @@ Après ces déconvenues voici la solution overkill:
 - La page permet de se connecter au serveur WebSocket.
 - Lorsque la page reçoit le nom d'un fichier, elle joue l'audio.
 
-Installer les dépendances web:
+Pour démarrer le sereur web:
 
-```
-npm install --prefix web
-```
-
-Et lancer l'app:
-
-```
-npm run dev --prefix web
+```sh
+cd web
+python http_server.py
 ```
 
 Cette interface web pourrait être utilisée par la suite pour afficher l'état des LEDs et remplacerait le driver pygame.
+
+### PM2
+
+PM2 peut être utilisé garder le serveur web ouvert de manière persistante
+
+Installation:
+
+```sh
+npm install pm2@latest -g
+```
+
+Lancer le service:
+
+```sh
+cd web
+pm2 start http_server.py
+```
+
+Créer un script de démarrage:
+
+```sh
+pm2 startup
+```
 
 ## Montage
 
