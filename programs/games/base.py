@@ -8,6 +8,7 @@ class BaseGame(ABC):
         self.quit = asyncio.Event()
         self.done = asyncio.Event()
         self.fps = 10
+        self.running = True
 
     @classmethod
     async def run(cls):
@@ -25,7 +26,8 @@ class BaseGame(ABC):
 
     async def loop(self):
         while not self.quit.is_set():
-            self.frame()
+            if self.running:
+                self.frame()
             await asyncio.sleep(1/self.fps)
 
     # these methods can be overridden in subclasses
@@ -40,7 +42,9 @@ class BaseGame(ABC):
     def on_west(self): pass
     def on_left(self): pass
     def on_right(self): pass
-    def on_start(self): pass
+
+    def on_start(self):
+        self.running = not self.running
 
     def on_select(self): 
         self.quit.set()
