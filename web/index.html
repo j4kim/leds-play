@@ -34,6 +34,7 @@
                 </fieldset>
                 <button type="submit" id="connectbtn">Connect to WebSocket server</button>
                 <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
+                <p id="error"></p>
             </form>
         </section>
     </main>
@@ -102,6 +103,11 @@
                 console.log("connected to ", url);
                 connectbtn.disabled = true;
                 disconnectbtn.disabled = false;
+            };
+
+            websocket.onerror = (e) => {
+                error.innerText = "Connection failed";
+                setTimeout(() => error.innerText = "", 1500);
             };
 
             websocket.onclose = () => {
