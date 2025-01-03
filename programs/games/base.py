@@ -23,6 +23,7 @@ class BaseGame(ABC):
         driver.clear()
         driver.stop_listening_controllers()
         game.done.set()
+        game.cleanup()
 
     async def loop(self):
         while not self.quit.is_set():
@@ -32,6 +33,7 @@ class BaseGame(ABC):
 
     # these methods can be overridden in subclasses
     def frame(self): pass
+    def cleanup(self): pass
     def on_arrow_up(self): pass
     def on_arrow_right(self): pass
     def on_arrow_down(self): pass

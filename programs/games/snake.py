@@ -22,8 +22,7 @@ class Snake(BaseGame):
             self.move()
             self.draw()
 
-    async def game_over(self):
-        self.game_is_over = True
+    async def game_over_animation(self):
         driver.fillscreen(color = 0xff0000)
         await asyncio.sleep(1/self.fps)
         self.draw()
@@ -36,13 +35,21 @@ class Snake(BaseGame):
         await padscroll(score)
         self.quit.set()
 
+    def game_over(self):
+        self.game_is_over = True
+        self.game_over_animation_task = asyncio.create_task(self.game_over_animation())
+
+    def cleanup(self):
+        if self.game_over_animation_task:
+            self.game_over_animation_task.cancel()
+
     def move(self):
         self.dir = self.nextdir
         hx, hy = self.head
         nx = hx + self.dir[0]
         ny = hy + self.dir[1]
         if not self.inscreen(nx, ny):
-            asyncio.create_task(self.game_over())
+            self.game_over()
         else:
             self.head = (nx, ny)
             self.body.insert(0, (hx, hy))
@@ -52,7 +59,7 @@ class Snake(BaseGame):
             else:
                 self.body.pop()
         if self.head in self.body:
-            asyncio.create_task(self.game_over())
+            self.game_over()
 
     def draw(self):
         driver.clear(False)
