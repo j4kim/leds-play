@@ -187,7 +187,7 @@ Lancer le service:
 
 ```sh
 cd web
-pm2 start http_server.py
+pm2 start http_server.py # ou start_http_server.sh pour lancer python dans le venv en sudo
 ```
 
 Créer un script de démarrage:
