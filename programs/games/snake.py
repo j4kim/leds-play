@@ -41,7 +41,7 @@ class Snake(BaseGame):
         hx, hy = self.head
         nx = hx + self.dir[0]
         ny = hy + self.dir[1]
-        if not self.inscreen(nx, ny) or (nx, ny) in self.body:
+        if not self.inscreen(nx, ny):
             asyncio.create_task(self.game_over())
         else:
             self.head = (nx, ny)
@@ -51,6 +51,8 @@ class Snake(BaseGame):
                 self.fps += 0.2
             else:
                 self.body.pop()
+        if self.head in self.body:
+            asyncio.create_task(self.game_over())
 
     def draw(self):
         driver.clear(False)
