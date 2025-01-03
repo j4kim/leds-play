@@ -19,11 +19,11 @@
                 <fieldset class="grid">
                     <label>
                         Address
-                        <input id="addressinput" value="%VITE_WS_ADDRESS%" />
+                        <input id="addressinput" required />
                     </label>
                     <label>
                         Port
-                        <input id="portinput" value="%VITE_WS_PORT%" />
+                        <input id="portinput" value="8765" required />
                     </label>
                 </fieldset>
                 <fieldset>
@@ -34,10 +34,13 @@
                 </fieldset>
                 <button type="submit" id="connectbtn">Connect to WebSocket server</button>
                 <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
+                <p id="error"></p>
             </form>
         </section>
     </main>
     <script>
+        addressinput.value = location.hostname
+
         var websocket = null;
 
         const sounds = {};
@@ -102,6 +105,11 @@
                 console.log("connected to ", url);
                 connectbtn.disabled = true;
                 disconnectbtn.disabled = false;
+            };
+
+            websocket.onerror = (e) => {
+                error.innerText = "Connection failed";
+                setTimeout(() => error.innerText = "", 1500);
             };
 
             websocket.onclose = () => {
