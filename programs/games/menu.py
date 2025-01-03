@@ -35,4 +35,4 @@ class Menu(base.BaseGame):
 
     def on_start(self):
         self.menu_task.cancel()
-        self.game_task = asyncio.create_task(self.start_game())
+        asyncio.create_task(self.start_game())
