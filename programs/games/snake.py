@@ -30,6 +30,8 @@ class Snake(BaseGame):
         await asyncio.sleep(1/self.fps)
         driver.fillscreen(color = 0xff0000)
         await asyncio.sleep(1/self.fps)
+        self.draw()
+        await asyncio.sleep(4/self.fps)
         score = str(len(self.body) - 1)
         await padscroll(score)
         self.quit.set()
