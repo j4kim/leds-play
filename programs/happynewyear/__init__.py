@@ -140,23 +140,27 @@ async def fadeout():
     driver.reset()
 
 async def start():
-    await countdown()
-    await fireworks_1()
-    await bonne_annee()
-    await fireworks_2()
-    await happy_new_year()
-    await fireworks_3()
-    await deux_zero_deux_cinq()
-    await fireworks_4()
-    await deux_mille_25()
-    await fireworks_5()
-    await la_sante()
-    await random_disco(8)
-    await fireworks_6()
-    await tchin_tchin()
-    await random_disco(16, multiplier=4)
-    await fireworks_final()
-    await fadeout()
+    try:
+        await countdown()
+        await fireworks_1()
+        await bonne_annee()
+        await fireworks_2()
+        await happy_new_year()
+        await fireworks_3()
+        await deux_zero_deux_cinq()
+        await fireworks_4()
+        await deux_mille_25()
+        await fireworks_5()
+        await la_sante()
+        await random_disco(8)
+        await fireworks_6()
+        await tchin_tchin()
+        await random_disco(16, multiplier=4)
+        await fireworks_final()
+        await fadeout()
+    finally:
+        driver.clear()
+        ws_server.stopsounds()
 
 async def scheduled_start(dt):
     patched_print("schedule start at", dt)
@@ -179,8 +183,6 @@ async def start_at(dt):
     task = asyncio.create_task(scheduled_start(dt))
     await inquirer.text(message="Task scheduled, Enter to cancel").execute_async()
     task.cancel()
-    driver.clear()
-    ws_server.stopsounds()
 
 async def schedule_for_midnight():
     now = datetime.datetime.now()
@@ -190,4 +192,6 @@ async def schedule_for_midnight():
     await start_at(ten_sec_before)
 
 async def run():
-    await start_at(datetime.datetime.now())
+    task = asyncio.create_task(start())
+    await inquirer.text(message="Task started, Enter to cancel").execute_async()
+    task.cancel()
