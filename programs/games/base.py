@@ -28,19 +28,27 @@ class BaseGame(ABC):
             self.frame()
             await asyncio.sleep(1/self.fps)
 
-    def frame(self):
-        pass
+    # these methods can be overridden in subclasses
+    def frame(self): pass
+    def on_arrow_up(self): pass
+    def on_arrow_right(self): pass
+    def on_arrow_down(self): pass
+    def on_arrow_left(self): pass
+    def on_north(self): pass
+    def on_east(self): pass
+    def on_south(self): pass
+    def on_west(self): pass
+    def on_left(self): pass
+    def on_right(self): pass
+    def on_start(self): pass
+
+    def on_select(self): 
+        self.quit.set()
 
     def handle_event(self, event):
         if event['value'] != 1:
             return
         key = event['key']
-        if key == 'select':
-            self.quit.set()
-            return
         methodname = f'on_{key}'
         method = getattr(self, methodname, None)
-        if method:
-            method()
-        else:
-            print(f"Method {methodname} not defined in {self.__class__.__name__}")
+        method()
