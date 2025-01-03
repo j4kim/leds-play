@@ -19,11 +19,11 @@
                 <fieldset class="grid">
                     <label>
                         Address
-                        <input id="addressinput" value="%VITE_WS_ADDRESS%" />
+                        <input id="addressinput" required />
                     </label>
                     <label>
                         Port
-                        <input id="portinput" value="%VITE_WS_PORT%" />
+                        <input id="portinput" value="8765" required />
                     </label>
                 </fieldset>
                 <fieldset>
@@ -39,6 +39,8 @@
         </section>
     </main>
     <script>
+        addressinput.value = location.hostname
+
         var websocket = null;
 
         const sounds = {};
