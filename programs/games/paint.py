@@ -52,20 +52,24 @@ class Paint(BaseGame):
     def change_rgb_index(self):
         self.rgb_index = (self.rgb_index + 1) % 3
 
+    def set_color(self, color):
+        self.color = tuple(color)
+        patched_print(f"Color: {self.color}")
+
     def tune(self, direction):
         rgb = list(self.color)
         curval = rgb[self.rgb_index]
-        newval = curval + direction * (255/10)
-        newval = int(min(255, max(0, newval)))
+        newval = curval + direction * 32
+        newval = min(255, max(0, newval))
         rgb[self.rgb_index] = newval
-        self.color = tuple(rgb)
+        self.set_color(rgb)
 
     def on_arrow_up(self): self.move(0, -1)
     def on_arrow_down(self): self.move(0, 1)
     def on_arrow_left(self): self.move(-1, 0)
     def on_arrow_right(self): self.move(1, 0)
     def on_south(self): self.apply()
-    def on_east(self): self.color = next(self.black_white)
+    def on_east(self): self.set_color(next(self.black_white))
     def on_west(self): self.change_rgb_index()
     def on_left(self): self.tune(-1)
     def on_right(self): self.tune(1)
