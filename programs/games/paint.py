@@ -23,7 +23,9 @@ class Paint(BaseGame):
         for y in range(7):
             for x in range(6):
                 driver.set(x, y, self.state[y][x])
-        driver.set(self.x, self.y, next(self.blinker))
+        color = next(self.blinker)
+        if color is not None:
+            driver.set(self.x, self.y, color)
         driver.show()
 
     def move(self, x, y):
@@ -31,11 +33,11 @@ class Paint(BaseGame):
         self.y = (self.y + y) % 7
 
     def get_blinker(self):
+        repeat = self.fps // 3
         while True:
-            for _ in range(self.fps//2):
-                yield 0x808080
-            for _ in range(self.fps//2):
-                yield 0
+            for color in [0x505050, self.color, 0x505050, None]:
+                for _ in range(repeat):
+                    yield color
 
     def on_arrow_up(self): self.move(0, -1)
     def on_arrow_down(self): self.move(0, 1)
