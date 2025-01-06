@@ -18,8 +18,9 @@ class Paint(BaseGame):
             [0, 0, 0, 0, 0, 0],
         )
         self.blinker = self.get_blinker()
-        self.color = 0xffffff
+        self.color = (255, 255, 255)
         self.applied_at = 0
+        self.black_white_n = 0
 
     def frame(self):
         for y in range(7):
@@ -42,16 +43,19 @@ class Paint(BaseGame):
                     yield color
 
     def apply(self):
-        t = time.time()
-        color = self.color
-        # erase on double click
-        if t - self.applied_at < 0.25:
-            color = 0
-        self.state[self.y][self.x] = color
-        self.applied_at = t
+        self.state[self.y][self.x] = self.color
+
+    def black_white(self):
+        self.black_white_n += 1
+        if self.black_white_n % 2 == 0:
+            self.color = (255, 255, 255)
+        else:
+            self.color = (0, 0, 0)
+
 
     def on_arrow_up(self): self.move(0, -1)
     def on_arrow_down(self): self.move(0, 1)
     def on_arrow_left(self): self.move(-1, 0)
     def on_arrow_right(self): self.move(1, 0)
     def on_south(self): self.apply()
+    def on_east(self): self.black_white()
