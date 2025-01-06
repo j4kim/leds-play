@@ -1,6 +1,7 @@
 import urllib.request
 import json
 from InquirerPy import inquirer
+from InquirerPy.utils import patched_print
 from . import config
 from tools import prompt_menu
 from . import tools
@@ -36,7 +37,7 @@ async def random_word():
     data = urllib.request.urlopen("https://random-word-api.herokuapp.com/word?lang=fr&length=5").read().decode("utf-8")
     word = json.loads(data)[0]
     await tools.padscroll(word)
-    print(word)
+    patched_print(word)
 
 async def setFont():
     config.default_font_index = await inquirer.number(

@@ -16,7 +16,7 @@ class BaseGame(ABC):
         try:
             driver.listen_controllers(game.handle_event)
         except Exception as e:
-            print(e)
+            patched_print(e)
             return
         patched_print(f"{cls.__name__} started. Press select to quit")
         await game.loop()
