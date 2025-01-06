@@ -31,9 +31,7 @@ class Paint(BaseGame):
         if self.forced_pointer_color is not None:
             driver.set(self.x, self.y, self.forced_pointer_color)
         else:
-            pointer_color = next(self.blinker)
-            if pointer_color is not None:
-                driver.set(self.x, self.y, pointer_color)
+            driver.set(self.x, self.y, next(self.blinker))
         driver.show()
 
     def move(self, x, y):
@@ -43,7 +41,7 @@ class Paint(BaseGame):
     def get_blinker_generator(self):
         repeat = self.fps // 3
         while True:
-            for color in [0x505050, self.color, 0x505050, None]:
+            for color in [0x505050, self.color]:
                 for _ in range(repeat):
                     yield color
 
