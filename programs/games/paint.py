@@ -59,6 +59,8 @@ class Paint(BaseGame):
     def tune(self, direction):
         rgb = list(self.color)
         curval = rgb[self.rgb_index]
+        if curval == 255:
+            curval = 256
         newval = curval + direction * 32
         newval = min(255, max(0, newval))
         rgb[self.rgb_index] = newval
