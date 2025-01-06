@@ -1,6 +1,5 @@
 from driver import driver
 from .base import BaseGame
-import time
 from InquirerPy.utils import patched_print
 
 class Paint(BaseGame):
@@ -19,7 +18,6 @@ class Paint(BaseGame):
         )
         self.blinker = self.get_blinker_generator()
         self.color = (255, 255, 255)
-        self.applied_at = 0
         self.black_white = self.get_black_white_generator()
 
     def frame(self):
