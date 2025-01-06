@@ -55,9 +55,12 @@ class Paint(BaseGame):
 
     def change_rgb_index(self):
         self.rgb_index = (self.rgb_index + 1) % 3
+        pointer = [0,0,0]
+        pointer[self.rgb_index] = 255
+        self.force_pointer_color(tuple(pointer))
 
     async def clear_forced_pointer(self):
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.5)
         self.forced_pointer_color = None
 
     def force_pointer_color(self, color):
