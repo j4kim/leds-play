@@ -17,6 +17,7 @@ class Paint(BaseGame):
             [0, 0, 0, 0, 0, 0],
         )
         self.blinker = self.get_blinker()
+        self.color = 0xffffff
 
     def frame(self):
         for y in range(7):
@@ -40,3 +41,6 @@ class Paint(BaseGame):
     def on_arrow_down(self): self.move(0, 1)
     def on_arrow_left(self): self.move(-1, 0)
     def on_arrow_right(self): self.move(1, 0)
+
+    def on_south(self):
+        self.state[self.y][self.x] = self.color
