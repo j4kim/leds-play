@@ -1,6 +1,7 @@
 from driver import driver
 from .base import BaseGame
 from InquirerPy.utils import patched_print
+import asyncio
 
 class Paint(BaseGame):
     def __init__(self):
@@ -20,14 +21,19 @@ class Paint(BaseGame):
         self.color = (255, 255, 255)
         self.black_white = self.get_black_white_generator()
         self.rgb_index = 0
+        self.forced_pointer_color = None
+        self.clear_forced_pointer_task = None
 
     def frame(self):
         for y in range(7):
             for x in range(6):
                 driver.set(x, y, self.state[y][x])
-        color = next(self.blinker)
-        if color is not None:
-            driver.set(self.x, self.y, color)
+        if self.forced_pointer_color is not None:
+            driver.set(self.x, self.y, self.forced_pointer_color)
+        else:
+            pointer_color = next(self.blinker)
+            if pointer_color is not None:
+                driver.set(self.x, self.y, pointer_color)
         driver.show()
 
     def move(self, x, y):
@@ -52,9 +58,20 @@ class Paint(BaseGame):
     def change_rgb_index(self):
         self.rgb_index = (self.rgb_index + 1) % 3
 
+    async def clear_forced_pointer(self):
+        await asyncio.sleep(1)
+        self.forced_pointer_color = None
+
+    def force_pointer_color(self, color):
+        if self.clear_forced_pointer_task is not None:
+            self.clear_forced_pointer_task.cancel()
+        self.forced_pointer_color = color
+        self.clear_forced_pointer_task = asyncio.create_task(self.clear_forced_pointer())
+
     def set_color(self, color):
         self.color = tuple(color)
         patched_print(f"Color: {self.color}")
+        self.force_pointer_color(self.color)
 
     def tune(self, direction):
         rgb = list(self.color)
