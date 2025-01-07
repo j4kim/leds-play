@@ -148,7 +148,7 @@ On utilise le clavier comme contrôleur, avec ces correspondances:
 - Touches fléchées: croix directionnelle
 - W,A,S,D: boutons d'actions
 - Q,E: gachettes
-- espace, backspace: select
+- escape, backspace: select
 - space, enter: start
 
 Ce mode ne permet pas de gérer plusieurs contrôleurs.
