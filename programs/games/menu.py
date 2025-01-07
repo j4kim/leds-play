@@ -9,16 +9,16 @@ class Menu(base.BaseGame):
         super().__init__()
         self.selected = 0
         self.items = [
-            {'value': snake.Snake.run, 'name': 'Snake'},
-            {'value': quack.Quack.run, 'name': 'Quack'},
-            {'value': paint.Paint.run, 'name': 'Paint'},
+            {'value': snake.Snake.run, 'name': 'Snake', 'colors': (0x00ff00, 0)},
+            {'value': quack.Quack.run, 'name': 'Quack', 'colors': (0x0000ff, 0)},
+            {'value': paint.Paint.run, 'name': 'Paint', 'colors': (0xffff00, 0)},
         ]
         self.menu_task = asyncio.create_task(self.show_selected())
 
     async def show_selected(self):
         selected = self.items[self.selected]
         while True:
-            await minscroll(selected['name'], 5, 5, padding=1)
+            await minscroll(selected['name'], 5, 5, selected['colors'], 1)
             await asyncio.sleep(1)
 
     def move(self, diff):
