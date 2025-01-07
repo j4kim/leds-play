@@ -1,4 +1,4 @@
-from . import base, snake, quack
+from . import base, snake, quack, paint
 import asyncio
 from ..text.tools import minscroll
 
@@ -9,6 +9,7 @@ class Menu(base.BaseGame):
         self.items = [
             {'value': snake.Snake.run, 'name': 'Snake'},
             {'value': quack.Quack.run, 'name': 'Quack'},
+            {'value': paint.Paint.run, 'name': 'Paint'},
         ]
         self.menu_task = asyncio.create_task(self.show_selected())
 
