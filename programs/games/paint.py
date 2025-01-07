@@ -14,6 +14,24 @@ class Paint(BaseGame):
         self.rgb_index = 0
         self.forced_pointer_color = None
         self.clear_forced_pointer_task = None
+        self.presets = [
+            (255, 255, 255), # white
+            (255, 0, 0),     # red
+            (0, 255, 0),     # green
+            (0, 0, 255),     # blue
+            (255, 255, 0),   # yellow
+            (255, 0, 255),   # magenta
+            (0, 255, 255),   # cyan
+            (255, 100, 0),   # orange
+            (100, 255, 0),   # lime
+            (0, 255, 100),   # teak
+            (0, 100, 255),   # sky
+            (100, 0, 255),   # purple
+            (255, 0, 100),   # pink
+            (0, 0, 0),       # black
+            (100, 100, 100), # gray
+        ]
+        self.preset_index = 0
 
     def frame(self):
         for y in range(7):
@@ -76,6 +94,11 @@ class Paint(BaseGame):
     def eyedropper(self):
         self.set_color(self.state[self.y][self.x])
 
+    def next_preset(self):
+        self.preset_index = (self.preset_index + 1) % len(self.presets)
+        color = self.presets[self.preset_index]
+        self.set_color(color)
+
     def on_arrow_up(self): self.move(0, -1)
     def on_arrow_down(self): self.move(0, 1)
     def on_arrow_left(self): self.move(-1, 0)
@@ -86,4 +109,4 @@ class Paint(BaseGame):
     def on_left(self): self.tune(-1)
     def on_right(self): self.tune(1)
     def on_north(self): self.inverse()
-    def on_start(self): self.set_color((255, 255, 255))
+    def on_start(self): self.next_preset()
