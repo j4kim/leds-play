@@ -84,6 +84,9 @@ class Paint(BaseGame):
         rgb[self.rgb_index] = newval
         self.set_color(rgb)
 
+    def inverse(self):
+        self.set_color(tuple(255 - x for x in self.color))
+
     def on_arrow_up(self): self.move(0, -1)
     def on_arrow_down(self): self.move(0, 1)
     def on_arrow_left(self): self.move(-1, 0)
@@ -93,3 +96,4 @@ class Paint(BaseGame):
     def on_west(self): self.change_rgb_index()
     def on_left(self): self.tune(-1)
     def on_right(self): self.tune(1)
+    def on_north(self): self.inverse()
