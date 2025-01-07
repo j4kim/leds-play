@@ -22,10 +22,11 @@ class PygameKeyboardDriver(PygameDriver):
 
     def handle_event(self, event: pygame.event.Event):
         if self.on_event and event.type in [pygame.KEYUP, pygame.KEYDOWN]:
-            self.on_event({
-                'value': 1 if event.type == pygame.KEYDOWN else 0,
-                'key': key_bindings.get(event.key, event.unicode),
-            })
+            if event.key in key_bindings:
+                self.on_event({
+                    'value': 1 if event.type == pygame.KEYDOWN else 0,
+                    'key': key_bindings.get(event.key, event.unicode),
+                })
 
     def listen_controllers(self, on_event):
         self.on_event = on_event
