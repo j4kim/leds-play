@@ -38,17 +38,12 @@ def char(text, font_index = None, colors = None):
     frame(bitmap, colors=colors)
 
 async def padscroll(text, fps = None, font_index = None, colors = None):
-    bitmap, width = generate_bitmap(text, font_index)
-    offset = -6
-    while offset < width:
-        frame(bitmap, offset, colors)
-        await asyncio.sleep(1/(fps or config.default_fps))
-        offset += 1
+    await minscroll(text, fps, font_index, colors, padding=6)
 
-async def minscroll(text, fps = None, font_index = None, colors = None):
+async def minscroll(text, fps = None, font_index = None, colors = None, padding = 0):
     bitmap, width = generate_bitmap(text, font_index)
-    offset = 0
-    while offset == 0 or offset < width - 6:
+    offset = -padding
+    while offset == 0 or offset < width - (6-padding):
         frame(bitmap, offset, colors)
         await asyncio.sleep(1/(fps or config.default_fps))
         offset += 1
