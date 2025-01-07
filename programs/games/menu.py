@@ -15,7 +15,9 @@ class Menu(base.BaseGame):
 
     async def show_selected(self):
         selected = self.items[self.selected]
-        await minscroll(selected['name'], 5, 5)
+        while True:
+            await minscroll(selected['name'], 5, 5, padding=1)
+            await asyncio.sleep(1)
 
     def move(self, diff):
         self.selected = (self.selected + diff) % len(self.items)
