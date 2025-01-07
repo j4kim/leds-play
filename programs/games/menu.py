@@ -1,6 +1,8 @@
 from . import base, snake, quack, paint
 import asyncio
 from ..text.tools import minscroll
+from driver import driver
+from InquirerPy.utils import patched_print
 
 class Menu(base.BaseGame):
     def __init__(self):
@@ -31,11 +33,12 @@ class Menu(base.BaseGame):
         self.move(1)
 
     async def start_game(self):
-        self.quit.set()
-        await self.done.wait()
+        driver.stop_listening_controllers()
         self.menu_task.cancel()
         await self.items[self.selected]['value']()
-        await self.run()
+        self.listen()
+        self.menu_task = asyncio.create_task(self.show_selected())
+        patched_print("Menu resumed. Press select to quit")
 
     def on_start(self):
         asyncio.create_task(self.start_game())

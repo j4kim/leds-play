@@ -13,17 +13,20 @@ class BaseGame(ABC):
     @classmethod
     async def run(cls):
         game = cls()
-        try:
-            driver.listen_controllers(game.handle_event)
-        except Exception as e:
-            patched_print(e)
-            return
+        game.listen()
         patched_print(f"{cls.__name__} started. Press select to quit")
         await game.loop()
         driver.clear()
         driver.stop_listening_controllers()
         game.cleanup()
         game.done.set()
+
+    def listen(self):
+        try:
+            driver.listen_controllers(self.handle_event)
+        except Exception as e:
+            patched_print(e)
+            return
 
     async def loop(self):
         while not self.quit.is_set():
