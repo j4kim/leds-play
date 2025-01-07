@@ -16,6 +16,7 @@ class Snake(BaseGame):
         self.food = None
         self.all_pixels = set([(x, y) for x in range(6) for y in range(7)])
         self.pop_food()
+        self.game_over_animation_task = None
 
     def frame(self):
         if not self.game_is_over:
