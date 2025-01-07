@@ -22,8 +22,8 @@ class BaseGame(ABC):
         await game.loop()
         driver.clear()
         driver.stop_listening_controllers()
-        game.done.set()
         game.cleanup()
+        game.done.set()
 
     async def loop(self):
         while not self.quit.is_set():

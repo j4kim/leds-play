@@ -33,9 +33,12 @@ class Menu(base.BaseGame):
     async def start_game(self):
         self.quit.set()
         await self.done.wait()
+        self.menu_task.cancel()
         await self.items[self.selected]['value']()
         await self.run()
 
     def on_start(self):
-        self.menu_task.cancel()
         asyncio.create_task(self.start_game())
+
+    def cleanup(self):
+        self.menu_task.cancel()
