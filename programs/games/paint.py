@@ -2,6 +2,7 @@ from driver import driver
 from .base import BaseGame
 from InquirerPy.utils import patched_print
 import asyncio
+import time
 
 class Paint(BaseGame):
     def __init__(self):
@@ -32,16 +33,21 @@ class Paint(BaseGame):
             (100, 100, 100), # gray
         ]
         self.preset_index = 0
+        self.last_action = time.time()
 
     def frame(self):
         for y in range(7):
             for x in range(6):
                 driver.set(x, y, self.state[y][x])
+        if time.time() - self.last_action < 3:
+            self.show_pointer()
+        driver.show()
+
+    def show_pointer(self):
         if self.forced_pointer_color is not None:
             driver.set(self.x, self.y, self.forced_pointer_color)
         else:
             driver.set(self.x, self.y, next(self.blinker))
-        driver.show()
 
     def move(self, x, y):
         self.x = (self.x + x) % 6
@@ -110,3 +116,4 @@ class Paint(BaseGame):
     def on_right(self): self.tune(1)
     def on_north(self): self.inverse()
     def on_start(self): self.next_preset()
+    def on_any(self): self.last_action = time.time()

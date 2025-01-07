@@ -44,6 +44,7 @@ class BaseGame(ABC):
     def on_west(self): pass
     def on_left(self): pass
     def on_right(self): pass
+    def on_any(self): pass
 
     def on_start(self):
         self.running = not self.running
@@ -58,3 +59,4 @@ class BaseGame(ABC):
         methodname = f'on_{key}'
         method = getattr(self, methodname, None)
         method()
+        self.on_any()
