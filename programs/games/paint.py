@@ -8,15 +8,7 @@ class Paint(BaseGame):
         super().__init__()
         self.x = 0
         self.y = 0
-        self.state = (
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-        )
+        self.state = [[(0,0,0)] * 6 for _ in range(7)]
         self.blinker = self.get_blinker_generator()
         self.color = (255, 255, 255)
         self.rgb_index = 0
