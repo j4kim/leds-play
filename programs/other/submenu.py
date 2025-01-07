@@ -1,9 +1,13 @@
-from programs import screen, zigzag, configure, individual, cursor, bt, happynewyear
+from programs.happynewyear import fireworks
 from driver import driver
+from programs.other import bt, configure, cursor, individual, screen, zigzag
 from tools import prompt_menu
 
 async def menu():
     await prompt_menu([
+        {'value': driver.clear, 'name': 'Clear'},
+        {'value': fireworks.individual, 'name': 'Fireworks'},
+        {'value': screen.rand, 'name': 'Random screen'},
         {'value': driver.fill, 'name': 'Fill', 'only-for': 'neopixel'},
         {'value': driver.fillscreen, 'name': 'Fill screen'},
         {'value': screen.draw, 'name': 'Draw screen'},
@@ -15,6 +19,4 @@ async def menu():
         {'value': individual.run, 'name': 'Individual', 'only-for': 'neopixel'},
         {'value': cursor.run, 'name': 'Cursor', 'only-for': 'neopixel'},
         {'value': bt.testControllers, 'name': 'Test controllers'},
-        {'value': happynewyear.run, 'name': 'Happy New Year'},
-        {'value': happynewyear.schedule_for_midnight, 'name': 'Happy New Year (scheduled for midnight)'},
     ])

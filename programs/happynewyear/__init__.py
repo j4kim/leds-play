@@ -1,8 +1,8 @@
 import asyncio
 from .. import text
-from .. import fireworks
+from . import fireworks
 from web import ws_server
-from .. import screen
+from ..other import screen
 from InquirerPy import inquirer
 from driver import driver
 import datetime
