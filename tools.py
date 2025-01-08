@@ -2,22 +2,27 @@ from InquirerPy import inquirer
 import asyncio
 import config
 
+colors = {
+    'w': (255, 255, 255), # white
+    'r': (255, 0, 0),     # red
+    'g': (0, 255, 0),     # green
+    'b': (0, 0, 255),     # blue
+    'y': (255, 255, 0),   # yellow
+    'm': (255, 0, 255),   # magenta
+    'c': (0, 255, 255),   # cyan
+    'o': (255, 100, 0),   # orange
+    'l': (100, 255, 0),   # lime
+    't': (0, 255, 100),   # teak
+    's': (0, 100, 255),   # sky
+    'p': (100, 0, 255),   # purple
+    'k': (255, 0, 100),   # pink
+    ' ': (0, 0, 0),       # black
+    '#': (100, 100, 100), # gray
+}
+
 def get_color(color):
-    mapping = {
-        'r': 'ff0000',
-        'g': '00ff00',
-        'b': '0000ff',
-        'w': 'ffffff',
-        'm': 'ff00ff',
-        'y': 'ffff00',
-        'c': '00ffff',
-        'o': 'ff5500',
-        ' ': 0,
-    }
-
-    if color in mapping:
-        color = mapping[color]
-
+    if color in colors:
+        return colors[color]
     return int(str(color), 16)
 
 async def prompt_color(message = "hex value or one of r,g,b,w,m,y,c,o:"):

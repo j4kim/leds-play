@@ -3,6 +3,7 @@ from .base import BaseGame
 from InquirerPy.utils import patched_print
 import asyncio
 import time
+from tools import colors
 
 class Paint(BaseGame):
     def __init__(self):
@@ -15,23 +16,7 @@ class Paint(BaseGame):
         self.rgb_index = 0
         self.forced_pointer_color = None
         self.clear_forced_pointer_task = None
-        self.presets = [
-            (255, 255, 255), # white
-            (255, 0, 0),     # red
-            (0, 255, 0),     # green
-            (0, 0, 255),     # blue
-            (255, 255, 0),   # yellow
-            (255, 0, 255),   # magenta
-            (0, 255, 255),   # cyan
-            (255, 100, 0),   # orange
-            (100, 255, 0),   # lime
-            (0, 255, 100),   # teak
-            (0, 100, 255),   # sky
-            (100, 0, 255),   # purple
-            (255, 0, 100),   # pink
-            (0, 0, 0),       # black
-            (100, 100, 100), # gray
-        ]
+        self.presets = list(colors.values())
         self.preset_index = 0
         self.last_action = time.time()
 
