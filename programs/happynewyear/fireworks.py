@@ -1,6 +1,5 @@
 import os.path
 from ..image import open_image, gif
-import asyncio
 from web import ws_server
 from InquirerPy import inquirer
 
@@ -23,10 +22,3 @@ async def individual():
         if index == -1:
             return
         await fire(index)
-
-async def run():
-    wait = [1, 0.5, 0.5, 2, 1, 0.2, 0.2, 0.2, 2, 0]
-
-    for i, s in enumerate(wait):
-        await fire(i)
-        await asyncio.sleep(s)

@@ -1,5 +1,3 @@
-from InquirerPy import inquirer
-
 fonts = [
     {
         "file": "PressStart2P-Regular.ttf",

@@ -1,7 +1,6 @@
 from InquirerPy import inquirer
 from InquirerPy.utils import patched_print
 from driver import driver
-import asyncio
 
 async def testControllers():
     def handle_event(event):
