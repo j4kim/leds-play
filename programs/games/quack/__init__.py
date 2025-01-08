@@ -7,22 +7,35 @@ from ..base import BaseGame
 class Quack(BaseGame):
     def __init__(self):
         super().__init__()
-        self.im = open_image("quack.gif", os.path.dirname(__file__))
+        self.images = {
+            'quack': open_image("quack.gif", os.path.dirname(__file__)),
+            'woof': open_image("woof.gif", os.path.dirname(__file__)),
+            'roar': open_image("roar.gif", os.path.dirname(__file__)),
+            'kri': open_image("kri.gif", os.path.dirname(__file__)),
+        }
+        self.selected = 'quack'
         self.show_frame(0)
-        self.quack_task = None
+        self.task = None
 
     def show_frame(self, index):
-        self.im.seek(index)
-        show_image(self.im)
+        im = self.images[self.selected]
+        im.seek(index)
+        show_image(im)
 
-    async def quack(self):
+    async def animate(self):
         self.show_frame(1)
-        ws_server.resumesound("coin.wav")
+        ws_server.resumesound(self.selected)
         await asyncio.sleep(0.3)
         self.show_frame(0)
 
-    def on_south(self):
-        if self.quack_task:
+    def play(self, selected):
+        self.selected = selected
+        if self.task:
             self.show_frame(0)
-            self.quack_task.cancel()
-        self.quack_task = asyncio.create_task(self.quack())
+            self.task.cancel()
+        self.task = asyncio.create_task(self.animate())
+
+    def on_south(self): self.play('quack')
+    def on_west(self): self.play('woof')
+    def on_north(self): self.play('roar')
+    def on_east(self): self.play('kri')
