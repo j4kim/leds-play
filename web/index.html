@@ -36,6 +36,11 @@
                 <button type="submit" id="disconnectbtn" disabled>Disconnect</button>
                 <p id="error"></p>
             </form>
+        <section>
+            <h2>Pixel Grid</h2>
+            <div id="pixel-grid" style="display: grid; grid-template-columns: repeat(6, 40px); grid-template-rows: repeat(7, 40px); gap: 2px; margin: 20px auto; width: fit-content;">
+                <!-- 7 rows x 6 columns -->
+            </div>
         </section>
     </main>
     <script>
@@ -76,6 +81,20 @@
             sounds[name] = new Howl({ src: [src] });
         });
 
+        // Create pixel grid
+        const grid = document.getElementById('pixel-grid');
+        for (let y = 0; y < 7; y++) {
+            for (let x = 0; x < 6; x++) {
+                const pixel = document.createElement('div');
+                pixel.id = `pixel-${x}-${y}`;
+                pixel.style.width = '40px';
+                pixel.style.height = '40px';
+                pixel.style.backgroundColor = '#000000';
+                pixel.style.border = '1px solid #333';
+                grid.appendChild(pixel);
+            }
+        }
+
         const actions = {
             play_sound: ({ sound }) => {
                 sounds[sound]?.stop();
@@ -95,6 +114,15 @@
             },
             fade: ({ sound, from, to, duration }) => {
                 sounds[sound]?.fade(from, to, duration);
+            },
+            update_grid: ({ grid }) => {
+                for (let y = 0; y < 7; y++) {
+                    for (let x = 0; x < 6; x++) {
+                        const color = grid[y][x];
+                        const hex = '#' + color.toString(16).padStart(6, '0');
+                        document.getElementById(`pixel-${x}-${y}`).style.backgroundColor = hex;
+                    }
+                }
             }
         }
 

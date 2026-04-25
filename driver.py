@@ -10,5 +10,8 @@ elif config.driver == "pygame":
     else:
         from drivers.pygame.keyboard import PygameKeyboardDriver
         driver = PygameKeyboardDriver()
+elif config.driver == "web":
+    from drivers.web.webdriver import WebDriver
+    driver = WebDriver()
 else:
     raise Exception(f"Unknown driver: {config.driver}")

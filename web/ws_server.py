@@ -50,3 +50,6 @@ def stopsounds():
 
 def fade(name, f, t, d):
     send({'action': 'fade', 'sound': name, 'from': f, 'to': t, 'duration': d})
+
+def update_grid(grid):
+    send({'action': 'update_grid', 'grid': grid})
