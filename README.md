@@ -50,7 +50,7 @@ Créer le fichier de config:
 cp config.py.example config.py
 ```
 
-Deux drivers à choix dans `config.py`: "pygame" et "neopixel". 
+Deux drivers à choix dans `config.py`: "pygame" et "neopixel".
 
 ### Driver pygame
 
@@ -158,6 +158,7 @@ Ce mode ne permet pas de gérer plusieurs contrôleurs.
 J'ai abandonnée l'idée de produire du son directement par le Raspberry. Rien ne marche: Le port jack crée des interférence avec les LEDs et fait tout crasher; une carte son produit un son pourri; connecter une enceinte bluetooth est un cauchemar... Bref j'ai abandonné.
 
 Après ces déconvenues voici la solution overkill:
+
 - Le programme Python crée un serveur WebSockets.
 - Les noms de fichier des sons sont envoyés aux clients au moment où ils doivent être joués.
 - Une page web `web/index.html` est ouverte depuis un autre appareil, un ordinateur ou un téléphone.
@@ -204,8 +205,33 @@ Schéma de montage:
 
 Chaque colonne contient une bande de 50 LEDs. Donc il y a 300 LEDs en tout. Les LEDs sont espacées de 3.333 cm, une bande de 50 fait donc 166.666 cm. Les bandes sont câblées en série. J'utilise une alimentation externe de 2 Ampères / 5 Volts pour économiser la charge du Raspberry. Si on voulait allumer toutes les LEDs à pleine puissance, il faudrait ajouter une deuxième alim qui alimente les 3 dernières bandes.
 
-On n'utilise qu'une LED par carreau donc environ une sur huit. Le schéma est vu depuis l'arrière de la paroi donc l'axe horizontal est inversé: La LED pour le premier carreau (en haut à gauche) est la 252. 
+On n'utilise qu'une LED par carreau donc environ une sur huit. Le schéma est vu depuis l'arrière de la paroi donc l'axe horizontal est inversé: La LED pour le premier carreau (en haut à gauche) est la 252.
 Le fichier [drivers/neopixel/matrix.py](drivers/neopixel/matrix.py) est utilisé pour faire la correspondance coordonnées du carreau -> index de la LED.
+
+### Pinout
+
+```
+               3V3  (1) (2)  5V     -- VCC PIR
+             GPIO2  (3) (4)  5V
+             GPIO3  (5) (6)  GND    -- GND leds
+DOUT PIR --  GPIO4  (7) (8)  GPIO14
+ GND PIR --    GND  (9) (10) GPIO15
+            GPIO17 (11) (12) GPIO18 -- DATA leds
+            GPIO27 (13) (14) GND
+            GPIO22 (15) (16) GPIO23
+               3V3 (17) (18) GPIO24
+            GPIO10 (19) (20) GND
+             GPIO9 (21) (22) GPIO25
+            GPIO11 (23) (24) GPIO8
+               GND (25) (26) GPIO7
+             GPIO0 (27) (28) GPIO1
+             GPIO5 (29) (30) GND
+             GPIO6 (31) (32) GPIO12
+            GPIO13 (33) (34) GND
+            GPIO19 (35) (36) GPIO16
+            GPIO26 (37) (38) GPIO20
+               GND (39) (40) GPIO21
+```
 
 ## Connexion SSH au Raspberry
 
