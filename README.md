@@ -233,6 +233,8 @@ DOUT PIR --  GPIO4  (7) (8)  GPIO14
                GND (39) (40) GPIO21
 ```
 
+![Photo du montage](IMG_1981.jpeg)
+
 ## Connexion SSH au Raspberry
 
 ```sh
