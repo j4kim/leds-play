@@ -177,7 +177,7 @@ Cette interface web pourrait être utilisée par la suite pour afficher l'état 
 
 ### PM2
 
-PM2 peut être utilisé garder le serveur web ouvert de manière persistante
+PM2 est utilisé pour garder le serveur web ouvert de manière persistante.
 
 Installation:
 
