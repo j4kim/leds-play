@@ -26,7 +26,7 @@ def get_color(color):
         return colors[color]
     return int(str(color), 16)
 
-async def prompt_color(message = "hex value or one of r,g,b,w,m,y,c,o:"):
+async def prompt_color(message = "hex value or one of w,W,r,g,b,y,m,c,o,l,t,s,p,k, ,#:"):
     color = await inquirer.text(message).execute_async()
     return get_color(color)
 

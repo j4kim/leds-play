@@ -2,6 +2,7 @@ from InquirerPy import inquirer
 from driver import driver
 from tools import prompt_color
 
+
 async def setBrighness():
     driver.brightness = await inquirer.number(
         message="Enter Brightness:",
@@ -12,5 +13,6 @@ async def setBrighness():
     ).execute_async()
     driver.reset()
 
+
 async def setDefaultColor():
-    driver.default_color = await prompt_color("Default color:")
+    driver.default_color = await prompt_color()
