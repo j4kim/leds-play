@@ -1,10 +1,13 @@
 from driver import driver
-from tools import get_color
+from tools import get_color, colors
 import random
 import asyncio
 from InquirerPy import inquirer
+from InquirerPy.utils import patched_print
+
 
 async def draw():
+    patched_print(f"Available colors are: {','.join(colors.keys())}")
     y = 0
     for y in range(7):
         values = await inquirer.text(f"{y}:").execute_async()
@@ -16,12 +19,14 @@ async def draw():
             driver.set(x, y, get_color(v))
         driver.show()
 
+
 def rand():
     for y in range(7):
         for x in range(6):
             color = get_color(random.choice("rgbwmyco0"))
             driver.set(x, y, color)
     driver.show()
+
 
 async def animate():
     stop_event = asyncio.Event()
