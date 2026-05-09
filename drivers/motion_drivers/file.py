@@ -1,3 +1,9 @@
+import os
+
+
 class FileMotionDriver:
+    file_path = os.path.join(os.path.dirname(__file__), "motion.txt")
+
     def read(self):
-        return False
+        with open(self.file_path, "r") as f:
+            return f.read() == "1"
