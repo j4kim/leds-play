@@ -1,4 +1,4 @@
-from programs import text, happynewyear
+from programs import text, happynewyear, light
 from programs.games import menu, snake, quack, paint
 from programs.other import submenu
 from tools import prompt_menu
@@ -13,6 +13,7 @@ async def run():
             {"value": paint.Paint.run, "name": "Paint"},
             {"value": text.menu, "name": "Text"},
             {"value": happynewyear.run, "name": "Happy New Year"},
+            {"value": light.Light.run, "name" : "Light"},
             {"value": submenu.menu, "name": "Other"},
         ]
     )

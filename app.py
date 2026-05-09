@@ -1,6 +1,7 @@
 import config
 import prompt
 from programs.games import menu
+from programs import light
 from driver import driver
 
 
@@ -9,4 +10,8 @@ async def run():
         await prompt.run()
     elif config.program == "menu":
         await menu.Menu.run()
+    elif config.program == "light":
+        await light.Light.run()
+    else:
+        print(f"configured program ({config.program}) not found")
     driver.quit()
