@@ -3,3 +3,6 @@ driver = "pygame"
 
 # for pygame driver only, controller is either "keyboard" or "gamepad"
 controller = "keyboard"
+
+# "prompt", "menu" or ...
+program = "menu"
