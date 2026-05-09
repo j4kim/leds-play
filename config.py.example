@@ -6,3 +6,6 @@ controller = "keyboard"
 
 # "prompt", "menu" or "light"
 program = "menu"
+
+# "pir" or "file"
+motion_driver = "file"

@@ -12,3 +12,13 @@ elif config.driver == "pygame":
         driver = PygameKeyboardDriver()
 else:
     raise Exception(f"Unknown driver: {config.driver}")
+
+
+if config.motion_driver == "pir":
+    from drivers.motion_drivers.pir import PirMotionDriver
+    motion_driver = PirMotionDriver()
+elif config.motion_driver == "file":
+    from drivers.motion_drivers.file import FileMotionDriver
+    motion_driver = FileMotionDriver()
+else:
+    raise Exception(f"Unknown motion driver: {config.motion_driver}")
