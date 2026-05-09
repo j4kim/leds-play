@@ -4,6 +4,7 @@ import config
 
 colors = {
     'w': (255, 255, 255), # white
+    'W': (255, 127, 20),  # warm white
     'r': (255, 0, 0),     # red
     'g': (0, 255, 0),     # green
     'b': (0, 0, 255),     # blue
