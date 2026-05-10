@@ -22,13 +22,13 @@ class Light:
 
     async def start(self):
         self.pir_init_task = asyncio.create_task(motion_driver.initialize())
-        self.sun_request_task = asyncio.create_task(self.sun.request())
         await asyncio.gather(self.loop(), self.stop())
         driver.clear()
 
     async def loop(self):
         while not self.quit.is_set():
-            if self.sun.isNight():
+            is_night = await self.sun.isNight()
+            if is_night:
                 if motion_driver.initialized:
                     self.frame()
                 await asyncio.sleep(0.5)
@@ -40,8 +40,6 @@ class Light:
         await inquirer.text(message="Quitter:").execute_async()
         if self.pir_init_task:
             self.pir_init_task.cancel()
-        if self.sun_request_task:
-            self.sun_request_task.cancel()
         self.quit.set()
 
     def frame(self):
