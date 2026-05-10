@@ -18,7 +18,7 @@ class Light:
     async def loop(self):
         while not self.quit.is_set():
             self.frame()
-            await asyncio.sleep(1 / 2)
+            await asyncio.sleep(1)
 
     def frame(self):
         motion = motion_driver.read()
