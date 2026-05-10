@@ -2,7 +2,7 @@ import config
 import prompt
 from programs.games import menu
 from programs import light
-from driver import driver
+from driver import driver, motion_driver
 
 
 async def run():
@@ -19,3 +19,4 @@ async def run():
         pass
     finally:
         driver.quit()
+        motion_driver.quit()
