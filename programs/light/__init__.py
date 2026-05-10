@@ -3,30 +3,31 @@ from driver import driver, motion_driver
 import asyncio
 from tools import get_color
 from InquirerPy import inquirer
-from sun import Sun
+from .sun import Sun
 
 
 class Light:
     def __init__(self):
-        self.quit = asyncio.Event()
         self.color = get_color("W")
         self.lines = 0
         self.motion_history = deque([0] * 10, maxlen=10)
         self.pir_init_task = None
+        self.loop_task = None
         self.sun = Sun()
 
     @classmethod
     async def run(cls):
         light = cls()
-        light.start()
+        await light.start()
 
     async def start(self):
         self.pir_init_task = asyncio.create_task(motion_driver.initialize())
-        await asyncio.gather(self.loop(), self.stop())
+        self.loop_task = asyncio.create_task(self.loop())
+        await self.stop()
         driver.clear()
 
     async def loop(self):
-        while not self.quit.is_set():
+        while True:
             is_night = await self.sun.isNight()
             if is_night:
                 if motion_driver.initialized:
@@ -40,7 +41,8 @@ class Light:
         await inquirer.text(message="Quitter:").execute_async()
         if self.pir_init_task:
             self.pir_init_task.cancel()
-        self.quit.set()
+        if self.loop_task:
+            self.loop_task.cancel()
 
     def frame(self):
         motion = motion_driver.read()
