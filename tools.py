@@ -1,6 +1,7 @@
 from InquirerPy import inquirer
 import asyncio
 from driver import driver_name
+from datetime import datetime
 
 colors = {
     "w": (255, 255, 255),  # white
@@ -47,3 +48,7 @@ async def prompt_menu(choices):
         r = f()
         if asyncio.iscoroutine(r):
             await r
+
+
+def get_minutes(dt: datetime):
+    return dt.hour * 60 + dt.minute
