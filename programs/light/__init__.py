@@ -15,6 +15,7 @@ class Light:
     @classmethod
     async def run(cls):
         light = cls()
+        await motion_driver.initialize()
         await light.loop()
         driver.clear()
 
