@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import asyncio
+from InquirerPy.utils import patched_print
 
 
 class PirMotionDriver:
@@ -12,6 +13,7 @@ class PirMotionDriver:
 
     async def initialize(self):
         if not self.initialized:
+            patched_print("Initialisation du capteur PIR...")
             await asyncio.sleep(30)
             self.initialized = True
 

@@ -29,7 +29,7 @@ class Light:
 
         total = sum(self.motion_history)
         delta = 1 if total > 0 else -1
-        lines = max(0, min(self.lines + delta, 4))
+        lines = max(0, min(self.lines + delta, 5))
         if self.lines == lines:
             return
         self.lines = lines
