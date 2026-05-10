@@ -3,7 +3,7 @@ from driver import driver, motion_driver
 import asyncio
 from tools import get_color
 from InquirerPy import inquirer
-from InquirerPy.utils import patched_print
+from sun import Sun
 
 
 class Light:
@@ -13,24 +13,35 @@ class Light:
         self.lines = 0
         self.motion_history = deque([0] * 10, maxlen=10)
         self.pir_init_task = None
+        self.sun = Sun()
 
     @classmethod
     async def run(cls):
         light = cls()
-        light.pir_init_task = asyncio.create_task(motion_driver.initialize())
-        await asyncio.gather(light.loop(), light.stop())
+        light.start()
+
+    async def start(self):
+        self.pir_init_task = asyncio.create_task(motion_driver.initialize())
+        self.sun_request_task = asyncio.create_task(self.sun.request())
+        await asyncio.gather(self.loop(), self.stop())
         driver.clear()
 
     async def loop(self):
         while not self.quit.is_set():
-            if motion_driver.initialized:
-                self.frame()
-            await asyncio.sleep(0.5)
+            if self.sun.isNight():
+                if motion_driver.initialized:
+                    self.frame()
+                await asyncio.sleep(0.5)
+            else:
+                driver.clear()
+                await asyncio.sleep(60)
 
     async def stop(self):
         await inquirer.text(message="Quitter:").execute_async()
         if self.pir_init_task:
             self.pir_init_task.cancel()
+        if self.sun_request_task:
+            self.sun_request_task.cancel()
         self.quit.set()
 
     def frame(self):
