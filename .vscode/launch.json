@@ -6,10 +6,10 @@
     "configurations": [
         
         {
-            "name": "Python Debugger: Current File",
+            "name": "Python Debugger: main",
             "type": "debugpy",
             "request": "launch",
-            "program": "${file}",
+            "program": "/Users/joaquimperez/dev/leds-play/main.py",
             "console": "integratedTerminal"
         }
     ]
