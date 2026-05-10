@@ -2,6 +2,8 @@ from collections import deque
 from driver import driver, motion_driver
 import asyncio
 from tools import get_color
+from InquirerPy import inquirer
+from InquirerPy.utils import patched_print
 
 
 class Light:
@@ -10,18 +12,25 @@ class Light:
         self.color = get_color("W")
         self.lines = 0
         self.motion_history = deque([0] * 10, maxlen=10)
+        self.pir_init_task = None
 
     @classmethod
     async def run(cls):
         light = cls()
-        await motion_driver.initialize()
-        await light.loop()
+        light.pir_init_task = asyncio.create_task(motion_driver.initialize())
+        await asyncio.gather(light.loop(), light.stop())
         driver.clear()
 
     async def loop(self):
         while not self.quit.is_set():
-            self.frame()
+            if motion_driver.initialized:
+                self.frame()
             await asyncio.sleep(0.5)
+
+    async def stop(self):
+        await inquirer.text(message="Quitter:").execute_async()
+        self.pir_init_task.cancel()
+        self.quit.set()
 
     def frame(self):
         motion = motion_driver.read()

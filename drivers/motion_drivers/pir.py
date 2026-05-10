@@ -15,6 +15,7 @@ class PirMotionDriver:
         if not self.initialized:
             patched_print("Initialisation du capteur PIR...")
             await asyncio.sleep(30)
+            patched_print("Capteur initialisé")
             self.initialized = True
 
     def read(self):
