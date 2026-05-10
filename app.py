@@ -6,12 +6,16 @@ from driver import driver
 
 
 async def run():
-    if config.program == "prompt":
-        await prompt.run()
-    elif config.program == "menu":
-        await menu.Menu.run()
-    elif config.program == "light":
-        await light.Light.run()
-    else:
-        print(f"configured program ({config.program}) not found")
-    driver.quit()
+    try:
+        if config.program == "prompt":
+            await prompt.run()
+        elif config.program == "menu":
+            await menu.Menu.run()
+        elif config.program == "light":
+            await light.Light.run()
+        else:
+            print(f"configured program ({config.program}) not found")
+    except KeyboardInterrupt:
+        pass
+    finally:
+        driver.quit()
