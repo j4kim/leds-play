@@ -29,7 +29,8 @@ class Light:
 
     async def stop(self):
         await inquirer.text(message="Quitter:").execute_async()
-        self.pir_init_task.cancel()
+        if self.pir_init_task:
+            self.pir_init_task.cancel()
         self.quit.set()
 
     def frame(self):
