@@ -9,7 +9,7 @@ class FileMotionDriver:
 
     def read(self):
         with open(self.file_path, "r") as f:
-            return f.read() == "1"
+            return f.read().startswith("1")
 
     def quit(self):
         pass
