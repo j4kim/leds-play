@@ -1,3 +1,4 @@
+from collections import deque
 from driver import driver, motion_driver
 import asyncio
 from tools import get_color
@@ -8,6 +9,7 @@ class Light:
         self.quit = asyncio.Event()
         self.color = get_color("W")
         self.lines = 0
+        self.motion_history = deque([0] * 10, maxlen=10)
 
     @classmethod
     async def run(cls):
@@ -22,12 +24,15 @@ class Light:
 
     def frame(self):
         motion = motion_driver.read()
-        delta = 1 if motion else -1
+        self.motion_history.append(1 if motion else 0)
+
+        total = sum(self.motion_history)
+        delta = 1 if total > 0 else -1
         lines = max(0, min(self.lines + delta, 7))
         if self.lines == lines:
             return
-        else:
-            self.lines = lines
+        self.lines = lines
+
         driver.clear(False)
         for y in range(6, 6 - self.lines, -1):
             for x in range(6):
