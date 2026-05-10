@@ -1,20 +1,19 @@
-import config
 import prompt
 from programs.games import menu
 from programs import light
 from driver import driver, motion_driver
 
 
-async def run():
+async def run(program):
     try:
-        if config.program == "prompt":
+        if program == "prompt":
             await prompt.run()
-        elif config.program == "menu":
+        elif program == "menu":
             await menu.Menu.run()
-        elif config.program == "light":
+        elif program == "light":
             await light.Light.run()
         else:
-            print(f"configured program ({config.program}) not found")
+            print(f"configured program ({program}) not found")
     except KeyboardInterrupt:
         pass
     finally:
